@@ -1,0 +1,114 @@
+! This is the default AGT verb list for the "menu-driven" parser for ADVLAND
+
+! AGAIN should be the first A-verb
+1 Again
+2 Attack
+3 Attack With
+1 away
+2 Break
+3 Break with
+1 Brief
+2 build
+1 bunyon
+2 Burn
+2 Chop
+2 Close
+2 Climb up
+2 Climb down
+2 climb to
+2 Cut
+! DOWN should be the first D-verb
+1 Down
+2 Drop
+2 Drink
+! EAST should be the first E-verb
+1 East
+2 Examine
+2 Eat
+2 empty
+2 Enter
+1 Exit
+2 Extinguish
+2 feed
+3 Feed to
+3 Fill with
+2 find
+2 free
+! GET should be the first G-verb
+2 Get
+3 Give to
+2 Go to
+! HELP should be the first H-verb
+1 Help
+2 Heat
+2 Hit
+3 Hit with
+2 Hold
+! INVENTORY should be the first I-verb
+1 Inventory
+2 ignite
+1 Jump
+2 Jump to
+2 kick
+2 Kill
+3 Kill With
+2 kiss
+! LOOK AROUND should be the first L-verb
+1 Look around
+2 Look at
+1 List Exits
+2 Light
+3 Light With
+3 Lock with
+! NORTH should be the first N-verb
+1 North
+1 Northeast
+1 Northwest
+1 no
+! OPEN should be the first O-verb
+2 Open
+3 Put in
+3 Pour on
+3 Pour in
+! QUIT should be the first Q-verb
+1 Quit
+! READ should be the first R-verb
+2 Read
+2 release
+2 Rub
+1 Restore
+! SOUTH should be the first S-verb
+1 South
+1 Southeast
+1 Southwest
+1 Score
+1 Save
+1 say
+1 Scream
+2 Scream At
+1 Script
+1 Shout
+1 Sit
+2 smash
+1 stop
+1 Swim
+! TAKE should be the first T-verb
+2 Take
+2 Throw
+3 Throw at
+! UP should be the first U-verb
+1 Up
+2 unlight
+2 Unlock
+1 Unscript
+! VERBOSE should be the first V-verb
+1 Verbose
+1 Version
+! WEST should be the first W-verb
+1 West
+1 Wait
+2 wake
+1 Yell
+2 Yell At
+1 yes
+1 yoho

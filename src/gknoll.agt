@@ -1,0 +1,2526 @@
+TITLE
+COLORS WHITE YELLOW BLACK YELLOW RED
+GRASSY KNOLL:
+The JFK Assassination Simulation
+
+Based on the books
+The Warren Commission Report
+and
+On The Trail of the Assassins by Jim Garrison
+
+Gone and Text Copyright 1995 by Tom Kidd
+END_TITLE
+
+
+INSTRUCTIONS
+During the game your commands can be expressed in the format:
+
+  <verb phrase> <(multiple) noun phrase(s)> <preposition> <noun phrase/object>
+
+For example:
+
+         PUT THE GREEN ROCK BEHIND THE OAK TREE
+         READ MY POETRY BOOK
+         SWIM IN THE SWIMMING POOL
+         EXAMINE THE GOLD RING, THE DWARF AND THE SILVER NECKLACE
+         EAT THE CELERY AND THE ONION
+         SHOOT THE BURGLAR WITH THE REVOLVER
+         ATTACK HIM
+           ("HIM" will refer to last noun mentioned, e.g., the burglar)
+         GET THE BOOK (also: TAKE THE BOOK)
+         READ IT
+           ("IT" will refer to last noun mentioned, e.g., the book)
+         GET ALL
+
+Compound commands can be created by connecting single commands (like those
+above) with "AND", "THEN" or the punctuation symbols "," or ";" to connect two
+or more separate commands, such as:
+
+         CLIMB DOWN THE LADDER THEN SOUTH, WEST AND NORTHWEST
+         GET THE CLOAK AND THEN EXAMINE IT; READ THE LABEL
+         DROP THE FOOD AND THE BOTTLE THEN UNLOCK THE DOOR AND THEN LEAVE
+
+The game uses a number of special commands for various "housekeeping" chores.
+These are all pretty standard for most adventure games.  Specifically:
+HELP, SCORE, INVENTORY, VERBOSE, LIST EXITS, SAVE, RESTORE, SCRIPT, UNSCRIPT
+and QUIT.
+
+The function keys have been predefined to stand for several of the most
+frequently used commands.  Similarly, the cursor keys correspond to the
+various movement/compass directions.
+
+Hitting the '?' key (during the game) will display a diagram of keys and their
+definitions.
+END_INSTRUCTIONS
+
+VERB
+LIGHT IGNITE BURN
+EXTINGUISH UNLIGHT
+Dummy_verb1 GO, CLIMB, ENTER
+Dummy_verb2 YES
+Dummy_verb3 NO
+Dummy_verb4 STOP
+Dummy_verb5 FIND
+Dummy_verb6 BUILD
+Dummy_verb7 WAKE
+Dummy_verb8 SWIM
+Dummy_verb9 YOHO
+Dummy_verb10 SIT
+Dummy_verb11 RUB
+Dummy_verb12 JUMP
+Dummy_verb13 SAY
+Dummy_verb14 CHOP, CUT
+Dummy_verb15 FILL
+Dummy_verb16 AWAY
+Dummy_verb17 BUNYON
+Dummy_verb18 POUR, FREE, RELEASE
+Dummy_verb19 KISS
+Dummy_verb20 GIVE, FEED
+Dummy_verb21 EMPTY
+Dummy_verb22 FOLLOW
+END_VERB
+
+VOCABULARY
+! This is the default AGT verb list for the "menu-driven" parser for ADVLAND
+
+! AGAIN should be the first A-verb
+1 Again
+2 Attack
+3 Attack With
+1 away
+2 Break
+3 Break with
+1 Brief
+2 build
+1 bunyon
+2 Burn
+2 Chop
+2 Close
+2 Climb up
+2 Climb down
+2 climb to
+2 Cut
+! DOWN should be the first D-verb
+1 Down
+2 Drop
+2 Drink
+! EAST should be the first E-verb
+1 East
+2 Examine
+2 Eat
+2 empty
+2 Enter
+1 Exit
+2 Extinguish
+2 feed
+3 Feed to
+3 Fill with
+2 find
+2 free
+! GET should be the first G-verb
+2 Get
+3 Give to
+2 Go to
+! HELP should be the first H-verb
+1 Help
+2 Heat
+2 Hit
+3 Hit with
+2 Hold
+! INVENTORY should be the first I-verb
+1 Inventory
+2 ignite
+1 Jump
+2 Jump to
+2 kick
+2 Kill
+3 Kill With
+2 kiss
+! LOOK AROUND should be the first L-verb
+1 Look around
+2 Look at
+1 List Exits
+2 Light
+3 Light With
+3 Lock with
+! NORTH should be the first N-verb
+1 North
+1 Northeast
+1 Northwest
+1 no
+! OPEN should be the first O-verb
+2 Open
+3 Put in
+3 Pour on
+3 Pour in
+! QUIT should be the first Q-verb
+1 Quit
+! READ should be the first R-verb
+2 Read
+2 release
+2 Rub
+1 Restore
+! SOUTH should be the first S-verb
+1 South
+1 Southeast
+1 Southwest
+1 Score
+1 Save
+1 say
+1 Scream
+2 Scream At
+1 Script
+1 Shout
+1 Sit
+2 smash
+1 stop
+1 Swim
+! TAKE should be the first T-verb
+2 Take
+2 Throw
+3 Throw at
+! UP should be the first U-verb
+1 Up
+2 unlight
+2 Unlock
+1 Unscript
+! VERBOSE should be the first V-verb
+1 Verbose
+1 Version
+! WEST should be the first W-verb
+1 West
+1 Wait
+2 wake
+1 Yell
+2 Yell At
+1 yes
+1 yoho
+END_VOCABULARY
+
+#DEFINE [noun weight] 13
+#DEFINE [NoWhere] 0
+
+PICTURES
+[GK02] GK02
+[GK03] GK03
+[GK04] GK04
+[GK05] GK05
+[GK06] GK06
+[GK07] GK07
+[GK08] GK08
+[GK09] GK09
+[GK10] GK10
+[GK11] GK11
+[GK12] GK12
+[GK13] GK13
+[GK14] GK14
+[GK15] GK15
+[GK16] GK16
+[GK17] GK17
+[GK18] GK18
+[GK19] GK19
+[GK20] GK20
+[GK21] GK21
+[GK22] GK22
+[GK23] GK23
+[GK24] GK24
+[GK25] GK25
+[GK26] GK26
+[GK27] GK27
+[GK28] GK28
+[GK29] GK29
+[GK30] GK30
+[GK31] GK31
+[GK32] GK32
+[GK33] GK33
+[GK34] GK34
+[GK35] GK35
+[GK36] GK36
+[GK37] GK37
+[GK38] GK38
+[GK39] GK39
+[GK40] GK40
+[GK41] GK41
+[GK42] GK42
+[GK43] GK43
+[GK44] GK44
+[GK45] GK45
+[GK46] GK46
+[GK47] GK47
+[GK48] GK48
+[GK49] GK49
+[GK50] GK50
+[GK51] GK51
+[GK52] GK52
+[GK53] GK53
+[GK54] GK54
+[GK55] GK55
+[GK56] GK56
+[GK57] GK57
+[GK58] GK58
+[GK59] GK59
+[GK60] GK60
+[GK61] GK61
+[GK62] GK62
+[GK63] GK63
+[GK64] GK64
+[GK65] GK65
+[GK66] GK66
+[GK67] GK67
+[GK68] GK68
+[GK69] GK69
+[GK70] GK70
+END_PICTURES
+
+INTRODUCTION
+        It's been six years since you last saw Dana Wilkins, your old High
+School Sweetheart. Since then, you've graduated from Texas A&M, and you're
+starting to make a name for yourself in your field. However, true love still
+eludes you, and you hear that Dana is single. She called Wednesday. She wanted
+to meet you. She said that it was urgent.
+        Well, it's at least worth a shot. She lives in Grand Prarie, Texas,
+and she works at the School Book Depository, which is somewhere on Elm Street
+in Dallas.
+        On the upside, Dana was a real looker back in Texas High School,
+class of '57. On the downside, Dallas is a whole 3 hours away from Texarkana,
+Texas.
+        So, on November 22, 1963, you take off from work, and head for
+Big "D". When you get near the Dealy Plaza, around 10:00, it takes about an
+hour to find a parking space some three blocks away. Seems some parade is in
+town. Oh, yes, the President's in it. Great. You can't get to Dealy until
+12:00. You've got to meet Dana for lunch at noon. No doubt she'll also want
+to watch the parade as well. Great. She works on the second floor of the
+School Book Depository. Perfect. This promises to be an interesting weekend.
+END_INTRO
+
+STARTING_ROOM [Outside DCCCB]
+
+STARTING_TIME 1200
+DELTA_TIME 3
+
+STATUS_OPTION 1
+
+ROOM [Outside DCCCB]
+Outside DCCCB
+EAST [DCCCB]
+NORTH [Outside DCRB]
+PICTURE [GK02]
+END_ROOM
+
+ROOM_DESCR [Outside DCCCB]
+You are standing outside the Dallas County Criminal Courts Building, where
+all of the city's criminal trials are being held. These guys probably can't
+handle any more crime in this city. From here, a sidewalk leads north, while
+the building eneters to the east.
+END_ROOM_DESCR
+
+HELP [Outside DCCCB]
+Go inside if you want, but remember, your purpose here is not in there. Get
+to the School Book Depository now!
+END_HELP_DESCR
+
+ROOM [DCCCB]
+The DCCCB
+WEST [Outside DCCCB]
+PICTURE [GK03]
+END_ROOM
+
+ROOM_DESCR [DCCCB]
+This is the Dallas County Criminal Courts Building. It is bustling with
+lawyers, judges, and tourists, most of which are seeking shelter from the
+Texas heat outside. There is an exit to the west.
+END_ROOM_DESCR
+
+HELP [DCCCB]
+As nice and comfortable as this is, you really ought to be getting back to
+your once (and maybe future) girlfriend!
+END_HELP_DESCR
+
+ROOM [Outside DCRB]
+Outside the DCRB
+SOUTH [Outside DCCCB]
+NORTH [Outside DTB]
+EAST [DCRB]
+PICTURE [GK04]
+END_ROOM
+
+ROOM_DESCR [Outside DCRB]
+You're standing outside the Dallas County Records building. Your uncle was
+born in Dallas, and if your guess is correct, his birth certificate is in
+there somewhere. You can follow the sidewalk to the north or south, or you
+can beat the heat by entering the building to the east.
+END_ROOM_DESCR
+
+HELP [Outside DCRB]
+Go inside if you want, but remember, your purpose here is not in there. Get
+to the School Book Depository now!
+END_HELP_DESCR
+
+ROOM [DCRB]
+The DCRB
+WEST [Outside DCRB]
+PICTURE [GK05]
+END_ROOM
+
+ROOM_DESCR [DCRB]
+You're standing in the Dallas County Records Building. WIth the possible
+exception of the receptionist and the tourists beating the heat, the place is
+empty. Cold, but empty. There is an exit to the east.
+END_ROOM_DESCR
+
+HELP [DCRB]
+As nice and comfortable as this is, you really ought to be getting back to
+your once (and maybe future) girlfriend!
+END_HELP_DESCR
+
+ROOM [Outside DTB]
+Outside the Dal-Tex Building.
+EAST [DTB]
+WEST [Outside SBD]
+SOUTH [Outside DCRB]
+PICTURE [GK06]
+END_ROOM
+
+ROOM_DESCR [Outside DTB]
+You're standing outside the Dal-Tex Building. You don't have a clue what
+Dal-Tex makes (or even if it's a company), and the outside of this
+establisment doesn't help much. You can cross Houston Street to the west, or
+you can enter the building to the east.
+END_ROOM_DESCR
+
+HELP [Outside DTB]
+Go inside if you want, but remember, your purpose here is not in there. Get
+to the School Book Depository now!
+END_HELP_DESCR
+
+ROOM [DTB]
+The Dal-Tex Building
+WEST [Outside DTB]
+PICTURE [GK07]
+END_ROOM
+
+ROOM_DESCR [DTB]
+This is the Dal-Tex Building, and the insides don't give much help as to
+exactly what in the hell the Dal-Tex Building is. There are some people here,
+and the place is at least air conditioned. There is an exit to the west.
+END_ROOM_DESCR
+
+HELP [DTB]
+As nice and comfortable as this is, you really ought to be getting back to
+your once (and maybe future) girlfriend!
+END_HELP_DESCR
+
+ROOM [Outside SBD]
+Outside the SBD
+NORTH [SBD]
+SOUTH [Grassy Field]
+EAST [Outside DTB]
+SOUTHWEST [Pergolas]
+PICTURE [GK08]
+END_ROOM
+
+ROOM_DESCR [Outside SBD]
+Well, you've made it to the School Book Depository. There are people hanging
+around outside, some even sitting down on the grass outside, to watch the
+parade. There are also some people sitting at open windows, hoping to catch
+a glimpse of the parade. The enterance to the School Book Depository is to
+the north. Across the street to the east is the Dal-Tex Building. Across Elm
+street to the south is a large grassy field. And to the southwest is
+Pergolas.
+END_ROOM_DESCR
+
+HELP [Outside SBD]
+Well, Dingleberry, seeing as how your whole purpose in driving up here for
+three hours is in this building to the north, you might as well go in there.
+END_HELP_DESCR
+
+ROOM [Grassy Field]
+A Grassy Field
+NORTH [Outside SBD]
+NORTHWEST [Pergolas]
+WEST [Grassy Knoll]
+SOUTHWEST [Underpass3]
+PICTURE [GK09]
+END_ROOM
+
+ROOM_DESCR [Grassy Field]
+This grassy field looks like a great place for a picnic, and indeed there are
+some people picnicing here. You can also get a great view of the parade that's
+coming. Across Elm Street to the north is the School Book Depository, to the
+northwest, there are Pergolas, and to the west, there is a grassy knoll. To
+the southwest, there is a triple underpass.
+END_ROOM_DESCR
+
+HELP [Grassy Field]
+Well, it's cute and all, but remember your purpose here (whatever that may
+be).
+END_HELP_DESCR
+
+ROOM [Pergolas]
+Pergolas
+NORTHEAST [Outside SBD]
+SOUTHEAST [Grassy Field]
+SOUTHWEST [Grassy Knoll]
+PICTURE [GK10]
+END_ROOM
+
+ROOM_DESCR [Pergolas]
+You're standing here outside some pergolas (structures consisting of parallel
+colonnades supporting an open roof of girders and cross rafters). Across Elm
+Street to the southeast is a large grassy field. To the northeast is the
+School Book Depository, and to the southwest, there is a grassy knoll.
+END_ROOM_DESCR
+
+HELP [Pergolas]
+Well, it's cute and all, but remember your purpose here (whatever that may
+be).
+END_HELP_DESCR
+
+ROOM [Grassy Knoll]
+Grassy Knoll
+NORTHEAST [Pergolas]
+SOUTH [Underpass3]
+EAST [Grassy Field]
+PICTURE [GK11]
+END_ROOM
+
+ROOM_DESCR [Grassy Knoll]
+This appears to be a grassy knoll. As with everything today, there are a lot
+of people here. There is a nice shade tree here, right up near a spiked
+wooden fence. To the northeast are some pergolas, and across the street to
+the east, there is a grassy field. To the south, there is a triple underpass
+END_ROOM_DESCR
+
+HELP [Grassy Knoll]
+You know, if someone really wanted to kill the president, this would be a
+great place to try and get a shot off....
+END_HELP_DESCR
+
+ROOM [SBD]
+The School Book Depository
+SOUTH [Outside SBD]
+SOUTHEAST [SBDStairs1]
+NORTH [Foyer1]
+PICTURE [GK12]
+END_ROOM
+
+ROOM_DESCR [SBD]
+This is the School Book Depository's Main Entrance. The building appears to be
+being refurbished, and there are lots of workers moving about. There are
+people working here, and there is a foyer to the north. There is also some
+stairs to the southeast.
+END_ROOM_DESCR
+
+HELP [SBD]
+You've come this far, now do it!
+END_HELP_DESCR
+
+ROOM [SBDStairs1]
+Stairwell, first floor
+NORTHWEST [SBD]
+UP [SBDStairs2]
+PICTURE [GK13]
+END_ROOM
+
+ROOM_DESCR [SBDStairs1]
+This stairwell can take you up. There is also an exit to the northwest. There
+are some workers in outfits going up and down the stairs.
+END_ROOM_DESCR
+
+HELP [SBDStairs1]
+Hello, Mr. Tyler........going up?
+END_HELP_DESCR
+
+ROOM [Foyer1]
+Foyer, first floor
+SOUTH [SBD]
+NORTH [OSS]
+NORTHEAST [Truly]
+PICTURE [GK14]
+END_ROOM
+
+ROOM_DESCR [Foyer1]
+This is a Foyer of sorts, whose exits lead north, northeast, and to the south.
+There are some workers in outfits here, all giving you that "you don't belong
+here" look.
+END_ROOM_DESCR
+
+ROOM [OSS]
+Open Storage Space
+SOUTH [Foyer1]
+PICTURE [GK15]
+END_ROOM
+
+ROOM_DESCR [OSS]
+This is a big, open, storage space. What'd you expect from a Book Depository?
+There are some more workers in outfits here. You can go south to exit.
+END_ROOM_DESCR
+
+HELP [OSS]
+You're getting colder......
+END_HELP_DESCR
+
+ROOM [Truly]
+Mr. Truly's Office
+SOUTHWEST [Foyer1]
+PICTURE [GK16]
+END_ROOM
+
+ROOM_DESCR [Truly]
+This appears to be the somewhat well-kept (and somewhat empty) office of a Mr.
+Roy S. Truly. The only exit is to the southwest.
+END_ROOM_DESCR
+
+ROOM [SBDStairs2]
+Stairs, second floor
+DOWN [SBDStairs1]
+UP [SBDStairs6]
+NORTHWEST [Foyer2]
+PICTURE [GK17]
+END_ROOM
+
+ROOM_DESCR [SBDStairs2]
+This is the stairwell of the second floor. Unspectacular, except for the fact
+that it leads up and down. There is also an exit for this floor to the
+northwest.
+END_ROOM_DESCR
+
+ROOM [Foyer2]
+Foyer, second floor
+NORTH [Hallway]
+WEST [Lunchroom]
+SOUTHEAST [SBDStairs2]
+PICTURE [GK18]
+END_ROOM
+
+ROOM_DESCR [Foyer2]
+This is another Foyer of sorts, with exits to the north, west, and to the
+southeast. There are still more workers here, moving about.
+END_ROOM_DESCR
+
+ROOM [Hallway]
+Hallway
+SOUTH [Foyer2]
+WEST [OSpace]
+PICTURE [GK19]
+END_ROOM
+
+ROOM_DESCR [Hallway]
+This is a hallway, whose one purpose is to lead to the office space to the
+west, and to the Foyer to the south.
+END_ROOM_DESCR
+
+ROOM [OSpace]
+Office Space
+EAST [Hallway]
+SOUTH [ConRoom]
+PICTURE [GK20]
+END_ROOM
+
+ROOM_DESCR [OSpace]
+This is some open office space, with nice little desks, and lots of pencils.
+Most of the people seem to be crowded around the windows. There are exits to
+the east and to the south.
+END_ROOM_DESCR
+
+ROOM [Lunchroom]
+Lunchroom
+SOUTH [Hallway2]
+EAST [Foyer2]
+PICTURE [GK21]
+END_ROOM
+
+ROOM_DESCR [Lunchroom]
+This is a lunchroom, complete with boring tables, a Coke machine, and one of
+those things that sells you stale sandwiches. There is an exit to the east,
+and one to the south.
+END_ROOM_DESCR
+
+ROOM [Hallway2]
+Hallway
+NORTH [Lunchroom]
+WEST [ConRoom]
+PICTURE [GK22]
+END_ROOM
+
+ROOM_DESCR [Hallway2]
+This is a hallway, whose sole purpose is to lead to the west and to the north.
+END_ROOM_DESCR
+
+ROOM [ConRoom]
+Conference Room
+NORTH [OSpace]
+EAST [Hallway2]
+PICTURE [GK23]
+END_ROOM
+
+ROOM_DESCR [ConRoom]
+This is an unused conference room, presumably because of the current lunch
+hour. There is a long table, some chairs here, a portrait of Govenor Connaly.
+There are some exits to the north and to the east.
+END_ROOM_DESCR
+
+ROOM [SBDStairs6]
+Stairway, sixth floor
+DOWN [SBDStairs2]
+NORTHWEST [LOSpace]
+PICTURE [GK24]
+END_ROOM
+
+ROOM_DESCR [SBDStairs6]
+This is the stairwell for the sixth floor. The third, fourth and fifth floor
+looked so boring, you skipped over them. There is an exit to the northwest,
+and another one down.
+END_ROOM_DESCR
+
+ROOM [LOSpace]
+Large Open Space
+SOUTHEAST [SBDStairs6]
+NORTHWEST [Window6]
+PICTURE [GK25]
+END_ROOM
+
+ROOM_DESCR [LOSpace]
+This is a large open space, with lots of boxes and stuff. There are some more
+workers working and moving about. The window view to the northwest would
+provide an excellent view of the parade (though it's hard to get to). There is
+also an exit to the southeast.
+END_ROOM_DESCR
+
+ROOM [Window6]
+Window, sixth floor
+SOUTHEAST [LOSpace]
+PICTURE [GK26]
+END_ROOM
+
+ROOM_DESCR [Window6]
+This window gives a perfect view of the parade, or at least the back of it as
+it passes by. There is an exit to the southeast.
+END_ROOM_DESCR
+
+COMMAND ANY
+AtLocation [Lunchroom]
+TimeGT 1214
+TimeLT 1221
+PrintMessage [LunchIt]
+END_COMMAND
+
+MESSAGE [LunchIt]
+There is a man in the lunchroom, who has the name Oswald on his outfit, eating
+END_MESSAGE
+
+COMMAND ANY
+AtLocation [Outside SBD]
+TimeGT 1214
+TimeLT 1221
+PrintMessage [Seizure!]
+END_COMMAND
+
+MESSAGE [Seizure!]
+There is a man in the street, who is having an epileptic seizure. There
+are people gathered all around
+END_MESSAGE
+
+COMMAND ANY
+AtLocation [Window6]
+TimeGT 1214
+TimeLT 1221
+PrintMessage [Lunch1]
+END_COMMAND
+
+MESSAGE [Lunch1]
+There is a man sitting at the window, his name tag says Bonnie Ray Williams,
+who is sitting here eating his chicken lunch.
+END_MESSAGE
+
+COMMAND ANY
+AtLocation [Lunchroom]
+TimeGT 1230
+TimeLT 1233
+PrintMessage [Lunch2]
+END_COMMAND
+
+MESSAGE [Lunch2]
+There is a man, with the name Oswald on his outfit, who appears to be on his
+way out of the building
+END_MESSAGE
+
+COMMAND ANY
+AtLocation [Outside SBD]
+TimeGT 1232
+TimeLT 1235
+PrintMessage [ByeOswald1]
+END_COMMAND
+
+MESSAGE [ByeOswald1]
+There is a man, with the name Oswald on his outfit, leaving the School Book
+Depository, despite all of the police and others surrounding the entrance.
+If you want, you can follow him to the northeast.
+END_MESSAGE
+
+COMMAND ANY
+AtLocation [Grassy Knoll]
+TimeGT 1220
+TimeLT 1230
+PrintMessage [CopFence]
+END_COMMAND
+
+MESSAGE [CopFence]
+There are some people standing behind the wooden picket fence. One of them
+appears to be a police officer, and he appears to have a rifle.
+END_MESSAGE
+
+ROOM [Underpass3]
+Triple Underpass
+NORTH [Grassy Knoll]
+NORTHEAST [Grassy Field]
+PICTURE [GK27]
+END_ROOM
+
+ROOM_DESCR [Underpass3]
+This is a triple underpass, formed by the convergence of Elm, Main and
+Commerce street, all coming together under the railroad overpass. There is
+a grassy field to the northeast, and a grassy knoll to the north.
+END_ROOM_DESCR
+
+COMMAND ANY
+AtLocation [Pergolas]
+TimeGT 1225
+TimeLT 1230
+PrintMessage [BlackUMB]
+END_COMMAND
+
+MESSAGE [BlackUMB]
+There is a man, standing near Elm Street, dressed in black, who has just now
+opened a black umbrella.
+END_MESSAGE
+
+COMMAND ANY
+AtLocation [Outside DTB]
+TimeGT 1230
+TimeLT 1245
+PrintMessage [Pand]
+END_COMMAND
+
+MESSAGE [Pand]
+There is pandemonium on the streets, with people running all over the place,
+cops everywhere arresting people, and even some people who look like Secret
+Service agents.
+END_MESSAGE
+
+COMMAND ANY
+AtLocation [Outside DCRB]
+TimeGT 1230
+TimeLT 1245
+PrintMessage [Pand]
+END_COMMAND
+
+COMMAND ANY
+AtLocation [Outside DCCCB]
+TimeGT 1230
+TimeLT 1245
+PrintMessage [Pand]
+END_COMMAND
+
+COMMAND ANY
+AtLocation [Outside SBD]
+TimeGT 1230
+TimeLT 1245
+PrintMessage [Pand]
+END_COMMAND
+
+COMMAND ANY
+AtLocation [Pergolas]
+TimeGT 1230
+TimeLT 1245
+PrintMessage [Pand]
+END_COMMAND
+
+COMMAND ANY
+AtLocation [Grassy Knoll]
+TimeGT 1230
+TimeLT 1245
+PrintMessage [Pand]
+END_COMMAND
+
+COMMAND ANY
+AtLocation [Grassy Field]
+TimeGT 1230
+TimeLT 1245
+PrintMessage [Pand]
+END_COMMAND
+
+COMMAND ANY
+AtLocation [Underpass3]
+TimeGT 1230
+TimeLT 1245
+PrintMessage [Pand]
+END_COMMAND
+
+COMMAND LOOK
+AtLocation [Window6]
+TimeGT 1230
+PrintMessage [UhOhOswald]
+END_COMMAND
+
+MESSAGE [UhOhOswald]
+There are some bullet casings, laying neatly here, and a paper bag.
+END_COMMAND
+
+COMMAND LOOK
+AtLocation [LOSpace]
+TimeGT 1230
+PrintMessage [UhOhOswald2]
+END_COMMAND
+
+MESSAGE [UhOhOswald2]
+There is a rifle here, laying in the boxes.
+END_COMMAND
+
+COMMAND ANY
+AtLocation [Pergolas]
+TimeGT 1245
+TimeLT 1250
+PrintMessage [Hoboes]
+END_COMMAND
+
+MESSAGE [Hoboes]
+Some officers from the Dallas Police Department are marching three hoboes in
+handcuffs to a patrolcar.
+END_MESSAGE
+
+COMMAND ANY
+AtLocation [Outside SBD]
+TimeGT 1219
+TimeLT 1226
+PrintMessage [SS1]
+END_COMMAND
+
+MESSAGE [SS1]
+You can see what appear to be Secret Service Men in the windows of the 6th
+floor of the School Book Depository
+END_MESSAGE
+
+COMMAND ANY
+AtLocation [Pergolas]
+TimeGT 1219
+TimeLT 1226
+PrintMessage [SS1]
+END_COMMAND
+
+COMMAND ANY
+AtLocation [SBD]
+TimeGT 1232
+TimeLT 1235
+PrintMessage [ByeOswald1]
+END_COMMAND
+
+COMMAND ANY
+AtLocation [OSpace]
+TimeGT 1231
+TimeLT 1234
+PrintMessage [Lunch2]
+END_COMMAND
+
+CREATURE [Dana Wilkins]
+Dana
+Woman
+There is a woman here, staring at you.
+LOCATION [Backstage]
+POINTS 50
+CREATURE_SYNONYMS DANA WILKINS WOMAN MA'AM
+GROUPMEMBER
+WOMAN
+END_CREATURE
+
+CREATURE_DESCR [Dana Wilkins]
+The woman here keeps staring at you. What, is everybody in Dallas a great big
+freak? Oh, wait! It looks like Dana Wilkins!
+END_CREATURE_DESCR
+
+TALK_DESCR [Dana Wilkins]
+"Oh my God, is it really you? I knew you'd come!"
+END_TALK_DESCR
+
+ASK_DESCR [Dana Wilkins]
+"I can't believe you's come all this way and ask me about that! Come here
+and give me a big hug!"
+And with that hug, you know you've done good.
+END_ASK_DESCR
+
+CREATURE [Zapruder]
+Man
+Abraham
+There is a man here, standing on the Stairwell, holding an 8mm Movie Camera.
+LOCATION [Pergolas]
+CREATURE_SYNONYMS ABRAHAM ZAPRUDER MAN OLD DUDE
+MAN
+END_CREATURE
+
+CREATURE_DESCR [Zapruder]
+This older gentleman, accompanied by a younger lady (presumably a relative),
+apparently is a big fan of the President's, and also enjoys filming
+everything. His 8mm Movie Camera doesn't stray from Elm Street and the parade.
+END_CREATURE_DESCR
+
+TALK_DESCR [Zapruder]
+He doesn't seem to hear you, and the hearing aide alludes you to why. However,
+the woman with him gives you a mean look.
+END_TALK_DESCR
+
+ASK_DESCR [Zapruder]
+He doesn't answer you, and you'd probably do better not question total
+strangers.
+END_ASK_DESCR
+
+CREATURE [Mr. Truly]
+Truly
+Man
+There is a man sitting here, in a business suit.
+LOCATION [Truly]
+CREATURE_SYNONYMS MAN TRULY SUIT MR MR. FATSO
+MAN
+END_CREATURE
+
+CREATURE_DESCR [Mr. Truly]
+The man sitting here is Mr. Truly, and apparently, he holds some sort of
+authority over the School Book Depository. Maybe he knows where Dana is.
+END_CREATURE_DESCR
+
+TALK_DESCR [Mr. Truly]
+"Who are you? How'd you get in here? Are you one of those damn workers,
+because if you are, you CAN'T use the phone! I can't believe you people walk
+around this place like it's no big deal! Do you have an appointment?....Wait,
+I don't have a secratary. Nevermind.
+END_TALK_DESCR
+
+ASK_DESCR [Mr. Truly]
+"I'm afraid I really don't know. Now would you please leave."
+END_ASK_DESCR
+
+COMMAND ASK ABOUT DANA
+InRoom [Mr. Truly]
+PrintMessage [IKnow]
+DoneWithTurn
+END_COMMAND
+
+MESSAGE [IKnow]
+"Oh, Dana? Yeah, she told me to tell you that she went over to the Grassy
+Knoll to go watch the parade. She must think of me as some damn message
+service. Now get out of here!"
+END_MESSAGE
+
+COMMAND ASK NAME
+AtLocation [Pergolas]
+PrintMessage [ZapMe]
+DoneWithTurn
+END_COMMAND
+
+COMMAND ASK NAME
+AtLocation [Grassy Knoll]
+PrintMessage [DanaThis]
+PlusScore  50
+DoneWithTurn
+END_COMMAND
+
+MESSAGE [ZapMe]
+The woman standing next to him says "His name is Abraham Zapruder. What's
+yours?"
+END_MESSAGE
+
+MESSAGE [DanaThis]
+"Don't you recognize me? I'm Dana Wilkins!"
+END_MESSAGE
+
+CREATURE [James Hague]
+Charles
+Man
+There is a man standing here, right next to the triple underpass.
+LOCATION [Underpass3]
+CREATURE_SYNONYMS MAN JAMES HAGUE GUY DUDE
+MAN
+END_CREATURE
+
+CREATURE_DESCR [James Hague]
+There is a man standing here, near the triple underpass, who is holding a
+camera, likely to get a head shot of the President (with the camera).
+END_CREATURE_DESCR
+
+ASK_DESCR [James Hague]
+"What'd you say? It's too damn hot. I feel like I'm gonna die of heat
+exhaustion."
+END_ASK_DESCR
+
+TALK_DESCR [James Hague]
+"I hope the parade goes well. You can't say that Dallas doesn't love the
+President."
+END_TALK_DESCR
+
+COMMAND ASK NAME
+AtLocation [Underpass3]
+InRoom [James Hague]
+PrintMessage [Bryers]
+DoneWithTurn
+END_COMMAND
+
+MESSAGE [Bryers]
+"Me? Oh, my name is James Hague. Can't wait to see the President, how about
+you?"
+END_MESSAGE
+
+COMMAND ANY
+TimeGT 1230
+SwapLocations [Zapruder]
+END_COMMAND
+
+CREATURE [JH+MM]
+Jean
+Women
+There are two women here, watching for the parade.
+LOCATION [Grassy Field]
+CREATURE_SYNONYMS JEAN HILL MARY MORMON WOMAN WOMEN BITCHES RED
+WOMAN
+END_CREATURE
+
+CREATURE_DESCR [JH+MM]
+There are two women here, one in regular blue and brown chlothes, and the
+blonde one in a red dress. They are obviously friends and here together.
+END_CREATURE_DESCR
+
+TALK_DESCR [JH+MM]
+"Oh, are you lost? We can help you find where you're going, right after the
+parade. You're in Texas, the friendly state!" says the lady in red.
+Well, no duh!
+END_TALK_DESCR
+
+ASK_DESCR [JH+MM]
+"I'm afraid I have no idea what you're talking about."
+Thanks a heap, lady.
+END_ASK_DESCR
+
+COMMAND ASK NAME
+AtLocation [Grassy Field]
+InRoom [JH+MM]
+PrintMessage [BillieJean]
+DoneWithTurn
+END_COMMAND
+
+MESSAGE [BillieJean]
+The woman in red responds, "My name is Jean Hill, and this is my friend Mary
+Mormon."
+END_MESSAGE
+
+CREATURE [WN]
+William
+Man
+There is a man here, among others, standing particularly close to Elm Street.
+LOCATION [Outside SBD]
+CREATURE_SYNONYMS WILLIAM WILLIAM NEWMAN MAN GUY SIR DUDE ASSWIPE
+END_CREATURE
+
+TALK_DESCR [WN]
+"Huh? Oh, no, I don't have a camera."
+END_TALK_DESCR
+
+ASK_DESCR [WN]
+"What? Oh, no, my Record Player is not broken."
+END_ASK_DESCR
+
+COMMAND ASK NAME
+AtLocation [Outside SBD]
+InRoom [WN]
+PrintMessage [WNce]
+DoneWithTurn
+END_COMMAND
+
+MESSAGE [WNce]
+"Huh? Oh, my name is William Newman."
+END_MESSAGE
+
+ROOM [Backstage]
+NORTH [SBD]
+END_ROOM
+
+ROOM_DESCR [Backstage]
+This room is for the cast to stay in while they wait.
+END_ROOM_DESCR
+
+CREATURE [Joe Smith]
+Joe
+Officer
+There is an officer here, apparently just ran to get here.
+LOCATION [Backstage]
+CREATURE_SYNONYMS SMITH SIR PIG
+MAN
+END_CREATURE
+
+TALK_DESCR [Joe Smith]
+"What? You saw shots coming from where?"
+END_TALK_DESCR
+
+ASK_DESCR [Joe Smith]
+"I can't be bothered with such a question, especially at this time."
+END_ASK_DESCR
+
+COMMAND ASK NAME
+AtLocation [Grassy Knoll]
+InRoom [Joe Smith]
+PrintMessage [BITEME]
+DoneWithTurn
+END_COMMAND
+
+MESSAGE [BITEME]
+"My name is Officer Joe Smith. What did you see?"
+END_MESSAGE
+
+COMMAND ANY
+AtLocation [Grassy Knoll]
+TimeGT 1233
+Chance 50
+PrintMessage [Arrest1]
+SendToRoom [Jail]
+SetTime 1330
+DoneWithTurn
+END_COMMAND
+
+MESSAGE [Arrest1]
+"Well, since you obviously saw the incident, we have to take you in for
+questioning," says Officer Joe Smith.
+And with that, you are taken to jail.
+END_MESSAGE
+
+ROOM [Jail]
+Jail Cell
+PICTURE [GK29]
+END_ROOM
+
+ROOM_DESCR [Jail]
+This is a jail cell in the Dallas Police Department, and you are surrounded
+by people you recognize as being in Dealy Plaza just a few minutes ago. It
+is obvious that you will be here for a while.
+END_ROOM_DESCR
+
+COMMAND ANY
+AtLocation [Jail]
+TimeGT 1400
+NOT InRoom [Dana Wilkins]
+PrintMessage [Oopsy]
+SendToRoom [ENDGAME!]
+DoneWithTurn
+END_COMMAND
+
+MESSAGE [Oopsy]
+Well, since this is a dark day in the history of America, it will take some
+time to sort things out. Even worse, you've completely missed Dana Wilkins,
+and love eludes you one more time. Damn.
+END_MESSAGE
+
+COMMAND ANY
+AtLocation [Jail]
+TimeGT 1400
+InRoom [Dana Wilkins]
+PrintMessage [GoodJob1]
+SendToRoom [ENDGAME!]
+DoneWithTurn
+END_COMMAND
+
+MESSAGE [GoodJob1]
+Well, since this is a dark day in the history of America, it will take some
+time to sort things out. But you've got a date next weekend with Dana, so
+things could be worse.
+END_MESSAGE
+
+COMMAND ANY
+AtLocation [Grassy Field]
+TimeGT 1233
+Chance 50
+PrintMessage [Arrest1]
+GoToRoom [Jail]
+SetTime 1330
+DoneWithTurn
+END_COMMAND
+
+COMMAND ANY
+AtLocation [Outside DCRB]
+TimeGT 1233
+Chance 50
+PrintMessage [Arrest1]
+GoToRoom [Jail]
+SetTime 1330
+DoneWithTurn
+END_COMMAND
+
+COMMAND ANY
+AtLocation [Outside DCCCB]
+TimeGT 1233
+Chance 50
+PrintMessage [Arrest1]
+GoToRoom [Jail]
+SetTime 1330
+DoneWithTurn
+END_COMMAND
+
+COMMAND ANY
+AtLocation [Outside SBD]
+TimeGT 1233
+Chance 25
+PrintMessage [Arrest1]
+GoToRoom [Jail]
+SetTime 1330
+DoneWithTurn
+END_COMMAND
+
+COMMAND ANY
+AtLocation [Pergolas]
+TimeGT 1233
+Chance 50
+PrintMessage [Arrest1]
+GoToRoom [Jail]
+SetTime 1330
+DoneWithTurn
+END_COMMAND
+
+COMMAND SOUTH
+AtLocation [SBD]
+TimeGT 1240
+PrintMessage [LockedIn]
+DoneWithTurn
+END_COMMAND
+
+MESSAGE [LockedIn]
+It appears that you cannot exit the School Book Depository, as it has been
+sealed off by the Dallas Police Department. Seems some people heard shots
+coming from the building.
+END_MESSAGE
+
+COMMAND NORTH
+AtLocation [Outside SBD]
+TimeGT 1240
+PrintMessage [LockedOut]
+DoneWithTurn
+END_COMMAND
+
+MESSAGE [LockedOut]
+You can't go into the School Book Depository, since it's been sealed off by
+the Dallas Police Department.
+END_MESSAGE
+
+COMMAND ANY
+AtLocation [SBD]
+TimeGT 1245
+Chance 90
+PrintMessage [Arrest2]
+GoToRoom [Jail2]
+SetTime 1330
+DoneWithTurn
+END_COMMAND
+
+COMMAND ANY
+AtLocation [SBDStairs1]
+TimeGT 1245
+Chance 90
+PrintMessage [Arrest2]
+GoToRoom [Jail2]
+SetTime 1330
+DoneWithTurn
+END_COMMAND
+
+COMMAND ANY
+AtLocation [SBDStairs2]
+TimeGT 1245
+Chance 90
+PrintMessage [Arrest2]
+GoToRoom [Jail2]
+SetTime 1330
+DoneWithTurn
+END_COMMAND
+
+COMMAND ANY
+AtLocation [SBDStairs6]
+TimeGT 1245
+Chance 25
+PrintMessage [Arrest2]
+GoToRoom [Jail2]
+SetTime 1330
+DoneWithTurn
+END_COMMAND
+
+COMMAND ANY
+AtLocation [Foyer1]
+TimeGT 1245
+Chance 90
+PrintMessage [Arrest2]
+GoToRoom [Jail2]
+SetTime 1330
+DoneWithTurn
+END_COMMAND
+
+COMMAND ANY
+AtLocation [Foyer2]
+TimeGT 1245
+Chance 50
+PrintMessage [Arrest2]
+GoToRoom [Jail2]
+SetTime 1330
+DoneWithTurn
+END_COMMAND
+
+COMMAND ANY
+AtLocation [Truly]
+TimeGT 1245
+Chance 90
+PrintMessage [Arrest2]
+GoToRoom [Jail2]
+SetTime 1330
+DoneWithTurn
+END_COMMAND
+
+COMMAND ANY
+AtLocation [OSS]
+TimeGT 1245
+Chance 90
+PrintMessage [Arrest2]
+GoToRoom [Jail2]
+SetTime 1330
+DoneWithTurn
+END_COMMAND
+
+COMMAND ANY
+AtLocation [Hallway]
+TimeGT 1250
+Chance 50
+PrintMessage [Arrest2]
+GoToRoom [Jail2]
+SetTime 1330
+DoneWithTurn
+END_COMMAND
+
+COMMAND ANY
+AtLocation [Hallway2]
+TimeGT 1250
+Chance 50
+PrintMessage [Arrest2]
+GoToRoom [Jail2]
+SetTime 1330
+DoneWithTurn
+END_COMMAND
+
+COMMAND ANY
+AtLocation [Lunchroom]
+TimeGT 1250
+Chance 90
+PrintMessage [Arrest2]
+GoToRoom [Jail2]
+SetTime 1330
+DoneWithTurn
+END_COMMAND
+
+COMMAND ANY
+AtLocation [ConRoom]
+TimeGT 1250
+Chance 90
+PrintMessage [Arrest2]
+GoToRoom [Jail2]
+SetTime 1330
+DoneWithTurn
+END_COMMAND
+
+COMMAND ANY
+AtLocation [LOSpace]
+TimeGT 1255
+Chance 75
+PrintMessage [Arrest2]
+GoToRoom [Jail2]
+SetTime 1330
+DoneWithTurn
+END_COMMAND
+
+COMMAND ANY
+AtLocation [Window6]
+TimeGT 1300
+Chance 90
+PrintMessage [Arrest2]
+GoToRoom [Jail2]
+SetTime 1330
+DoneWithTurn
+END_COMMAND
+
+MESSAGE [Arrest2]
+"Well, since you were in the School Book Depository, we need to take you in
+for questioning," says Officer Chris Whitaker of the Dallas Police Department.
+And with that, you are taken to jail.
+END_MESSAGE
+
+ROOM [Jail2]
+Jail Cell
+PICTURE [GK30]
+END_ROOM
+
+ROOM_DESCR [Jail2]
+This is a jail cell in the Dallas Police Department, and you are surrounded
+by people you recognize as being in the School Book Depository just a few
+minutes ago. It is obvious that you will be here for a while.
+END_ROOM_DESCR
+
+ROOM [ENDGAME!]
+Game Over.
+GAME_END
+END_ROOM
+
+NOUN [CokeMach]
+Machine
+Coke
+There is a Coke Machine here. Insert a quarter, and get a drink.
+LOCATION [Lunchroom]
+SIZE 10
+OPEN
+PUSHABLE
+NOUN_SYNONYMS COKE MACHINE COKE DRINK SHIT
+END_NOUN
+
+NOUN [Quarter]
+Quarter
+Rusted
+There is a quarter on the ground here.
+LOCATION [DCCCB]
+POINTS 5
+END_NOUN
+
+COMMAND PUT QUARTER IN MACHINE
+IsCarrying [Quarter]
+InRoom [CokeMach]
+AtLocation [Lunchroom]
+PrintMessage [DrinkUp]
+SwapLocations [Coke] [Quarter]
+DoneWithTurn
+END_COMMAND
+
+NOUN [Coke]
+Bottle
+Coke
+There are some bottles of Coke here.
+LOCATION  [CokeMach]
+DRINKABLE
+END_NOUN
+
+MESSAGE [DrinkUp]
+You insert the quarter into the Coke machine, and it gives you a bottle of
+Coke. You then open the Coke.
+END_MESSAGE
+
+COMMAND GET MACHINE
+AtLocation [Lunchroom]
+InRoom [CokeMach]
+PrintMessage "Are you crazy? It's too damn heavy!"
+END_COMMAND
+
+COMMAND GET QUARTER
+AtLocation [Lunchroom]
+InRoom [CokeMach]
+InRoom [Quarter]
+PrintMessage "Your arm's not long enough."
+DoneWithTurn
+END_COMMAND
+
+NOUN [FoodMach]
+Food
+Dispenser
+There is a Sandwich Dispenser here.
+LOCATION [Lunchroom]
+OPEN
+SIZE 10
+NOUN_SYNONYMS FOOD, DISPENSER
+END_NOUN
+
+NOUN_DESCR [FoodMach]
+This is a sandwich dispensing mechanism that gives you a nasty stale sandwich
+in excfhange for a quarter.
+END_NOUN_DESCR
+
+NOUN [Sandwich]
+Ham&Cheese
+Sandwich
+There are some Ham and Cheese Sandwiches here.
+LOCATION [FoodMach]
+NOUN_SYNONYMS SANDWICH HAM CHEESE POISON
+EDIBLE
+POISONOUS
+END_NOUN
+
+NOUN_DESCR [Sandwich]
+This is a typical Ham and Cheese sandwich, though this one appears to be
+unwrapped.
+END_NOUN_DESCR
+
+COMMAND PUT QUARTER IN DISPENSER
+IsCarrying [Quarter]
+InRoom [FoodMach]
+AtLocation [Lunchroom]
+PrintMessage [EatUp]
+SwapLocations [Sandwich] [Quarter]
+DoneWithTurn
+END_COMMAND
+
+MESSAGE [EatUp]
+You now have the Ham and Cheese sandwich. Good thing, too, since it's
+lunchtime and all.
+END_MESSAGE
+
+COMMAND GET DISPENSER
+AtLocation [Lunchroom]
+InRoom [CokeMach]
+PrintMessage "Are you crazy? It's too damn heavy!"
+END_COMMAND
+
+ROOM [P+RP]
+Peristyles and Reflectng Pools
+EAST [Outside DCCCB]
+WEST [Grassy Field]
+PICTURE [GK32]
+END_ROOM
+
+ROOM_DESCR [P+RP]
+Well, looks loke the whole ressurection thing worked, but all that orange
+smoke appears to have startled some of the old timers sitting here, at the
+beautiful peristiles and reflecting pools. You would do good to leave here
+amd avoid any further embarrassment. You can go east to the Dallas County
+Criminal Courts Building, or you could go west to that grassy field. Either
+way, you probably shouldn't come back.
+END_ROOM_DESCR
+
+RESURRECTION_ROOM [P+RP]
+
+COMMAND NORTHEAST
+AtLocation [Outside SBD]
+TimeGT 1231
+TimeLT 1240
+GoToRoom [E+M]
+DoneWithTurn
+END_COMMAND
+
+ROOM [E+M]
+Elm and Main Street
+SOUTHEAST [Outside SBD]
+PICTURE [GK33]
+END_ROOM
+
+ROOM_DESCR [E+M]
+The man known as Oswald gets on a bus here at the intersection of Elm and
+Main Street. If you wish, you can board the bus and see where he goes, or
+you can go back to Dealy Plaza to the southeast.
+END_ROOM_DESCR
+
+NOUN [Bus]
+Bus
+White
+There is a White Bus Here
+LOCATION [E+M]
+UNMOVEABLE
+END_NOUN
+
+COMMAND GET ON BUS
+AtLocation [E+M]
+NOT IsCarrying [Quarter]
+TimeGT 1230
+TimeLT 1245
+PrintMessage [FO3]
+DoneWithTurn
+END_COMMAND
+
+COMMAND GET ON BUS
+AtLocation [E+M]
+IsCarrying [Quarter]
+TimeGT 1230
+TimeLT 1245
+PrintMessage [FO1]
+SwapLocations [Quarter]
+GoToRoom [P+L]
+SetTime  1244
+DoneWithTurn
+END_COMMAND
+
+COMMAND GET ON BUS
+AtLocation [E+M]
+TimeGT 1245
+PrintMessage [FO2]
+DoneWithTurn
+END_COMMAND
+
+MESSAGE [FO1]
+You get on the Bus, where the driver asks for a quarter. You give it to him,
+and then the bus goes to Paydras Street and Lamar Street. Then Oswald gets off
+the bus, as do you. Then Oswald goes to the southeast. You can also go to
+Dealy Plaza to the southwest.
+END_MESSAGE
+
+ROOM [P+L]
+Paydras and Lamar Street
+SOUTHEAST [C+L]
+SOUTHWEST [Outside DCCCB]
+PICTURE [GK34]
+END_ROOM
+
+MESSAGE [FO2]
+Well, the bus has left, and you can't get on it (obviously). Since you don't
+want to get lost in Downtown Dallas, you might as well go southeast, back to
+Dealy Plaza.
+END_MESSAGE
+
+MESSAGE [FO3]
+You get on the Bus, but the Bus Driver demands a quarter to ride. Damn. And
+you forgot all your change. He kicks you off. Might as well go back to Dealy
+Plaza to the southeast.
+END_MESSAGE
+
+ROOM [C+L]
+Commerce and Lamar Street.
+SOUTHWEST [Outside DCCCB]
+PICTURE [GK35]
+END_ROOM
+
+ROOM_DESCR [C+L]
+Here, Oswald hails a cab. If you want, you can FOLLOW OSWALD.
+END_ROOM_DESCR
+
+ROOM_DESCR [P+L]
+Here, Oswald goes southeast. You can follow him, or go to the southwest, back
+to Dealy Plaza.
+END_ROOM_DESCR
+
+COMMAND FOLLOW
+AtLocation [C+L]
+GoToRoom [B+N]
+SetTime 1254
+DoneWithTurn
+END_COMMAND
+
+ROOM [B+N]
+Beckley and Neely
+NORTH [1026NB]
+PICTURE [GK36]
+END_ROOM
+
+ROOM_DESCR [B+N]
+You grab the bottom of the cab, and get out from under it when it gets to
+the intersection of Berkley and Neely Streets. Oswald doesn't see you. Hey, it
+could happen! Oswald isn't here, but you could've swore he went north. Might
+as well go North and follow him.
+END_ROOM_DESCR
+
+ROOM [1026NB]
+1026 North Beckley Ave.
+PICTURE [GK37]
+SOUTHWEST [B+N]
+SOUTH [DAVIS]
+END_ROOM
+
+COMMAND ANY
+AtLocation [B+N]
+SetTime 1303
+END_COMMAND
+
+ROOM_DESCR [1026NB]
+Here, at 1026 North Beckley Ave., is a rooming house. Oswald leaves here and
+goes south. Never even saw you.
+END_ROOM_DESCR
+
+ROOM [DAVIS]
+Davis and Beckley Street
+NORTH [1026NB]
+EAST [DAVIS+C]
+PICTURE [GK38]
+END_ROOM
+
+ROOM_DESCR [DAVIS]
+This is the intersection of Davis and Beckley Street. Oswald went east from
+here.
+END_ROOM_DESCR
+
+ROOM [DAVIS+C]
+Davis and Commerce Street
+WEST [DAVIS]
+SOUTHEAST [10+C]
+PICTURE [GK39]
+END_ROOM
+
+ROOM_DESCR [DAVIS+C]
+This is the intersection of Davis and Crawford Street. Oswald went southeast
+from here.
+END_ROOM_DESCR
+
+ROOM [10+C]
+10th and Commerce Street
+NORTHWEST [DAVIS+C]
+NORTHEAST [10+P]
+PICTURE [GK40]
+INITIAL
+This is the intersection of 10th and Crawford Street. Oswald went northeast
+from here. From the northeast, you can hear gunshots. Great.
+END_INITIAL
+END_ROOM
+
+ROOM_DESCR [10+C]
+This is the intersection of 10th and Crawford Street. Oswald went northeast
+from here.
+END_ROOM_DESCR
+
+COMMAND ANY
+AtLocation [10+C]
+SetTime 1316
+END_COMMAND
+
+ROOM [10+P]
+10th St. and Patton Ave.
+SOUTHWEST [10+C]
+SOUTHEAST [C+J]
+PICTURE [GK41]
+INITIAL
+This is the intersection of 10th St. and Patton Ave. You can see Oswald going southeast.
+END_INITIAL
+END_ROOM
+
+ROOM_DESCR [10+P]
+This is the intersection of 10th St. Oswald went southeast from here.
+END_ROOM_DESCR
+
+ROOM [C+J]
+Crawford St. and Jefferson Blvd.
+NORTHEAST [10+P]
+SOUTHWEST [TEXAST]
+PICTURE [GK42]
+END_ROOM
+
+ROOM_DESCR [C+J]
+This is the intersection of Crawford St. and Jefferson Blvd. Oswald probably
+went southwest from here
+END_ROOM_DESCR
+
+NOUN [Body]
+Body
+Dead
+There is a body here.
+LOCATION [10+P]
+UNMOVEABLE
+END_NOUN
+
+NOUN_DESCR [Body]
+The body appears to be that of an officer Tippet. You're no coroner, but you
+can tell that he was recently killed by bullet wounds.
+END_NOUN_DESCR
+
+COMMAND GET any
+AtLocation [10+P]
+PrintMessage [DontTouch]
+DoneWithTurn
+END_COMMAND
+
+COMMAND GET any
+AtLocation [C+J]
+PrintMessage [DontTouch]
+DoneWithTurn
+END_COMMAND
+
+NOUN [Jacket]
+Jacket
+Nondescript
+There is a nondescript jacket lying on the ground here.
+LOCATION [C+J]
+UNMOVEABLE
+END_NOUN
+
+MESSAGE [DontTouch]
+In light of today's events, it's probably best not to touch or disturb
+anything you see, especially this, as it would be disturbing evidence.
+END_MESSAGE
+
+ROOM [TEXAST]
+Texas Theater
+Points=500
+NORTH [Jail3]
+SOUTH [Outside DCCCB]
+PICTURE [GK43]
+END_ROOM
+
+ROOM_DESCR [TEXAST]
+This is the Texas Theater, where you think you just saw Oswald go into.
+However, it is currently being swarmed by cops. You can enter the theater to
+the north, or start heading back to the south.
+END_ROOM_DESCR
+
+COMMAND SOUTHWEST
+AtLocation [C+J]
+SetTime 1350
+END_COMMAND
+
+MESSAGE [Arrest3]
+"Well, since you obviously saw the incident, we have to take you in for
+questioning," says Officer Bill Cook.
+And with that, you are taken to jail.
+END_COMMAND
+
+ROOM [Jail3]
+Jail Cell
+NORTH [Jail3]
+PICTURE [GK44]
+END_ROOM
+
+ROOM_DESCR [Jail3]
+This is a jail cell in the Dallas Police Department, and you are alone. It
+is obvious that you will be here for a while.
+END_ROOM_DESCR
+
+COMMAND ANY
+AtLocation [Jail3]
+TimeGT 1430
+NOT InRoom [Dana Wilkins]
+SendToRoom [ENDGAME!]
+PrintMessage [Oopsy2]
+END_COMMAND
+
+COMMAND ANY
+AtLocation [Jail3]
+TimeGT 1400
+InRoom [Dana Wilkins]
+SendToRoom [ENDGAME!]
+PrintMessage [GoodJob2]
+END_COMMAND
+
+MESSAGE [GoodJob2]
+Well, since this is a dark day in the history of America, it will take some
+time to sort things out. In Addition, it will be a long time, if ever, to
+prove that the man that you followed killed Kennedy. But you've got a date
+next weekend with Dana, so things could be worse.
+END_MESSAGE
+
+COMMAND NORTH
+AtLocation [TexasT]
+SetTime 1430
+PrintMessage [Arrest3]
+END_COMMAND
+
+MESSAGE [Oopsy2]
+Well, since this is a dark day in the history of America, it will take some
+time to sort things out. Even worse, since you followed some nut that you
+thought killed the President, you've completely missed Dana Wilkins, and love
+eludes you one more time. Damn.
+END_MESSAGE
+
+COMMAND SOUTH
+AtLocation [TexasT]
+SetTime 1430
+END_COMMAND
+
+NOUN [Oswald]
+Oswald
+Lee
+Lee Harvey Fuckin' Oswald!
+LOCATION [Backstage]
+END_NOUN
+
+NOUN [Limo]
+Limo
+Black
+There is a black limousine here.
+LOCATION [Backstage]
+NOUN_SYNONYMS LIMO LIMOUSINE CAR BLACK
+END_NOUN
+
+COMMAND GET IN LIMO
+AtLocation [Grassy Knoll]
+TimeGT 1233
+PrintMessage [Hitch Ride]
+SetTime 1240
+SendToRoom [Outside PH]
+DoneWithTurn
+END_COMMAND
+
+COMMAND GET IN LIMO
+AtLocation [Grassy Field]
+PrintMessage [Hitch Ride]
+SetTime 1240
+GoToRoom [Outside PH]
+DoneWithTurn
+END_COMMAND
+
+COMMAND GET IN LIMO
+AtLocation [Underpass3]
+TimeGT 1233
+PrintMessage [Hitch Ride]
+SetTime 1240
+GoToRoom [Outside PH]
+DoneWithTurn
+END_COMMAND
+
+ROOM [Outside PH]
+Outside Parkland Hospital ER
+EAST [Underpass3]
+WEST [ERLobby]
+PICTURE [GK45]
+INITIAL
+You are here at Parkland Hospital, standing outside hte Emergency Room. Some 
+Secret Service agents and plenty of Doctors and Surgeons have just escorted 
+the wounded President inside. The Hospital enters ot the west, while a walk 
+to Dealy Plaza is to the east.
+END_INITIAL
+END_ROOM
+
+ROOM_DESCR [Outside PH]
+You are here at Parkland Hospital, standing outside the Emergency Room. The 
+Hospital enters to the west, while a walk to Dealy Plaza is to the east.
+END_ROOM_DESCR
+
+COMMAND EAST
+AtLocation [Outside PH]
+AddToTime 10
+END_COMMAND
+
+ROOM [ERLobby]
+Emergency Room Lobby
+NORTH [ERHall]
+EAST [Outside PH]
+INITIAL
+This is the lobby of the Emergency Rom of Parkland Hospital. You were able 
+to enter hte lobby because of the connotion outside. There is similar 
+commotion here, though it appears obvious that hte President is in the hallway 
+to the north.
+END_INITIAL
+PICTURE [GK46]
+END_ROOM
+
+ROOM_DESCR [ERLobby]
+This is the lobby of the Emergency Room of Parkland Hospital. The Emergency
+Room Hallway is to the north, while the exit outside is to the east.
+END_ROOM_DESCR
+
+ROOM [ERHall]
+Emergency Room Hallway
+SOUTH [ERHall]
+NORTH [TR1]
+PICTURE [GK47]
+END_ROOM
+
+ROOM_DESCR [ERHall]
+This is the Emergency Room Hallway of the Parkland Hospital. Trama Room 1,
+which is the room that they wheeled the President into, enters to the north.
+END_ROOM_DESCR
+
+ROOM [TR1]
+Trauma Room 1
+SOUTH [ERHall]
+INITIAL
+This is Trauma Room 1, where the President has just been taken. There are
+lots of people here. Surgeons, Doctors, and Secret Service Agents. Due to the
+confusion, no one notices your presence.
+END_INITIAL
+PICTURE [GK46]
+END_ROOM
+
+ROOM_DESCR [TR1]
+This is Trauma Room 1, where the President has just been taken. There are
+lots of people here. Surgeons, Doctors, and Secret Service Agents. Due to the
+confusion, no one notices your presence.
+END_ROOM_DESCR
+
+MESSAGE [Hitch Ride]
+You run after the Limousine, carrying the now wounded President. In the
+confusion and rush that followed, you were somehow able to grab the limousine,
+and the vehicle takes you to Parkland Hospital.
+END_MESSAGE
+
+CREATURE [Jackie]
+Jackie
+Kennedy
+The first lady, covered in blood, is sitting here.
+LOCATION [ERHall]
+POINTS 100
+WOMAN
+CREATURE_SYNONYMS JACKIE KENNEDY JAQUELINE ONASSIS O'NASSIS FIRST LADY
+END_CREATURE
+
+CREATURE_DESCR [Jackie]
+Jackie Kennedy, the First Lady of the United States, is sitting here,
+splattered with blood and other such bodily matter, crying with her head
+buried in her hands.
+END_CREATURE_DESCR
+
+TALK_DESCR [Jackie]
+She's too overcome with emotion to answer. Plus, you're not supposed to be
+here, so you'd do good not to draw attention to yourself.
+END_TALK_DESCR
+
+ASK_DESCR [Jackie]
+She's too overcome with emotion to answer. Plus, you're not supposed to be
+here, so you'd do good not to draw attention to yourself.
+END_ASK_DESCR
+
+NOUN [Gurney]
+Gurney
+Hospital
+There is a Hospital Gurney in the hallway here.
+LOCATION [ERLobby]
+OPEN
+UNMOVEABLE
+END_NOUN
+
+NOUN [Magic Bullet]
+Bullet
+Pristine
+There is a pristine bullet here.
+LOCATION [Gurney]
+END_NOUN
+
+COMMAND GET ANY
+AtLocation [ERLobby]
+PrintMessage [DontTouch]
+DoneWithTurn
+END_COMMAND
+
+NOUN_DESCR [Gurney]
+There is a Hospital Gurney here, and judging from the appearence, it was used
+to wheel the President here after the shooting.
+END_NOUN_DESCR
+
+NOUN_DESCR [Magic Bullet]
+There is a perfect pristine bullet here, and it looks as if it has been fired,
+though likely not into anything dense.
+END_NOUN_DESCR
+
+COMMAND ANY
+AtLocation [TR1]
+TimeGT 1239
+TimeLT 1246
+PrintMessage [NoBrain]
+END_COMMAND
+
+MESSAGE [NoBrain]
+It appears obvious apoun viewing the head of the President that the right
+side of his brain is missing.
+END_MESSAGE
+
+COMMAND ANY
+AtLocation [TR1]
+TimeGT 1240
+TimeLT 1247
+PrintMessage [HolyThroat]
+END_COMMAND
+
+MESSAGE [HolyThroat]
+It is also becoming more obvious to you and the surgeons that there is a
+large hole in the President's throat.
+END_MESSAGE
+
+COMMAND ANY
+AtLocation [TR1]
+TimeGT 1241
+TimeLT 1248
+PrintMessage [NoLuck]
+END_COMMAND
+
+MESSAGE [NoLuck]
+The surgeons are trying, unsuccessfully, to revive the President.
+END_MESSAGE
+
+COMMAND ANY
+AtLocation [ERHall]
+TimeGT 1244
+TimeLT 1248
+PrintMessage [Asshole]
+END_COMMAND
+
+MESSAGE [Asshole]
+There is a man here, a Secret Service Agent named Clint Hill (nevermind how
+you know that), who is waving a gun, and making threats.
+END_MESSAGE
+
+COMMAND ANY
+AtLocation [ERHall]
+TimeGT 1245
+TimeLT 1249
+PrintMessage [DumbAsshole]
+END_COMMAND
+
+MESSAGE [DumbAsshole]
+Nurse Doris Nelson is trying (somewhat successfully) to talk down Clint Hill.
+END_MESSAGE
+
+COMMAND ANY
+AtLocation [TR1]
+TimeGT 1244
+TimeLT 1248
+PrintMessage [Nude]
+END_COMMAND
+
+MESSAGE [Nude]
+Dr. Charles A. Crenshaw is cutting off JFK's trouser legs, and taking off his
+back brace, in preparation for surgery. However, he leaves the President's
+boxer shorts on, in order to preserve a bit of dignity.
+END_MESSAGE
+
+COMMAND ANY
+AtLocation [TR1]
+TimeGT 1246
+TimeLT 1249
+PrintMessage [TM!]
+END_COMMAND
+
+MESSAGE [TM!]
+Dr. Jim Carrico perfors a trachiomoty, while Dr. Charles A. Crenshaw
+discovers that there is a pulse, though no blood pressure.
+END_MESSAGE
+
+COMMAND ANY
+AtLocation [TR1]
+TimeGT 1248
+TimeLT 1251
+PrintMessage [Ouch]
+END_COMMAND
+
+MESSAGE [Ouch]
+The doctors insert a cathader into the President's heart, while his breathing
+is now being performed by a machine.
+END_MESSAGE
+
+COMMAND ANY
+AtLocation [TR1]
+TimeGT 1251
+TimeLT 1300
+PrintMessage [DOA]
+END_COMMAND
+
+MESSAGE [DOA]
+President John F. Kennedy has been pronounced dead.
+END_MESSAGE
+
+NOUN [Camera] 
+Camera
+Expensive
+There is a Camera here.
+LOCATION [DTB]
+READABLE
+PUSHABLE
+POINTS 5
+NOUN_SYNONYMS CAMERA PICTURE FILM
+END_NOUN
+
+NOUN_DESCR [Camera]
+This is an expensive camera, and the empty surroundings seem to imply that
+this is a lost camera. It's some sort of 35mm job, with one big button on top.
+It's also got some sort of initials on it.
+END_NOUN_DESCR
+
+TEXT [Camera]
+The camera is engraved with the initials "W.M.".
+END_TEXT
+
+PUSH_DESCR [Camera]
+The camera's flash goes off, and the unit itself makes some noise. Great. Now
+the owner will always remember you, assuming the damn thing has film.
+END_PUSH_DESCR
+
+COMMAND PUSH CAMERA
+AtLocation [Outside SBD]
+TimeLT 1240
+PrintMessage [OhShit]
+SwapLocations [Camera]
+PlusScore  50
+DoneWithTurn
+END_COMMAND
+
+MESSAGE [OhShit]
+As you push the button in this location, the man standing here says, "Hey! You
+found it! My Camera! Thanks a lot!"
+And you get a warm, fuzzy feeling inside.
+END_MESSAGE
+
+COMMAND ANY
+AtLocation [Truly]
+FirstVisitToRoom
+SwapLocations [Cooler] [Dana Wilkins]
+END_COMMAND
+
+NOUN [Cooler]
+Cooler
+Igloo
+There is an Igloo Cooler here.
+LOCATION [Grassy Knoll]
+POINTS 5
+CLOSED
+END_NOUN
+
+COMMAND GIVE COOLER TO ANY
+AtLocation [Underpass3]
+InRoom [James Hague]
+PrintMessage [ThanksAShitload]
+SwapLocations [Cooler]
+PlusScore  50
+DoneWithTurn
+END_COMMAND
+
+MESSAGE [ThanksAShitload]
+"Wow! Thanks, man! Now I won't die of heat exhaustion."
+And you get a warm fuzzy inside.
+END_MESSAGE
+
+NOUN [Knife]
+Knife
+Pocket
+There is a pocket knife here.
+LOCATION [OSS]
+CLOSED
+CLOSEABLE
+END_NOUN
+
+NOUN_DESCR [Knife]
+This is the kind of pocket knife that would be ideal for a killer: a large
+blade, very sharp, and folds down into a neat carrying case.
+END_NOUN_DESCR
+
+COMMAND KILL ANY WITH KNIFE
+InRoom [WN]
+IsCarrying [Knife]
+PrintMessage [BadBoy]
+SwapLocations [WN] [Dead Body]
+DoneWithTurn
+END_COMMAND
+
+MESSAGE [BadBoy]
+You attack and kill the innocent person. Now, your knife is covered in blood,
+and everyone is staring at you. Maybe you shouldn't have done that.
+END_MESSAGE
+
+NOUN [Dead Body]
+Body
+Dead
+There is a dead body lying here
+LOCATION [Backstage]
+END_NOUN
+
+COMMAND KILL ANY WITH KNIFE
+InRoom [Dana Wilkins]
+IsCarrying [Knife]
+PrintMessage [BadBoy]
+SwapLocations [Dana Wilkins] [Dead Body]
+DoneWithTurn
+END_COMMAND
+
+COMMAND KILL ANY WITH KNIFE
+InRoom [Zapruder]
+IsCarrying [Knife]
+PrintMessage [BadBoy]
+SwapLocations [Zapruder] [Dead Body]
+DoneWithTurn
+END_COMMAND
+
+COMMAND KILL ANY WITH KNIFE
+InRoom [Mr. Truly]
+IsCarrying [Knife]
+PrintMessage [BadBoy]
+SwapLocations [Mr. Truly] [Dead Body]
+DoneWithTurn
+END_COMMAND
+
+COMMAND KILL ANY WITH KNIFE
+InRoom [James Hague]
+IsCarrying [Knife]
+PrintMessage [BadBoy]
+SwapLocations [James Hague] [Dead Body]
+DoneWithTurn
+END_COMMAND
+
+COMMAND KILL ANY WITH KNIFE
+InRoom [JH+MM]
+IsCarrying [Knife]
+PrintMessage [BadBoy]
+SwapLocations [JH+MM] [Dead Body]
+DoneWithTurn
+END_COMMAND
+
+COMMAND KILL ANY WITH KNIFE
+InRoom [Joe Smith]
+IsCarrying [Knife]
+PrintMessage [BadBoy]
+SwapLocations [Joe Smith] [Dead Body]
+DoneWithTurn
+END_COMMAND
+
+NOUN_DESCR [Dead Body]
+There is a dead body here, obviously killed by a pocket knife of some sort.
+Oh, and by the way, people are staring at you and that bloody knife of yours.
+END_NOUN_DESCR
+
+COMMAND ANY
+InRoom [Dead Body]
+Chance 95
+PrintMessage [Arrest4]
+GoToRoom [Jail4]
+DoneWithTurn
+END_COMMAND
+
+MESSAGE [Arrest4]
+Because of the fact that there's a deed body here, and because you've got a
+bloody knife, the Dallas Police Department has arrested you and placed you
+in jail. You have been charged with murder in the first degree.
+Don't fuck with Texas. We've got the Electric Chair.
+END_MESSAGE
+
+ROOM [Jail4]
+Jail Cell
+END_ROOM
+
+ROOM_DESCR [Jail4]
+This is a Jail Cell. Your murder charge is being proccessed. You're gonna be
+here a long time.
+END_ROOM_DESCR
+
+CREATURE [Bubba]
+Bubba
+Big
+There is a large individual here named Bubba that wants you to bend over.
+HOSTILE
+TIME_THRESH 5
+THRESHOLD 3
+MAN
+END_CREATURE
+
+NOUN [Hanky]
+Hankerchief
+White
+There is a white hankerchief here.
+LOCATION [DCRB]
+POINTS 50
+NOUN_SYNONYMS HANKERCHIEF WHITE HANKY NAPKIN KNAPKIN COFFEE FILTER
+END_NOUN
+
+NOUN_DESCR [Hanky]
+This is an ordinary white hankerchief, perfect for crying into.
+END_NOUN_DESCR
+
+COMMAND GIVE HANKERCHIEF TO JACKIE
+SwapLocations [Hanky]
+PrintMessage [ThankU]
+PlusScore  100
+DoneWithTurn
+END_COMMAND
+
+MESSAGE [ThankU]
+Jackie takes the hankerchief, and thanks you.
+END_MESSAGE
+
+COMMAND ANY
+AtLocation [Window6]
+TimeGT 1229
+TimeLT 1236
+PrintMessage [NoNoNo]
+SendToRoom [SBDStairs6]
+END_COMMAND
+
+COMMAND ANY
+AtLocation [LOSpace]
+TimeGT 1229
+TimeLT 1236
+PrintMessage [NoNoNo]
+SendToRoom [SBDStairs6]
+END_COMMAND
+
+MESSAGE [NoNoNo]
+For some strange, inexplicable reason, you feel as if you should get out of
+this room. Maybe it's those gunshots.
+END_MESSAGE
+
+COMMAND ANY
+AtLocation [Outside DCRB]
+TimeGT 1224
+TimeLT 1231
+PrintMessage [ByeParade]
+END_COMMAND
+
+MESSAGE [ByeParade]
+The parade goes by. When it gets to Elm Street, though, something happens.
+END_MESSAGE
+
+COMMAND ANY
+AtLocation [Outside DCCCB]
+TimeGT 1224
+TimeLT 1231
+PrintMessage [ByeParade]
+END_COMMAND
+
+COMMAND ANY
+AtLocation [Outside DTB]
+TimeGT 1224
+TimeLT 1234
+PrintMessage [JFKShot1]
+END_COMMAND
+
+COMMAND ANY
+AtLocation [Outside SBD]
+TimeGT 1224
+TimeLT 1234
+PrintMessage [JFKShot1]
+END_COMMAND
+
+COMMAND ANY
+AtLocation [Underpass3]
+TimeGT 1224
+TimeLT 1234
+PrintMessage [JFKShot1]
+END_COMMAND
+
+MESSAGE [JFKShot1]
+The parade is passing by.
+And here's the president.
+Wait.
+He's been shot.
+More shots are ringing out.
+He's been shot in the head.
+The limo drives on.
+END_MESSAGE
+
+COMMAND ANY
+AtLocation [Grassy Field]
+TimeGT 1226
+TimeLT 1230
+PrintMessage [JFKShot2]
+WaitForReturn
+ShowPicture [GK50]
+PrintMessage [JFKShot3]
+SendToRoom [Underpass3]
+AddToTime 5
+END_COMMAND
+
+COMMAND ANY
+AtLocation [Grassy Knoll]
+TimeGT 1226
+TimeLT 1230
+PrintMessage [JFKShot2]
+WaitForReturn
+ShowPicture [GK50]
+PrintMessage [JFKShot3]
+SendToRoom [Underpass3]
+AddToTime 5
+END_COMMAND
+
+COMMAND ANY
+AtLocation [Pergolas]
+TimeGT 1226
+TimeLT 1230
+PrintMessage [JFKShot2]
+WaitForReturn
+ShowPicture [GK50]
+PrintMessage [JFKShot3]
+SendToRoom [Underpass3]
+AddToTime 5
+END_COMMAND
+
+MESSAGE [JFKShot2]
+The parade is passing by.
+And here's the president.
+Wait.
+He's been shot.
+END_MESSAGE
+
+MESSAGE [JFKShot3]
+More shots are ringing out.
+He's been shot in the head.
+The limo drives on.
+END_MESSAGE
