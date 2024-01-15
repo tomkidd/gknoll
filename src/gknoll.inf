@@ -1,0 +1,418 @@
+! GRASSY KNOLL: The JFK Assassination Simulation
+
+Constant Story "GRASSY KNOLL: The JFK Assassination Simulation";
+Constant Headline "^Based on the books^The Warren Commission Report and^On The Trail of the Assassins by Jim Garrison^Game and Text Copyright 1995 by Tom Kidd^";
+Constant DEBUG;
+
+Include "parser";
+Include "verblib";
+Include "grammar";
+
+[ Initialise;
+    location = Outside_DCCCB;
+    print "^^^^^INTRODUCTION^^ (later)^";
+!         It's been six years since you last saw Dana Wilkins, your old High
+! School Sweetheart. Since then, you've graduated from Texas A&M, and you're
+! starting to make a name for yourself in your field. However, true love still
+! eludes you, and you hear that Dana is single. She called Wednesday. She wanted
+! to meet you. She said that it was urgent.^^
+!         Well, it's at least worth a shot. She lives in Grand Prarie, Texas,
+! and she works at the School Book Depository, which is somewhere on Elm Street
+! in Dallas.^^
+!         On the upside, Dana was a real looker back in Texas High School,
+! class of '57. On the downside, Dallas is a whole 3 hours away from Texarkana,
+! Texas.^^
+!         So, on November 22, 1963, you take off from work, and head for
+! Big ~D~. When you get near the Dealy Plaza, around 10:00, it takes about an
+! hour to find a parking space some three blocks away. Seems some parade is in
+! town. Oh, yes, the President's in it. Great. You can't get to Dealy until
+! 12:00. You've got to meet Dana for lunch at noon. No doubt she'll also want
+! to watch the parade as well. Great. She works on the second floor of the
+! School Book Depository. Perfect. This promises to be an interesting weekend...^^";
+];
+
+Object  Outside_DCCCB "Outside the Dallas County Criminal Courts Building"
+ has    light
+ with   description "You are standing outside the Dallas County Criminal Courts Building, where
+            all of the city's criminal trials are being held. These guys probably can't
+            handle any more crime in this city. From here, a sidewalk leads north, while
+            the building eneters to the east.",
+        e_to DCCCB,
+        n_to Outside_DCRB;
+
+Object  DCCCB "The Dallas County Criminal Courts Building"
+ has    light
+ with   description "This is the Dallas County Criminal Courts Building. It is bustling with
+            lawyers, judges, and tourists, most of which are seeking shelter from the
+            Texas heat outside. There is an exit to the west.";
+
+Object  Outside_DCRB "The Dallas County Records Building"
+ has    light
+ with   description "You're standing outside the Dallas County Records building. Your uncle was
+            born in Dallas, and if your guess is correct, his birth certificate is in
+            there somewhere. You can follow the sidewalk to the north or south, or you
+            can beat the heat by entering the building to the east.",
+        s_to Outside_DCCCB,
+        n_to Outside_DTB,
+        e_to DCRB;
+
+Object  DCRB "The Dallas County Records Building"
+ has    light
+ with   description "You're standing in the Dallas County Records Building. WIth the possible
+            exception of the receptionist and the tourists beating the heat, the place is
+            empty. Cold, but empty. There is an exit to the east.",
+        w_to Outside_DCRB;
+
+Object  Outside_DTB "Outside the Dal-Tex Building"
+ has    light
+ with   description "You're standing outside the Dal-Tex Building. You don't have a clue what
+            Dal-Tex makes (or even if it's a company), and the outside of this
+            establisment doesn't help much. You can cross Houston Street to the west, or
+            you can enter the building to the east.",
+        e_to DTB,
+        w_to Outside_SBD,
+        s_to Outside_DCRB;
+
+Object  DTB "The Dal-Tex Building"
+ has    light
+ with   description "This is the Dal-Tex Building, and the insides don't give much help as to
+            exactly what in the hell the Dal-Tex Building is. There are some people here,
+            and the place is at least air conditioned. There is an exit to the west.",
+        w_to Outside_DTB;
+
+Object  Outside_SBD "Outside the School Book Depository"
+ has    light
+ with   description "Well, you've made it to the School Book Depository. There are people hanging
+            around outside, some even sitting down on the grass outside, to watch the
+            parade. There are also some people sitting at open windows, hoping to catch
+            a glimpse of the parade. The enterance to the School Book Depository is to
+            the north. Across the street to the east is the Dal-Tex Building. Across Elm
+            street to the south is a large grassy field. And to the southwest is
+            Pergolas.",
+        n_to SBD,
+        s_to Grassy_Field,
+        e_to Outside_DTB,
+        sw_to Pergolas;
+
+Object  Grassy_Field "A Grassy Field"
+ has    light
+ with   description "This grassy field looks like a great place for a picnic, and indeed there are
+            some people picnicing here. You can also get a great view of the parade that's
+            coming. Across Elm Street to the north is the School Book Depository, to the
+            northwest, there are Pergolas, and to the west, there is a grassy knoll. To
+            the southwest, there is a triple underpass.",
+        n_to Outside_SBD,
+        nw_to Pergolas,
+        w_to Grassy_Knoll,
+        sw_to Underpass3;
+
+Object  Pergolas
+ has    light
+ with   description "You're standing here outside some pergolas (structures consisting of parallel
+            colonnades supporting an open roof of girders and cross rafters). Across Elm
+            Street to the southeast is a large grassy field. To the northeast is the
+            School Book Depository, and to the southwest, there is a grassy knoll.",
+        ne_to Outside_SBD,
+        se_to Grassy_Field,
+        sw_to Grassy_Knoll;
+
+Object  Grassy_Knoll
+ has    light
+ with   description "This appears to be a grassy knoll. As with everything today, there are a lot
+            of people here. There is a nice shade tree here, right up near a spiked
+            wooden fence. To the northeast are some pergolas, and across the street to
+            the east, there is a grassy field. To the south, there is a triple underpass",
+        ne_to Pergolas,
+        s_to Underpass3,
+        e_to Grassy_Field;
+
+Object  SBD "The School Book Depository"
+ has    light
+ with   description "This is the School Book Depository's Main Entrance. The building appears to be
+            being refurbished, and there are lots of workers moving about. There are
+            people working here, and there is a foyer to the north. There is also some
+            stairs to the southeast.",
+        s_to Outside_SBD,
+        se_to SBDStairs1,
+        n_to Foyer1;
+
+Object  SBDStairs1 "Stairwell, first floor"
+ has    light
+ with   description "This stairwell can take you up. There is also an exit to the northwest. There
+            are some workers in outfits going up and down the stairs.",
+        nw_to SBD,
+        u_to SBDStairs2;
+
+Object  Foyer1 "Foyer, first floor"
+ has    light
+ with   description "This is a Foyer of sorts, whose exits lead north, northeast, and to the south.
+            There are some workers in outfits here, all giving you that ~you don't belong
+            here~ look.",
+        s_to SBD,
+        n_to OSS,
+        ne_to Truly;
+
+Object  OSS "Open Storage Space"
+ has    light
+ with   description "This is a big, open, storage space. What'd you expect from a Book Depository?
+            There are some more workers in outfits here. You can go south to exit.",
+        s_to Foyer1;
+
+Object  Truly "Mr. Truly's Office"
+ has    light
+ with   description "This appears to be the somewhat well-kept (and somewhat empty) office of a Mr.
+            Roy S. Truly. The only exit is to the southwest.",
+        sw_to Foyer1;
+
+Object  SBDStairs2 "Stairs, second floor"
+ has    light,
+ with   description "This is the stairwell of the second floor. Unspectacular, except for the fact
+            that it leads up and down. There is also an exit for this floor to the
+            northwest.",
+        d_to SBDStairs1,
+        u_to SBDStairs6,
+        nw_to Foyer2;
+
+Object  Foyer2 "Foyer, second floor"
+ has    light,
+ with   description "This is another Foyer of sorts, with exits to the north, west, and to the
+            southeast. There are still more workers here, moving about.",
+        n_to Hallway,
+        w_to Lunchroom,
+        se_to SBDStairs2;
+
+Object  Hallway "Hallway"
+ has    light,
+ with   description "This is a hallway, whose one purpose is to lead to the office space to the
+            west, and to the Foyer to the south.",
+        s_to Foyer2,
+        w_to OSpace;
+
+Object  OSpace "Office Space"
+ has    light,
+ with   description "This is some open office space, with nice little desks, and lots of pencils.
+            Most of the people seem to be crowded around the windows. There are exits to
+            the east and to the south.",
+        e_to Hallway,
+        s_to ConRoom;
+
+Object  Lunchroom "Lunchroom"
+ has    light,
+ with   description "This is a lunchroom, complete with boring tables, a Coke machine, and one of
+            those things that sells you stale sandwiches. There is an exit to the east,
+            and one to the south.",
+        s_to Hallway2,
+        e_to Foyer2;
+
+Object  Hallway2 "Hallway"
+ has    light,
+ with   description "This is a hallway, whose sole purpose is to lead to the west and to the north.",
+        n_to Lunchroom,
+        w_to ConRoom;
+
+Object  ConRoom "Conference Room"
+ has    light,
+ with   description "This is an unused conference room, presumably because of the current lunch
+            hour. There is a long table, some chairs here, a portrait of Govenor Connaly.
+            There are some exits to the north and to the east.",
+        n_to OSpace,
+        e_to Hallway2;
+
+Object  SBDStairs6 "Stairway, sixth floor"
+ has    light,
+ with   description "This is the stairwell for the sixth floor. The third, fourth and fifth floor
+            looked so boring, you skipped over them. There is an exit to the northwest,
+            and another one down.",
+        d_to SBDStairs2,
+        nw_to LOSpace;
+
+Object  LOSpace "Large Open Space"
+ has    light
+ with   description "This is a large open space, with lots of boxes and stuff. There are some more
+            workers working and moving about. The window view to the northwest would
+            provide an excellent view of the parade (though it's hard to get to). There is
+            also an exit to the southeast.",
+        se_to SBDStairs6,
+        nw_to Window6;
+
+Object  Window6 "Window, sixth floor"
+ has    light
+ with   description "This window gives a perfect view of the parade, or at least the back of it as
+            it passes by. There is an exit to the southeast.",
+        se_to LOSpace;
+
+Object  Underpass3 "Triple Underpass"
+ has    light
+ with   description "This is a triple underpass, formed by the convergence of Elm, Main and
+            Commerce street, all coming together under the railroad overpass. There is
+            a grassy field to the northeast, and a grassy knoll to the north.",
+        n_to Grassy_Knoll,
+        ne_to Grassy_Field;
+
+Object  Backstage "Backstage"
+ has    light
+ with   description "This room is for the cast to stay in while they wait.",
+        n_to SBD;
+
+Object  Jail "Jail Cell"
+ has    light
+ with   description "This is a jail cell in the Dallas Police Department, and you are surrounded
+            by people you recognize as being in Dealy Plaza just a few minutes ago. It
+            is obvious that you will be here for a while.";
+
+Object  Jail2 "Jail Cell"
+ has    light
+ with   description "This is a jail cell in the Dallas Police Department, and you are surrounded
+            by people you recognize as being in the School Book Depository just a few
+            minutes ago. It is obvious that you will be here for a while.";
+
+! This is the GAME_END room in the AGT source. It may not be necessary in Inform
+Object  Endgame "Game Over"
+ has    light;
+
+! This is the RESURRECTION_ROOM room in the AGT source. I'm not sure how we get there
+! in the AGT game and there may not be a direct eqivalent in Inform
+Object  PandRP "Peristyles and Reflectng Pools"
+ has    light
+ with   description "Well, looks loke the whole ressurection thing worked, but all that orange
+            smoke appears to have startled some of the old timers sitting here, at the
+            beautiful peristiles and reflecting pools. You would do good to leave here
+            amd avoid any further embarrassment. You can go east to the Dallas County
+            Criminal Courts Building, or you could go west to that grassy field. Either
+            way, you probably shouldn't come back.",
+        e_to Outside_DCCCB,
+        w_to Grassy_Field;
+
+Object  EandM "Elm and Main Street"
+ has    light
+ with   description "The man known as Oswald gets on a bus here at the intersection of Elm and
+            Main Street. If you wish, you can board the bus and see where he goes, or
+            you can go back to Dealy Plaza to the southeast.",
+        se_to Outside_SBD;
+
+Object  PandL "Paydras and Lamar Street"
+ has    light
+ with   description "Here, Oswald goes southeast. You can follow him, or go to the southwest, back
+            to Dealy Plaza.",
+        se_to CandL,
+        sw_to Outside_DCCCB;
+
+! This location exists to tell you to do the "FOLLOW OSWALD" command. Will need to see
+! if something similar can be rigged up with Inform
+Object  CandL "Commerce and Lamar Street"
+ has    light
+ with   description "Here, Oswald hails a cab. If you want, you can FOLLOW OSWALD.",
+        sw_to Outside_DCCCB;
+
+Object  BandN "Beckley and Neely"
+ has    light
+ with   description "You grab the bottom of the cab, and get out from under it when it gets to
+            the intersection of Berkley and Neely Streets. Oswald doesn't see you. Hey, it
+            could happen! Oswald isn't here, but you could've swore he went north. Might
+            as well go North and follow him.",
+        n_to NBAve;
+
+Object  NBAve "1026 North Beckley Ave."
+ has    light
+ with   description "You grab the bottom of the cab, and get out from under it when it gets to
+            the intersection of Berkley and Neely Streets. Oswald doesn't see you. Hey, it
+            could happen! Oswald isn't here, but you could've swore he went north. Might
+            as well go North and follow him.",
+        sw_to BandN,
+        s_to Davis;
+
+Object  Davis "Davis and Beckley Street"
+ has    light
+ with   description "This is the intersection of Davis and Beckley Street. Oswald went east from
+            here.",
+        n_to NBAve,
+        e_to DavisAndC;
+
+Object  DavisAndC "Davis and Commerce Street"
+ has    light
+ with   description "This is the intersection of Davis and Crawford Street. Oswald went southeast
+            from here.",
+        w_to Davis,
+        sw_to TenthAndC;
+
+! The "INITIAL" concept in AGT may work differently in AGT than Inform, may need to debug later
+Object  TenthAndC "10th and Commerce Street"
+ has    light
+ with   description "This is the intersection of 10th and Crawford Street. Oswald went northeast",
+        initial "This is the intersection of 10th and Crawford Street. Oswald went northeast
+            from here. From the northeast, you can hear gunshots. Great.",
+        nw_to DavisAndC,
+        ne_to TenthAndP;
+
+Object  TenthAndP "10th St. and Patton Ave."
+ has    light
+ with   description "This is the intersection of 10th St. and Patton Ave. Oswald went southeast from here.",
+        initial "This is the intersection of 10th St. Oswald went southeast from here.",
+        sw_to TenthAndC,
+        se_to CandJ;
+
+Object  CandJ "Crawford St. and Jefferson Blvd."
+ has    light
+ with   description "This is the intersection of Crawford St. and Jefferson Blvd. Oswald probably
+            went southwest from here",
+        ne_to TenthAndP,
+        sw_to TexasT;
+
+! The AGT source gives 500 points to the score for getting here
+Object  TexasT "Texas Theater"
+ has    light
+ with   description "This is the Texas Theater, where you think you just saw Oswald go into.
+            However, it is currently being swarmed by cops. You can enter the theater to
+            the north, or start heading back to the south.",
+        n_to Jail3,
+        s_to Outside_DCCCB;
+
+Object  Jail3 "Jail Cell"
+ has    light
+ with   description "This is a jail cell in the Dallas Police Department, and you are alone. It
+            is obvious that you will be here for a while.";
+
+Object  OutsidePH "Outside Parkland Hospital ER"
+ has    light
+ with   description "You are here at Parkland Hospital, standing outside the Emergency Room. The 
+            Hospital enters to the west, while a walk to Dealy Plaza is to the east.",
+        initial "You are here at Parkland Hospital, standing outside hte Emergency Room. Some 
+            Secret Service agents and plenty of Doctors and Surgeons have just escorted 
+            the wounded President inside. The Hospital enters ot the west, while a walk 
+            to Dealy Plaza is to the east.",
+        e_to Underpass3,
+        w_to ERLobby;
+
+Object  ERLobby "Emergency Room Lobby"
+ has    light
+ with   description "This is the lobby of the Emergency Room of Parkland Hospital. The Emergency
+            Room Hallway is to the north, while the exit outside is to the east.",
+        initial "This is the lobby of the Emergency Rom of Parkland Hospital. You were able 
+            to enter hte lobby because of the connotion outside. There is similar 
+            commotion here, though it appears obvious that hte President is in the hallway 
+            to the north.",
+        n_to ERHall,
+        e_to OutsidePH;
+
+Object  ERHall "Emergency Room Hallway"
+ has    light
+ with   description "This is the Emergency Room Hallway of the Parkland Hospital. Trama Room 1,
+            which is the room that they wheeled the President into, enters to the north.",
+        s_to ERHall,
+        n_to TR1;
+
+Object  TR1 "Trauma Room 1"
+ has    light
+ with   description "This is Trauma Room 1, where the President has just been taken. There are
+            lots of people here. Surgeons, Doctors, and Secret Service Agents. Due to the
+            confusion, no one notices your presence.",
+        initial "This is Trauma Room 1, where the President has just been taken. There are
+            lots of people here. Surgeons, Doctors, and Secret Service Agents. Due to the
+            confusion, no one notices your presence.",
+        s_to ERHall;
+
+Object  Jail4 "Jail Cell"
+ has    light
+ with   description "This is a Jail Cell. Your murder charge is being proccessed. You're gonna be
+        here a long time.";
+
