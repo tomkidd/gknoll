@@ -1,444 +1,72 @@
-TITLE
-COLORS WHITE YELLOW BLACK YELLOW RED
-GRASSY KNOLL:
-The JFK Assassination Simulation
-
-Based on the books
-The Warren Commission Report
-and
-On The Trail of the Assassins by Jim Garrison
-
-Gone and Text Copyright 1995 by Tom Kidd
-END_TITLE
-
 #DEFINE [noun weight] 13
 #DEFINE [NoWhere] 0
-
-INTRODUCTION
-        It's been six years since you last saw Dana Wilkins, your old High
-School Sweetheart. Since then, you've graduated from Texas A&M, and you're
-starting to make a name for yourself in your field. However, true love still
-eludes you, and you hear that Dana is single. She called Wednesday. She wanted
-to meet you. She said that it was urgent.
-        Well, it's at least worth a shot. She lives in Grand Prarie, Texas,
-and she works at the School Book Depository, which is somewhere on Elm Street
-in Dallas.
-        On the upside, Dana was a real looker back in Texas High School,
-class of '57. On the downside, Dallas is a whole 3 hours away from Texarkana,
-Texas.
-        So, on November 22, 1963, you take off from work, and head for
-Big "D". When you get near the Dealy Plaza, around 10:00, it takes about an
-hour to find a parking space some three blocks away. Seems some parade is in
-town. Oh, yes, the President's in it. Great. You can't get to Dealy until
-12:00. You've got to meet Dana for lunch at noon. No doubt she'll also want
-to watch the parade as well. Great. She works on the second floor of the
-School Book Depository. Perfect. This promises to be an interesting weekend.
-END_INTRO
-
-STARTING_ROOM [Outside DCCCB]
 
 STARTING_TIME 1200
 DELTA_TIME 3
 
 STATUS_OPTION 1
 
-ROOM [Outside DCCCB]
-Outside DCCCB
-EAST [DCCCB]
-NORTH [Outside DCRB]
-PICTURE [GK02]
-END_ROOM
-
-ROOM_DESCR [Outside DCCCB]
-You are standing outside the Dallas County Criminal Courts Building, where
-all of the city's criminal trials are being held. These guys probably can't
-handle any more crime in this city. From here, a sidewalk leads north, while
-the building eneters to the east.
-END_ROOM_DESCR
-
 HELP [Outside DCCCB]
 Go inside if you want, but remember, your purpose here is not in there. Get
 to the School Book Depository now!
 END_HELP_DESCR
-
-ROOM [DCCCB]
-The DCCCB
-WEST [Outside DCCCB]
-PICTURE [GK03]
-END_ROOM
-
-ROOM_DESCR [DCCCB]
-This is the Dallas County Criminal Courts Building. It is bustling with
-lawyers, judges, and tourists, most of which are seeking shelter from the
-Texas heat outside. There is an exit to the west.
-END_ROOM_DESCR
 
 HELP [DCCCB]
 As nice and comfortable as this is, you really ought to be getting back to
 your once (and maybe future) girlfriend!
 END_HELP_DESCR
 
-ROOM [Outside DCRB]
-Outside the DCRB
-SOUTH [Outside DCCCB]
-NORTH [Outside DTB]
-EAST [DCRB]
-PICTURE [GK04]
-END_ROOM
-
-ROOM_DESCR [Outside DCRB]
-You're standing outside the Dallas County Records building. Your uncle was
-born in Dallas, and if your guess is correct, his birth certificate is in
-there somewhere. You can follow the sidewalk to the north or south, or you
-can beat the heat by entering the building to the east.
-END_ROOM_DESCR
-
 HELP [Outside DCRB]
 Go inside if you want, but remember, your purpose here is not in there. Get
 to the School Book Depository now!
 END_HELP_DESCR
-
-ROOM [DCRB]
-The DCRB
-WEST [Outside DCRB]
-PICTURE [GK05]
-END_ROOM
-
-ROOM_DESCR [DCRB]
-You're standing in the Dallas County Records Building. WIth the possible
-exception of the receptionist and the tourists beating the heat, the place is
-empty. Cold, but empty. There is an exit to the east.
-END_ROOM_DESCR
 
 HELP [DCRB]
 As nice and comfortable as this is, you really ought to be getting back to
 your once (and maybe future) girlfriend!
 END_HELP_DESCR
 
-ROOM [Outside DTB]
-Outside the Dal-Tex Building.
-EAST [DTB]
-WEST [Outside SBD]
-SOUTH [Outside DCRB]
-PICTURE [GK06]
-END_ROOM
-
-ROOM_DESCR [Outside DTB]
-You're standing outside the Dal-Tex Building. You don't have a clue what
-Dal-Tex makes (or even if it's a company), and the outside of this
-establisment doesn't help much. You can cross Houston Street to the west, or
-you can enter the building to the east.
-END_ROOM_DESCR
-
 HELP [Outside DTB]
 Go inside if you want, but remember, your purpose here is not in there. Get
 to the School Book Depository now!
 END_HELP_DESCR
-
-ROOM [DTB]
-The Dal-Tex Building
-WEST [Outside DTB]
-PICTURE [GK07]
-END_ROOM
-
-ROOM_DESCR [DTB]
-This is the Dal-Tex Building, and the insides don't give much help as to
-exactly what in the hell the Dal-Tex Building is. There are some people here,
-and the place is at least air conditioned. There is an exit to the west.
-END_ROOM_DESCR
 
 HELP [DTB]
 As nice and comfortable as this is, you really ought to be getting back to
 your once (and maybe future) girlfriend!
 END_HELP_DESCR
 
-ROOM [Outside SBD]
-Outside the SBD
-NORTH [SBD]
-SOUTH [Grassy Field]
-EAST [Outside DTB]
-SOUTHWEST [Pergolas]
-PICTURE [GK08]
-END_ROOM
-
-ROOM_DESCR [Outside SBD]
-Well, you've made it to the School Book Depository. There are people hanging
-around outside, some even sitting down on the grass outside, to watch the
-parade. There are also some people sitting at open windows, hoping to catch
-a glimpse of the parade. The enterance to the School Book Depository is to
-the north. Across the street to the east is the Dal-Tex Building. Across Elm
-street to the south is a large grassy field. And to the southwest is
-Pergolas.
-END_ROOM_DESCR
-
 HELP [Outside SBD]
 Well, Dingleberry, seeing as how your whole purpose in driving up here for
 three hours is in this building to the north, you might as well go in there.
 END_HELP_DESCR
-
-ROOM [Grassy Field]
-A Grassy Field
-NORTH [Outside SBD]
-NORTHWEST [Pergolas]
-WEST [Grassy Knoll]
-SOUTHWEST [Underpass3]
-PICTURE [GK09]
-END_ROOM
-
-ROOM_DESCR [Grassy Field]
-This grassy field looks like a great place for a picnic, and indeed there are
-some people picnicing here. You can also get a great view of the parade that's
-coming. Across Elm Street to the north is the School Book Depository, to the
-northwest, there are Pergolas, and to the west, there is a grassy knoll. To
-the southwest, there is a triple underpass.
-END_ROOM_DESCR
 
 HELP [Grassy Field]
 Well, it's cute and all, but remember your purpose here (whatever that may
 be).
 END_HELP_DESCR
 
-ROOM [Pergolas]
-Pergolas
-NORTHEAST [Outside SBD]
-SOUTHEAST [Grassy Field]
-SOUTHWEST [Grassy Knoll]
-PICTURE [GK10]
-END_ROOM
-
-ROOM_DESCR [Pergolas]
-You're standing here outside some pergolas (structures consisting of parallel
-colonnades supporting an open roof of girders and cross rafters). Across Elm
-Street to the southeast is a large grassy field. To the northeast is the
-School Book Depository, and to the southwest, there is a grassy knoll.
-END_ROOM_DESCR
-
 HELP [Pergolas]
 Well, it's cute and all, but remember your purpose here (whatever that may
 be).
 END_HELP_DESCR
-
-ROOM [Grassy Knoll]
-Grassy Knoll
-NORTHEAST [Pergolas]
-SOUTH [Underpass3]
-EAST [Grassy Field]
-PICTURE [GK11]
-END_ROOM
-
-ROOM_DESCR [Grassy Knoll]
-This appears to be a grassy knoll. As with everything today, there are a lot
-of people here. There is a nice shade tree here, right up near a spiked
-wooden fence. To the northeast are some pergolas, and across the street to
-the east, there is a grassy field. To the south, there is a triple underpass
-END_ROOM_DESCR
 
 HELP [Grassy Knoll]
 You know, if someone really wanted to kill the president, this would be a
 great place to try and get a shot off....
 END_HELP_DESCR
 
-ROOM [SBD]
-The School Book Depository
-SOUTH [Outside SBD]
-SOUTHEAST [SBDStairs1]
-NORTH [Foyer1]
-PICTURE [GK12]
-END_ROOM
-
-ROOM_DESCR [SBD]
-This is the School Book Depository's Main Entrance. The building appears to be
-being refurbished, and there are lots of workers moving about. There are
-people working here, and there is a foyer to the north. There is also some
-stairs to the southeast.
-END_ROOM_DESCR
-
 HELP [SBD]
 You've come this far, now do it!
 END_HELP_DESCR
-
-ROOM [SBDStairs1]
-Stairwell, first floor
-NORTHWEST [SBD]
-UP [SBDStairs2]
-PICTURE [GK13]
-END_ROOM
-
-ROOM_DESCR [SBDStairs1]
-This stairwell can take you up. There is also an exit to the northwest. There
-are some workers in outfits going up and down the stairs.
-END_ROOM_DESCR
 
 HELP [SBDStairs1]
 Hello, Mr. Tyler........going up?
 END_HELP_DESCR
 
-ROOM [Foyer1]
-Foyer, first floor
-SOUTH [SBD]
-NORTH [OSS]
-NORTHEAST [Truly]
-PICTURE [GK14]
-END_ROOM
-
-ROOM_DESCR [Foyer1]
-This is a Foyer of sorts, whose exits lead north, northeast, and to the south.
-There are some workers in outfits here, all giving you that "you don't belong
-here" look.
-END_ROOM_DESCR
-
-ROOM [OSS]
-Open Storage Space
-SOUTH [Foyer1]
-PICTURE [GK15]
-END_ROOM
-
-ROOM_DESCR [OSS]
-This is a big, open, storage space. What'd you expect from a Book Depository?
-There are some more workers in outfits here. You can go south to exit.
-END_ROOM_DESCR
-
 HELP [OSS]
 You're getting colder......
 END_HELP_DESCR
-
-ROOM [Truly]
-Mr. Truly's Office
-SOUTHWEST [Foyer1]
-PICTURE [GK16]
-END_ROOM
-
-ROOM_DESCR [Truly]
-This appears to be the somewhat well-kept (and somewhat empty) office of a Mr.
-Roy S. Truly. The only exit is to the southwest.
-END_ROOM_DESCR
-
-ROOM [SBDStairs2]
-Stairs, second floor
-DOWN [SBDStairs1]
-UP [SBDStairs6]
-NORTHWEST [Foyer2]
-PICTURE [GK17]
-END_ROOM
-
-ROOM_DESCR [SBDStairs2]
-This is the stairwell of the second floor. Unspectacular, except for the fact
-that it leads up and down. There is also an exit for this floor to the
-northwest.
-END_ROOM_DESCR
-
-ROOM [Foyer2]
-Foyer, second floor
-NORTH [Hallway]
-WEST [Lunchroom]
-SOUTHEAST [SBDStairs2]
-PICTURE [GK18]
-END_ROOM
-
-ROOM_DESCR [Foyer2]
-This is another Foyer of sorts, with exits to the north, west, and to the
-southeast. There are still more workers here, moving about.
-END_ROOM_DESCR
-
-ROOM [Hallway]
-Hallway
-SOUTH [Foyer2]
-WEST [OSpace]
-PICTURE [GK19]
-END_ROOM
-
-ROOM_DESCR [Hallway]
-This is a hallway, whose one purpose is to lead to the office space to the
-west, and to the Foyer to the south.
-END_ROOM_DESCR
-
-ROOM [OSpace]
-Office Space
-EAST [Hallway]
-SOUTH [ConRoom]
-PICTURE [GK20]
-END_ROOM
-
-ROOM_DESCR [OSpace]
-This is some open office space, with nice little desks, and lots of pencils.
-Most of the people seem to be crowded around the windows. There are exits to
-the east and to the south.
-END_ROOM_DESCR
-
-ROOM [Lunchroom]
-Lunchroom
-SOUTH [Hallway2]
-EAST [Foyer2]
-PICTURE [GK21]
-END_ROOM
-
-ROOM_DESCR [Lunchroom]
-This is a lunchroom, complete with boring tables, a Coke machine, and one of
-those things that sells you stale sandwiches. There is an exit to the east,
-and one to the south.
-END_ROOM_DESCR
-
-ROOM [Hallway2]
-Hallway
-NORTH [Lunchroom]
-WEST [ConRoom]
-PICTURE [GK22]
-END_ROOM
-
-ROOM_DESCR [Hallway2]
-This is a hallway, whose sole purpose is to lead to the west and to the north.
-END_ROOM_DESCR
-
-ROOM [ConRoom]
-Conference Room
-NORTH [OSpace]
-EAST [Hallway2]
-PICTURE [GK23]
-END_ROOM
-
-ROOM_DESCR [ConRoom]
-This is an unused conference room, presumably because of the current lunch
-hour. There is a long table, some chairs here, a portrait of Govenor Connaly.
-There are some exits to the north and to the east.
-END_ROOM_DESCR
-
-ROOM [SBDStairs6]
-Stairway, sixth floor
-DOWN [SBDStairs2]
-NORTHWEST [LOSpace]
-PICTURE [GK24]
-END_ROOM
-
-ROOM_DESCR [SBDStairs6]
-This is the stairwell for the sixth floor. The third, fourth and fifth floor
-looked so boring, you skipped over them. There is an exit to the northwest,
-and another one down.
-END_ROOM_DESCR
-
-ROOM [LOSpace]
-Large Open Space
-SOUTHEAST [SBDStairs6]
-NORTHWEST [Window6]
-PICTURE [GK25]
-END_ROOM
-
-ROOM_DESCR [LOSpace]
-This is a large open space, with lots of boxes and stuff. There are some more
-workers working and moving about. The window view to the northwest would
-provide an excellent view of the parade (though it's hard to get to). There is
-also an exit to the southeast.
-END_ROOM_DESCR
-
-ROOM [Window6]
-Window, sixth floor
-SOUTHEAST [LOSpace]
-PICTURE [GK26]
-END_ROOM
-
-ROOM_DESCR [Window6]
-This window gives a perfect view of the parade, or at least the back of it as
-it passes by. There is an exit to the southeast.
-END_ROOM_DESCR
 
 COMMAND ANY
 AtLocation [Lunchroom]
@@ -511,19 +139,6 @@ MESSAGE [CopFence]
 There are some people standing behind the wooden picket fence. One of them
 appears to be a police officer, and he appears to have a rifle.
 END_MESSAGE
-
-ROOM [Underpass3]
-Triple Underpass
-NORTH [Grassy Knoll]
-NORTHEAST [Grassy Field]
-PICTURE [GK27]
-END_ROOM
-
-ROOM_DESCR [Underpass3]
-This is a triple underpass, formed by the convergence of Elm, Main and
-Commerce street, all coming together under the railroad overpass. There is
-a grassy field to the northeast, and a grassy knoll to the north.
-END_ROOM_DESCR
 
 COMMAND ANY
 AtLocation [Pergolas]
@@ -879,14 +494,6 @@ MESSAGE [WNce]
 "Huh? Oh, my name is William Newman."
 END_MESSAGE
 
-ROOM [Backstage]
-NORTH [SBD]
-END_ROOM
-
-ROOM_DESCR [Backstage]
-This room is for the cast to stay in while they wait.
-END_ROOM_DESCR
-
 CREATURE [Joe Smith]
 Joe
 Officer
@@ -930,17 +537,6 @@ MESSAGE [Arrest1]
 questioning," says Officer Joe Smith.
 And with that, you are taken to jail.
 END_MESSAGE
-
-ROOM [Jail]
-Jail Cell
-PICTURE [GK29]
-END_ROOM
-
-ROOM_DESCR [Jail]
-This is a jail cell in the Dallas Police Department, and you are surrounded
-by people you recognize as being in Dealy Plaza just a few minutes ago. It
-is obvious that you will be here for a while.
-END_ROOM_DESCR
 
 COMMAND ANY
 AtLocation [Jail]
@@ -1193,22 +789,6 @@ for questioning," says Officer Chris Whitaker of the Dallas Police Department.
 And with that, you are taken to jail.
 END_MESSAGE
 
-ROOM [Jail2]
-Jail Cell
-PICTURE [GK30]
-END_ROOM
-
-ROOM_DESCR [Jail2]
-This is a jail cell in the Dallas Police Department, and you are surrounded
-by people you recognize as being in the School Book Depository just a few
-minutes ago. It is obvious that you will be here for a while.
-END_ROOM_DESCR
-
-ROOM [ENDGAME!]
-Game Over.
-GAME_END
-END_ROOM
-
 NOUN [CokeMach]
 Machine
 Coke
@@ -1314,22 +894,6 @@ InRoom [CokeMach]
 PrintMessage "Are you crazy? It's too damn heavy!"
 END_COMMAND
 
-ROOM [P+RP]
-Peristyles and Reflectng Pools
-EAST [Outside DCCCB]
-WEST [Grassy Field]
-PICTURE [GK32]
-END_ROOM
-
-ROOM_DESCR [P+RP]
-Well, looks loke the whole ressurection thing worked, but all that orange
-smoke appears to have startled some of the old timers sitting here, at the
-beautiful peristiles and reflecting pools. You would do good to leave here
-amd avoid any further embarrassment. You can go east to the Dallas County
-Criminal Courts Building, or you could go west to that grassy field. Either
-way, you probably shouldn't come back.
-END_ROOM_DESCR
-
 RESURRECTION_ROOM [P+RP]
 
 COMMAND NORTHEAST
@@ -1339,18 +903,6 @@ TimeLT 1240
 GoToRoom [E+M]
 DoneWithTurn
 END_COMMAND
-
-ROOM [E+M]
-Elm and Main Street
-SOUTHEAST [Outside SBD]
-PICTURE [GK33]
-END_ROOM
-
-ROOM_DESCR [E+M]
-The man known as Oswald gets on a bus here at the intersection of Elm and
-Main Street. If you wish, you can board the bus and see where he goes, or
-you can go back to Dealy Plaza to the southeast.
-END_ROOM_DESCR
 
 NOUN [Bus]
 Bus
@@ -1395,13 +947,6 @@ the bus, as do you. Then Oswald goes to the southeast. You can also go to
 Dealy Plaza to the southwest.
 END_MESSAGE
 
-ROOM [P+L]
-Paydras and Lamar Street
-SOUTHEAST [C+L]
-SOUTHWEST [Outside DCCCB]
-PICTURE [GK34]
-END_ROOM
-
 MESSAGE [FO2]
 Well, the bus has left, and you can't get on it (obviously). Since you don't
 want to get lost in Downtown Dallas, you might as well go southeast, back to
@@ -1414,21 +959,6 @@ you forgot all your change. He kicks you off. Might as well go back to Dealy
 Plaza to the southeast.
 END_MESSAGE
 
-ROOM [C+L]
-Commerce and Lamar Street.
-SOUTHWEST [Outside DCCCB]
-PICTURE [GK35]
-END_ROOM
-
-ROOM_DESCR [C+L]
-Here, Oswald hails a cab. If you want, you can FOLLOW OSWALD.
-END_ROOM_DESCR
-
-ROOM_DESCR [P+L]
-Here, Oswald goes southeast. You can follow him, or go to the southwest, back
-to Dealy Plaza.
-END_ROOM_DESCR
-
 COMMAND FOLLOW
 AtLocation [C+L]
 GoToRoom [B+N]
@@ -1436,106 +966,15 @@ SetTime 1254
 DoneWithTurn
 END_COMMAND
 
-ROOM [B+N]
-Beckley and Neely
-NORTH [1026NB]
-PICTURE [GK36]
-END_ROOM
-
-ROOM_DESCR [B+N]
-You grab the bottom of the cab, and get out from under it when it gets to
-the intersection of Berkley and Neely Streets. Oswald doesn't see you. Hey, it
-could happen! Oswald isn't here, but you could've swore he went north. Might
-as well go North and follow him.
-END_ROOM_DESCR
-
-ROOM [1026NB]
-1026 North Beckley Ave.
-PICTURE [GK37]
-SOUTHWEST [B+N]
-SOUTH [DAVIS]
-END_ROOM
-
 COMMAND ANY
 AtLocation [B+N]
 SetTime 1303
 END_COMMAND
 
-ROOM_DESCR [1026NB]
-Here, at 1026 North Beckley Ave., is a rooming house. Oswald leaves here and
-goes south. Never even saw you.
-END_ROOM_DESCR
-
-ROOM [DAVIS]
-Davis and Beckley Street
-NORTH [1026NB]
-EAST [DAVIS+C]
-PICTURE [GK38]
-END_ROOM
-
-ROOM_DESCR [DAVIS]
-This is the intersection of Davis and Beckley Street. Oswald went east from
-here.
-END_ROOM_DESCR
-
-ROOM [DAVIS+C]
-Davis and Commerce Street
-WEST [DAVIS]
-SOUTHEAST [10+C]
-PICTURE [GK39]
-END_ROOM
-
-ROOM_DESCR [DAVIS+C]
-This is the intersection of Davis and Crawford Street. Oswald went southeast
-from here.
-END_ROOM_DESCR
-
-ROOM [10+C]
-10th and Commerce Street
-NORTHWEST [DAVIS+C]
-NORTHEAST [10+P]
-PICTURE [GK40]
-INITIAL
-This is the intersection of 10th and Crawford Street. Oswald went northeast
-from here. From the northeast, you can hear gunshots. Great.
-END_INITIAL
-END_ROOM
-
-ROOM_DESCR [10+C]
-This is the intersection of 10th and Crawford Street. Oswald went northeast
-from here.
-END_ROOM_DESCR
-
 COMMAND ANY
 AtLocation [10+C]
 SetTime 1316
 END_COMMAND
-
-ROOM [10+P]
-10th St. and Patton Ave.
-SOUTHWEST [10+C]
-SOUTHEAST [C+J]
-PICTURE [GK41]
-INITIAL
-This is the intersection of 10th St. and Patton Ave. You can see Oswald going southeast.
-END_INITIAL
-END_ROOM
-
-ROOM_DESCR [10+P]
-This is the intersection of 10th St. Oswald went southeast from here.
-END_ROOM_DESCR
-
-ROOM [C+J]
-Crawford St. and Jefferson Blvd.
-NORTHEAST [10+P]
-SOUTHWEST [TEXAST]
-PICTURE [GK42]
-END_ROOM
-
-ROOM_DESCR [C+J]
-This is the intersection of Crawford St. and Jefferson Blvd. Oswald probably
-went southwest from here
-END_ROOM_DESCR
 
 NOUN [Body]
 Body
@@ -1575,20 +1014,6 @@ In light of today's events, it's probably best not to touch or disturb
 anything you see, especially this, as it would be disturbing evidence.
 END_MESSAGE
 
-ROOM [TEXAST]
-Texas Theater
-Points=500
-NORTH [Jail3]
-SOUTH [Outside DCCCB]
-PICTURE [GK43]
-END_ROOM
-
-ROOM_DESCR [TEXAST]
-This is the Texas Theater, where you think you just saw Oswald go into.
-However, it is currently being swarmed by cops. You can enter the theater to
-the north, or start heading back to the south.
-END_ROOM_DESCR
-
 COMMAND SOUTHWEST
 AtLocation [C+J]
 SetTime 1350
@@ -1599,17 +1024,6 @@ MESSAGE [Arrest3]
 questioning," says Officer Bill Cook.
 And with that, you are taken to jail.
 END_COMMAND
-
-ROOM [Jail3]
-Jail Cell
-NORTH [Jail3]
-PICTURE [GK44]
-END_ROOM
-
-ROOM_DESCR [Jail3]
-This is a jail cell in the Dallas Police Department, and you are alone. It
-is obvious that you will be here for a while.
-END_ROOM_DESCR
 
 COMMAND ANY
 AtLocation [Jail3]
@@ -1693,75 +1107,10 @@ GoToRoom [Outside PH]
 DoneWithTurn
 END_COMMAND
 
-ROOM [Outside PH]
-Outside Parkland Hospital ER
-EAST [Underpass3]
-WEST [ERLobby]
-PICTURE [GK45]
-INITIAL
-You are here at Parkland Hospital, standing outside hte Emergency Room. Some 
-Secret Service agents and plenty of Doctors and Surgeons have just escorted 
-the wounded President inside. The Hospital enters ot the west, while a walk 
-to Dealy Plaza is to the east.
-END_INITIAL
-END_ROOM
-
-ROOM_DESCR [Outside PH]
-You are here at Parkland Hospital, standing outside the Emergency Room. The 
-Hospital enters to the west, while a walk to Dealy Plaza is to the east.
-END_ROOM_DESCR
-
 COMMAND EAST
 AtLocation [Outside PH]
 AddToTime 10
 END_COMMAND
-
-ROOM [ERLobby]
-Emergency Room Lobby
-NORTH [ERHall]
-EAST [Outside PH]
-INITIAL
-This is the lobby of the Emergency Rom of Parkland Hospital. You were able 
-to enter hte lobby because of the connotion outside. There is similar 
-commotion here, though it appears obvious that hte President is in the hallway 
-to the north.
-END_INITIAL
-PICTURE [GK46]
-END_ROOM
-
-ROOM_DESCR [ERLobby]
-This is the lobby of the Emergency Room of Parkland Hospital. The Emergency
-Room Hallway is to the north, while the exit outside is to the east.
-END_ROOM_DESCR
-
-ROOM [ERHall]
-Emergency Room Hallway
-SOUTH [ERHall]
-NORTH [TR1]
-PICTURE [GK47]
-END_ROOM
-
-ROOM_DESCR [ERHall]
-This is the Emergency Room Hallway of the Parkland Hospital. Trama Room 1,
-which is the room that they wheeled the President into, enters to the north.
-END_ROOM_DESCR
-
-ROOM [TR1]
-Trauma Room 1
-SOUTH [ERHall]
-INITIAL
-This is Trauma Room 1, where the President has just been taken. There are
-lots of people here. Surgeons, Doctors, and Secret Service Agents. Due to the
-confusion, no one notices your presence.
-END_INITIAL
-PICTURE [GK46]
-END_ROOM
-
-ROOM_DESCR [TR1]
-This is Trauma Room 1, where the President has just been taken. There are
-lots of people here. Surgeons, Doctors, and Secret Service Agents. Due to the
-confusion, no one notices your presence.
-END_ROOM_DESCR
 
 MESSAGE [Hitch Ride]
 You run after the Limousine, carrying the now wounded President. In the
@@ -2104,15 +1453,6 @@ bloody knife, the Dallas Police Department has arrested you and placed you
 in jail. You have been charged with murder in the first degree.
 Don't fuck with Texas. We've got the Electric Chair.
 END_MESSAGE
-
-ROOM [Jail4]
-Jail Cell
-END_ROOM
-
-ROOM_DESCR [Jail4]
-This is a Jail Cell. Your murder charge is being proccessed. You're gonna be
-here a long time.
-END_ROOM_DESCR
 
 CREATURE [Bubba]
 Bubba

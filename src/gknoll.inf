@@ -31,6 +31,7 @@ Include "grammar";
 ! School Book Depository. Perfect. This promises to be an interesting weekend...^^";
 ];
 
+! [Outside DCCCB] in the AGT source
 Object  Outside_DCCCB "Outside the Dallas County Criminal Courts Building"
  has    light
  with   description "You are standing outside the Dallas County Criminal Courts Building, where
@@ -44,8 +45,11 @@ Object  DCCCB "The Dallas County Criminal Courts Building"
  has    light
  with   description "This is the Dallas County Criminal Courts Building. It is bustling with
             lawyers, judges, and tourists, most of which are seeking shelter from the
-            Texas heat outside. There is an exit to the west.";
+            Texas heat outside. There is an exit to the west.",
+        w_to Outside_DCCCB;
 
+
+! [Outside DCRB] in the AGT source
 Object  Outside_DCRB "The Dallas County Records Building"
  has    light
  with   description "You're standing outside the Dallas County Records building. Your uncle was
@@ -63,6 +67,7 @@ Object  DCRB "The Dallas County Records Building"
             empty. Cold, but empty. There is an exit to the east.",
         w_to Outside_DCRB;
 
+! [Outside DTB] in the AGT source
 Object  Outside_DTB "Outside the Dal-Tex Building"
  has    light
  with   description "You're standing outside the Dal-Tex Building. You don't have a clue what
@@ -80,6 +85,7 @@ Object  DTB "The Dal-Tex Building"
             and the place is at least air conditioned. There is an exit to the west.",
         w_to Outside_DTB;
 
+! [Outside SBD] in the AGT source
 Object  Outside_SBD "Outside the School Book Depository"
  has    light
  with   description "Well, you've made it to the School Book Depository. There are people hanging
@@ -94,6 +100,7 @@ Object  Outside_SBD "Outside the School Book Depository"
         e_to Outside_DTB,
         sw_to Pergolas;
 
+! [Grassy Field] in the AGT source
 Object  Grassy_Field "A Grassy Field"
  has    light
  with   description "This grassy field looks like a great place for a picnic, and indeed there are
@@ -116,6 +123,7 @@ Object  Pergolas
         se_to Grassy_Field,
         sw_to Grassy_Knoll;
 
+! [Grassy Knoll] in the AGT source
 Object  Grassy_Knoll
  has    light
  with   description "This appears to be a grassy knoll. As with everything today, there are a lot
@@ -272,6 +280,7 @@ Object  Endgame "Game Over"
 
 ! This is the RESURRECTION_ROOM room in the AGT source. I'm not sure how we get there
 ! in the AGT game and there may not be a direct eqivalent in Inform
+! [P+RP] in the AGT source
 Object  PandRP "Peristyles and Reflectng Pools"
  has    light
  with   description "Well, looks loke the whole ressurection thing worked, but all that orange
@@ -283,6 +292,7 @@ Object  PandRP "Peristyles and Reflectng Pools"
         e_to Outside_DCCCB,
         w_to Grassy_Field;
 
+! [E+M] in the AGT source
 Object  EandM "Elm and Main Street"
  has    light
  with   description "The man known as Oswald gets on a bus here at the intersection of Elm and
@@ -290,6 +300,7 @@ Object  EandM "Elm and Main Street"
             you can go back to Dealy Plaza to the southeast.",
         se_to Outside_SBD;
 
+! [P+L] in the AGT source
 Object  PandL "Paydras and Lamar Street"
  has    light
  with   description "Here, Oswald goes southeast. You can follow him, or go to the southwest, back
@@ -299,11 +310,13 @@ Object  PandL "Paydras and Lamar Street"
 
 ! This location exists to tell you to do the "FOLLOW OSWALD" command. Will need to see
 ! if something similar can be rigged up with Inform
+! [C+L] in the AGT source
 Object  CandL "Commerce and Lamar Street"
  has    light
  with   description "Here, Oswald hails a cab. If you want, you can FOLLOW OSWALD.",
         sw_to Outside_DCCCB;
 
+! [B+N] in the AGT source
 Object  BandN "Beckley and Neely"
  has    light
  with   description "You grab the bottom of the cab, and get out from under it when it gets to
@@ -312,6 +325,7 @@ Object  BandN "Beckley and Neely"
             as well go North and follow him.",
         n_to NBAve;
 
+! [1026NB] in the AGT source
 Object  NBAve "1026 North Beckley Ave."
  has    light
  with   description "You grab the bottom of the cab, and get out from under it when it gets to
@@ -328,6 +342,7 @@ Object  Davis "Davis and Beckley Street"
         n_to NBAve,
         e_to DavisAndC;
 
+! [DAVIS+C] in the AGT source
 Object  DavisAndC "Davis and Commerce Street"
  has    light
  with   description "This is the intersection of Davis and Crawford Street. Oswald went southeast
@@ -336,6 +351,7 @@ Object  DavisAndC "Davis and Commerce Street"
         sw_to TenthAndC;
 
 ! The "INITIAL" concept in AGT may work differently in AGT than Inform, may need to debug later
+! [10+C] in the AGT source
 Object  TenthAndC "10th and Commerce Street"
  has    light
  with   description "This is the intersection of 10th and Crawford Street. Oswald went northeast",
@@ -344,6 +360,7 @@ Object  TenthAndC "10th and Commerce Street"
         nw_to DavisAndC,
         ne_to TenthAndP;
 
+! [10+P] in the AGT source
 Object  TenthAndP "10th St. and Patton Ave."
  has    light
  with   description "This is the intersection of 10th St. and Patton Ave. Oswald went southeast from here.",
@@ -351,6 +368,7 @@ Object  TenthAndP "10th St. and Patton Ave."
         sw_to TenthAndC,
         se_to CandJ;
 
+! [C+J] in the AGT source
 Object  CandJ "Crawford St. and Jefferson Blvd."
  has    light
  with   description "This is the intersection of Crawford St. and Jefferson Blvd. Oswald probably
@@ -372,6 +390,7 @@ Object  Jail3 "Jail Cell"
  with   description "This is a jail cell in the Dallas Police Department, and you are alone. It
             is obvious that you will be here for a while.";
 
+! [Outside PH] in the AGT source
 Object  OutsidePH "Outside Parkland Hospital ER"
  has    light
  with   description "You are here at Parkland Hospital, standing outside the Emergency Room. The 
