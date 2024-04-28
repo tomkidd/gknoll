@@ -4,9 +4,46 @@ Constant Story "GRASSY KNOLL: The JFK Assassination Simulation";
 Constant Headline "^Based on the books^The Warren Commission Report and^On The Trail of the Assassins by Jim Garrison^Game and Text Copyright 1995 by Tom Kidd^";
 Constant DEBUG;
 
+! Variables to store the current time
+Global hours = 12;       ! Initial hours
+Global minutes = 00;     ! Initial minutes
+Global timeispm = true;  ! AM/PM
+
+Replace DrawStatusLine;
+
 Include "parser";
 Include "verblib";
-Include "grammar";
+
+! Overriding DrawStatusLine lets me put the time in the status bar.
+[ DrawStatusLine width posa posb posc;
+  !if (invisible_status) { @split_window 0; return; }
+  @split_window 1; @set_window 1; @set_cursor 1 1; style reverse;
+  width = 0->33; posa = width-39; posb = width-26; posc = width-13;
+  spaces (width);
+  @set_cursor 1 2;  PrintShortName(location);
+
+  if (width > 76) {
+      @set_cursor 1 posa; print "Score: ", sline1;
+      @set_cursor 1 posb; print "Moves: ", sline2;
+      
+      @set_cursor 1 posc; 
+      print "Time: "; 
+      if (hours < 10) print "0"; 
+      print hours; 
+      print ":"; 
+      if (minutes < 10) print "0"; 
+      print minutes;
+      if (timeispm) print " PM"; else print " AM";
+  }
+  if (width > 63 && width <= 76) {
+      @set_cursor 1 posb; print sline1, "/", sline2;
+  }
+  @set_cursor 1 1; style roman; @set_window 0;
+];
+
+Object Timer "game timer"
+    with name 'game timer name',
+    time_left 60;
 
 [ Initialise;
     location = Outside_DCCCB;
@@ -29,7 +66,38 @@ Include "grammar";
 ! 12:00. You've got to meet Dana for lunch at noon. No doubt she'll also want
 ! to watch the parade as well. Great. She works on the second floor of the
 ! School Book Depository. Perfect. This promises to be an interesting weekend...^^";
+
+    ! NOTE: TODO: Right now I'm not actually using the timer. 
+    ! The examples I found were using it but really it's just a handy way to get
+    ! a function to run on every turn. I should probably use a Daemon but I need 
+    ! to figure out how those work first. And maybe I use a timer in the future.
+    ! so for now it stays.
+    StartTimer(Timer, 60, TimePasses); 
 ];
+
+[ TimePasses;
+  if (parent(Timer) == nothing) {
+    Timer.time_left = Timer.time_left - 1;
+
+      IncrementTime();
+  }
+];
+
+[ IncrementTime;
+  minutes = minutes + 1;
+  if (minutes >= 60) {
+    minutes = 0;
+    hours = hours + 1;
+    if (hours > 12) {
+      hours = 1;
+    }
+    if (hours >= 11) {
+      if (timeispm) timeispm = false; else timeispm = true;
+    }
+  }
+];
+
+Include "grammar";
 
 ! [Outside DCCCB] in the AGT source
 Object  Outside_DCCCB "Outside the Dallas County Criminal Courts Building"
