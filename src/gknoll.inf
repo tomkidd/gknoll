@@ -5,9 +5,10 @@ Constant Headline "^Based on the books^The Warren Commission Report and^On The T
 Constant DEBUG;
 
 ! Variables to store the current time
-Global hours = 12;       ! Initial hours
+Global hours = 12;       ! Initial hours (24h time)
+Global printhours = 12;  ! Initial print hours (12h time)
 Global minutes = 00;     ! Initial minutes
-Global timeispm = true;  ! AM/PM
+Global fulltime = 1200;  ! 24h time spelled out for event checking
 
 Replace DrawStatusLine;
 
@@ -29,11 +30,13 @@ Include "verblib";
       @set_cursor 1 posc; 
       print "Time: "; 
       if (hours < 10) print "0"; 
-      print hours; 
+      printhours = hours;
+      if (hours > 12) printhours = hours - 12;
+      print printhours; 
       print ":"; 
       if (minutes < 10) print "0"; 
       print minutes;
-      if (timeispm) print " PM"; else print " AM";
+      if (hours > 11) print " PM"; else print " AM";
   }
   if (width > 63 && width <= 76) {
       @set_cursor 1 posb; print sline1, "/", sline2;
@@ -78,8 +81,8 @@ Object Timer "game timer"
 [ TimePasses;
   if (parent(Timer) == nothing) {
     Timer.time_left = Timer.time_left - 1;
-
-      IncrementTime();
+    IncrementTime();
+    CheckForEvents();
   }
 ];
 
@@ -88,13 +91,8 @@ Object Timer "game timer"
   if (minutes >= 60) {
     minutes = 0;
     hours = hours + 1;
-    if (hours > 12) {
-      hours = 1;
-    }
-    if (hours >= 11) {
-      if (timeispm) timeispm = false; else timeispm = true;
-    }
   }
+  fulltime = (hours * 100) + minutes;
 ];
 
 Include "grammar";
@@ -102,10 +100,12 @@ Include "grammar";
 ! [Outside DCCCB] in the AGT source
 Object  Outside_DCCCB "Outside the Dallas County Criminal Courts Building"
  has    light
- with   description "You are standing outside the Dallas County Criminal Courts Building, where
+ with   description [;
+            "You are standing outside the Dallas County Criminal Courts Building, where
             all of the city's criminal trials are being held. These guys probably can't
             handle any more crime in this city. From here, a sidewalk leads north, while
-            the building eneters to the east.",
+            the building eneters to the east.";
+        ],
         e_to DCCCB,
         n_to Outside_DCRB;
 
@@ -503,3 +503,75 @@ Object  Jail4 "Jail Cell"
  with   description "This is a Jail Cell. Your murder charge is being proccessed. You're gonna be
         here a long time.";
 
+[ CheckForEvents;
+    ! LunchIt in the AGT code
+    if (location == Lunchroom && fulltime > 1214 && fulltime < 1221) {
+        print "^^There is a man in the lunchroom, who has the name Oswald on his outfit, eating.";
+    }
+
+    ! Seizure! in the AGT code
+    if (location == Outside_SBD && fulltime > 1214 && fulltime < 1221) {
+        print "^^There is a man in the street, who is having an epileptic seizure. There
+            are people gathered all around.";
+    }
+
+    ! Lunch1 in the AGT code
+    if (location == Window6 && fulltime > 1214 && fulltime < 1221) {
+        print "^^There is a man sitting at the window, his name tag says Bonnie Ray Williams,
+            who is sitting here eating his chicken lunch.";
+    }
+
+    ! Lunch2 in the AGT code
+    if ((location == Lunchroom && fulltime > 1230 && fulltime < 1233) ||
+        (location == OSpace && fulltime > 1231 && fulltime < 1234)) {
+        print "^^There is a man, with the name Oswald on his outfit, who appears to be on his
+            way out of the building.";
+    }
+
+    ! ByeOswald1 in the AGT code
+    if ((location == Outside_SBD ||
+        location == SBD) && fulltime > 1232 && fulltime < 1235) {
+        print "^^There is a man, with the name Oswald on his outfit, leaving the School Book
+            Depository, despite all of the police and others surrounding the entrance.
+            If you want, you can follow him to the northeast.";
+    }
+
+    ! SS1 in the AGT code
+    if ((location == Outside_SBD || 
+        location == Pergolas) && fulltime > 1219 && fulltime < 1226) {
+        print "^^You can see what appear to be Secret Service Men in the windows of the 6th
+            floor of the School Book Depository";
+    }
+
+    ! CopFence in the AGT code
+    if (location == Grassy_Knoll && fulltime > 1220 && fulltime < 1230) {
+        print "^^There are some people standing behind the wooden picket fence. One of them
+            appears to be a police officer, and he appears to have a rifle.";
+    }
+    
+    ! BlackUMB in the AGT code
+    if (location == Pergolas && fulltime > 1225 && fulltime < 1230) {
+        print "^^There is a man, standing near Elm Street, dressed in black, who has just now
+            opened a black umbrella.";
+    }
+    
+    ! Pand in the AGT code
+    if ((location == Outside_DTB || 
+        location == Outside_DCRB || 
+        location == Outside_DCCCB || 
+        location == Outside_SBD || 
+        location == Pergolas || 
+        location == Grassy_Knoll || 
+        location == Grassy_Field || 
+        location == Underpass3) && fulltime > 1230 && fulltime < 1245) {
+        print "^^There is pandemonium on the streets, with people running all over the place,
+            cops everywhere arresting people, and even some people who look like Secret
+            Service agents.";
+    }    
+    
+    ! Hoboes in the AGT code
+    if (location == Pergolas && fulltime > 1245 && fulltime < 1250) {
+        print "^^Some officers from the Dallas Police Department are marching three hoboes in
+            handcuffs to a patrolcar.";
+    }
+];
