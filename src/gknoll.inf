@@ -118,7 +118,7 @@ Object  DCCCB "The Dallas County Criminal Courts Building"
 
 
 ! [Outside DCRB] in the AGT source
-Object  Outside_DCRB "The Dallas County Records Building"
+Object  Outside_DCRB "Outside the Dallas County Records Building"
  has    light
  with   description "You're standing outside the Dallas County Records building. Your uncle was
             born in Dallas, and if your guess is correct, his birth certificate is in
@@ -575,3 +575,16 @@ Object  Jail4 "Jail Cell"
             handcuffs to a patrolcar.";
     }
 ];
+
+Class   Person
+ has    animate
+ with   name "creature";
+
+Person  William "William" Outside_SBD
+ with   name "William",
+        description [;
+             "There is a man here, among others, standing particularly close to Elm Street.";
+         ],
+        describe [;
+             "There is a man here, among others, standing particularly close to Elm Street.";
+         ];
