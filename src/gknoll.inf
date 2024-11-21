@@ -196,7 +196,7 @@ Object  Grassy_Field "A Grassy Field"
         w_to Grassy_Knoll,
         sw_to Underpass3;
 
-Object  Pergolas
+Object  Pergolas "Pergolas"
  has    light
  with   description "You're standing here outside some pergolas (structures consisting of parallel
             colonnades supporting an open roof of girders and cross rafters). Across Elm
@@ -207,7 +207,7 @@ Object  Pergolas
         sw_to Grassy_Knoll;
 
 ! [Grassy Knoll] in the AGT source
-Object  Grassy_Knoll
+Object  Grassy_Knoll "Grassy Knoll"
  has    light
  with   description "This appears to be a grassy knoll. As with everything today, there are a lot
             of people here. There is a nice shade tree here, right up near a spiked
@@ -697,5 +697,32 @@ Person Mr_Truly "man"
                      }
                  }
                  "~I'm afraid I really don't know. Now would you please leave.~";
+         ],
+    has animate;
+
+! [James Hague] in the AGT Source
+Person James_Hague "man"
+    Underpass3
+    with name 'james' 'hague' 'man' 'guy' 'dude',
+         initial [;
+            "There is a man standing here, right next to the triple underpass.^";
+         ],
+         description [;
+            "There is a man standing here, near the triple underpass, who is holding a camera, likely to get a head shot of the President (with the camera).";
+         ],
+         life [;
+             Talk:
+                 print "~I hope the parade goes well. You can't say that Dallas doesn't love the President.~^";
+                 rtrue;
+             Ask:
+                if (noun == self) {
+                     switch (second) {
+                         'name':
+                             print "~Me? Oh, my name is James Hague. Can't wait to see the President, how about you?~^";
+                             return true;
+                     }
+                 }
+                 print "~What'd you say? It's too damn hot. I feel like I'm gonna die of heat exhaustion.~^";
+                 rtrue;
          ],
     has animate;

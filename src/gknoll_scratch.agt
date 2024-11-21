@@ -99,42 +99,6 @@ MESSAGE [DanaThis]
 "Don't you recognize me? I'm Dana Wilkins!"
 END_MESSAGE
 
-CREATURE [James Hague]
-Charles
-Man
-There is a man standing here, right next to the triple underpass.
-LOCATION [Underpass3]
-CREATURE_SYNONYMS MAN JAMES HAGUE GUY DUDE
-MAN
-END_CREATURE
-
-CREATURE_DESCR [James Hague]
-There is a man standing here, near the triple underpass, who is holding a
-camera, likely to get a head shot of the President (with the camera).
-END_CREATURE_DESCR
-
-ASK_DESCR [James Hague]
-"What'd you say? It's too damn hot. I feel like I'm gonna die of heat
-exhaustion."
-END_ASK_DESCR
-
-TALK_DESCR [James Hague]
-"I hope the parade goes well. You can't say that Dallas doesn't love the
-President."
-END_TALK_DESCR
-
-COMMAND ASK NAME
-AtLocation [Underpass3]
-InRoom [James Hague]
-PrintMessage [Bryers]
-DoneWithTurn
-END_COMMAND
-
-MESSAGE [Bryers]
-"Me? Oh, my name is James Hague. Can't wait to see the President, how about
-you?"
-END_MESSAGE
-
 COMMAND ANY
 TimeGT 1230
 SwapLocations [Zapruder]
