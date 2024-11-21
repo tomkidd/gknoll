@@ -98,17 +98,10 @@ Object Timer "game timer"
 Include "grammar";
 
 ! Grammar for talking
-! [ TalkSub;
-!     if (noun has animate) {
-!         print "You try to talk to ", (the) noun, ".^";
-!         rtrue;
-!     }
-!     "There's no one to talk to.";
-! ];
 
 [ TalkSub;
     if (noun has animate) {
-        if (RunRoutines(noun, life)) rtrue; ! Call the NPC's life routine for Talk
+        if (RunLife(noun, ##Talk)) rtrue; ! Call the NPC's life routine for Talk
         print_ret "You try to talk to ", (the) noun, ", but get no response.";
     }
     "There's no one to talk to.";
@@ -610,7 +603,6 @@ Person William_Newman "man"
     Outside_SBD
     with name 'william' 'newman' 'man' 'guy' 'sir' 'dude' 'asswipe',
          describe "^There is a man here, standing particularly close to Elm Street.",
-         description "There is a man here, standing particularly close to Elm Street.",
          life [;
              Ask:
                  if (noun == self) {
@@ -630,7 +622,7 @@ Person William_Newman "man"
          ],
     has animate;
 
-
+! [Dana Wilkins] in the AGT Source
 Person Dana_Wilkins "woman"
     Backstage
     with name 'dana' 'wilkins' 'woman' 'ma^am',
@@ -655,3 +647,55 @@ Person Dana_Wilkins "woman"
          ],
     has animate;
 
+! [Zapruder] in the AGT Source
+Person Zapruder "man"
+    Pergolas
+    with name 'abraham' 'zapruder' 'man' 'old' 'dude',
+         initial [;
+            "There is a man here, standing on the Stairwell, holding an 8mm Movie Camera.";
+         ],
+         description [;
+            "This older gentleman, accompanied by a younger lady (presumably a relative), apparently is a big fan of the President's, and also enjoys filming everything. His 8mm Movie Camera doesn't stray from Elm Street and the parade.";
+         ],
+         life [;
+             Talk:
+                 print "He doesn't seem to hear you, and the hearing aid clues you in as to why. However, the woman with him gives you a mean look.^";
+                 rtrue;
+             Ask:
+                if (noun == self) {
+                     switch (second) {
+                         'name':
+                             print "The woman standing next to him says ~His name is Abraham Zapruder. What's yours?~^";
+                             return true;
+                     }
+                 }
+                 print "He doesn't answer you, and you'd probably do better not to question total strangers.^";
+                 rtrue;
+         ],
+    has animate;
+
+! [Mr. Truly] in rhe AGT Source
+Person Mr_Truly "man"
+    Truly
+    with name 'man' 'truly' 'suit' 'mr' 'mr. fatso',
+         initial [;
+            "There is a man sitting here, in a business suit.";
+         ],
+         description [;
+            "The man sitting here is Mr. Truly, and apparently, he holds some sort of authority over the School Book Depository. Maybe he knows where Dana is.^";
+         ],
+         life [;
+             Talk:
+                 print "~Who are you? How'd you get in here? Are you one of those damn workers, because if you are, you CAN'T use the phone! I can't believe you people walk around this place like it's no big deal! Do you have an appointment?....Wait, I don't have a secratary. Nevermind.~^";
+                 rtrue;
+             Ask:
+                 if (noun == self) {
+                     switch (second) {
+                         'dana':
+                             print "~Oh, Dana? Yeah, she told me to tell you that she went over to the Grassy Knoll to go watch the parade. She must think of me as some damn message service. Now get out of here!~^";
+                             return true;
+                     }
+                 }
+                 "~I'm afraid I really don't know. Now would you please leave.~";
+         ],
+    has animate;

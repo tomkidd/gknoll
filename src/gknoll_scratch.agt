@@ -88,85 +88,12 @@ MESSAGE [UhOhOswald2]
 There is a rifle here, laying in the boxes.
 END_COMMAND
 
-CREATURE [Zapruder]
-Man
-Abraham
-There is a man here, standing on the Stairwell, holding an 8mm Movie Camera.
-LOCATION [Pergolas]
-CREATURE_SYNONYMS ABRAHAM ZAPRUDER MAN OLD DUDE
-MAN
-END_CREATURE
-
-CREATURE_DESCR [Zapruder]
-This older gentleman, accompanied by a younger lady (presumably a relative),
-apparently is a big fan of the President's, and also enjoys filming
-everything. His 8mm Movie Camera doesn't stray from Elm Street and the parade.
-END_CREATURE_DESCR
-
-TALK_DESCR [Zapruder]
-He doesn't seem to hear you, and the hearing aide alludes you to why. However,
-the woman with him gives you a mean look.
-END_TALK_DESCR
-
-ASK_DESCR [Zapruder]
-He doesn't answer you, and you'd probably do better not question total
-strangers.
-END_ASK_DESCR
-
-CREATURE [Mr. Truly]
-Truly
-Man
-There is a man sitting here, in a business suit.
-LOCATION [Truly]
-CREATURE_SYNONYMS MAN TRULY SUIT MR MR. FATSO
-MAN
-END_CREATURE
-
-CREATURE_DESCR [Mr. Truly]
-The man sitting here is Mr. Truly, and apparently, he holds some sort of
-authority over the School Book Depository. Maybe he knows where Dana is.
-END_CREATURE_DESCR
-
-TALK_DESCR [Mr. Truly]
-"Who are you? How'd you get in here? Are you one of those damn workers,
-because if you are, you CAN'T use the phone! I can't believe you people walk
-around this place like it's no big deal! Do you have an appointment?....Wait,
-I don't have a secratary. Nevermind.
-END_TALK_DESCR
-
-ASK_DESCR [Mr. Truly]
-"I'm afraid I really don't know. Now would you please leave."
-END_ASK_DESCR
-
-COMMAND ASK ABOUT DANA
-InRoom [Mr. Truly]
-PrintMessage [IKnow]
-DoneWithTurn
-END_COMMAND
-
-MESSAGE [IKnow]
-"Oh, Dana? Yeah, she told me to tell you that she went over to the Grassy
-Knoll to go watch the parade. She must think of me as some damn message
-service. Now get out of here!"
-END_MESSAGE
-
-COMMAND ASK NAME
-AtLocation [Pergolas]
-PrintMessage [ZapMe]
-DoneWithTurn
-END_COMMAND
-
 COMMAND ASK NAME
 AtLocation [Grassy Knoll]
 PrintMessage [DanaThis]
 PlusScore  50
 DoneWithTurn
 END_COMMAND
-
-MESSAGE [ZapMe]
-The woman standing next to him says "His name is Abraham Zapruder. What's
-yours?"
-END_MESSAGE
 
 MESSAGE [DanaThis]
 "Don't you recognize me? I'm Dana Wilkins!"
