@@ -113,34 +113,6 @@ CREATURE_SYNONYMS JEAN HILL MARY MORMON WOMAN WOMEN BITCHES RED
 WOMAN
 END_CREATURE
 
-CREATURE_DESCR [JH+MM]
-There are two women here, one in regular blue and brown chlothes, and the
-blonde one in a red dress. They are obviously friends and here together.
-END_CREATURE_DESCR
-
-TALK_DESCR [JH+MM]
-"Oh, are you lost? We can help you find where you're going, right after the
-parade. You're in Texas, the friendly state!" says the lady in red.
-Well, no duh!
-END_TALK_DESCR
-
-ASK_DESCR [JH+MM]
-"I'm afraid I have no idea what you're talking about."
-Thanks a heap, lady.
-END_ASK_DESCR
-
-COMMAND ASK NAME
-AtLocation [Grassy Field]
-InRoom [JH+MM]
-PrintMessage [BillieJean]
-DoneWithTurn
-END_COMMAND
-
-MESSAGE [BillieJean]
-The woman in red responds, "My name is Jean Hill, and this is my friend Mary
-Mormon."
-END_MESSAGE
-
 CREATURE [Joe Smith]
 Joe
 Officer

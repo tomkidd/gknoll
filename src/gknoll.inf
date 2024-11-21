@@ -726,3 +726,30 @@ Person James_Hague "man"
                  rtrue;
          ],
     has animate;
+
+! [JH+MM] in the AGT Source
+Person Jean_Hill_Mary_Mormon "women"
+    Grassy_Field
+    with name 'jean' 'hill' 'mary' 'mormon' 'woman' 'women' 'red',
+         initial [;
+            "There are two women here, watching for the parade.^";
+         ],
+         description [;
+            "There are two women here, one in regular blue and brown chlothes, and the blonde one in a red dress. They are obviously friends and here together.";
+         ],
+         life [;
+             Talk:
+                 print "~Oh, are you lost? We can help you find where you're going, right after the parade. You're in Texas, the friendly state!~ says the lady in red.^Well, no duh!^";
+                 rtrue;
+             Ask:
+                if (noun == self) {
+                     switch (second) {
+                         'name':
+                             print "The woman in red responds, ~My name is Jean Hill, and this is my friend Mary Mormon.~^";
+                             return true;
+                     }
+                 }
+                 print "~I'm afraid I have no idea what you're talking about.~^Thanks a heap, lady.^";
+                 rtrue;
+         ],
+    has animate;
