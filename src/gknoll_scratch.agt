@@ -88,32 +88,6 @@ MESSAGE [UhOhOswald2]
 There is a rifle here, laying in the boxes.
 END_COMMAND
 
-CREATURE [Dana Wilkins]
-Dana
-Woman
-There is a woman here, staring at you.
-LOCATION [Backstage]
-POINTS 50
-CREATURE_SYNONYMS DANA WILKINS WOMAN MA'AM
-GROUPMEMBER
-WOMAN
-END_CREATURE
-
-CREATURE_DESCR [Dana Wilkins]
-The woman here keeps staring at you. What, is everybody in Dallas a great big
-freak? Oh, wait! It looks like Dana Wilkins!
-END_CREATURE_DESCR
-
-TALK_DESCR [Dana Wilkins]
-"Oh my God, is it really you? I knew you'd come!"
-END_TALK_DESCR
-
-ASK_DESCR [Dana Wilkins]
-"I can't believe you's come all this way and ask me about that! Come here
-and give me a big hug!"
-And with that hug, you know you've done good.
-END_ASK_DESCR
-
 CREATURE [Zapruder]
 Man
 Abraham
@@ -274,33 +248,6 @@ END_COMMAND
 MESSAGE [BillieJean]
 The woman in red responds, "My name is Jean Hill, and this is my friend Mary
 Mormon."
-END_MESSAGE
-
-CREATURE [WN]
-William
-Man
-There is a man here, among others, standing particularly close to Elm Street.
-LOCATION [Outside SBD]
-CREATURE_SYNONYMS WILLIAM WILLIAM NEWMAN MAN GUY SIR DUDE ASSWIPE
-END_CREATURE
-
-TALK_DESCR [WN]
-"Huh? Oh, no, I don't have a camera."
-END_TALK_DESCR
-
-ASK_DESCR [WN]
-"What? Oh, no, my Record Player is not broken."
-END_ASK_DESCR
-
-COMMAND ASK NAME
-AtLocation [Outside SBD]
-InRoom [WN]
-PrintMessage [WNce]
-DoneWithTurn
-END_COMMAND
-
-MESSAGE [WNce]
-"Huh? Oh, my name is William Newman."
 END_MESSAGE
 
 CREATURE [Joe Smith]

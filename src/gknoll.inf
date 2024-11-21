@@ -97,6 +97,28 @@ Object Timer "game timer"
 
 Include "grammar";
 
+! Grammar for talking
+! [ TalkSub;
+!     if (noun has animate) {
+!         print "You try to talk to ", (the) noun, ".^";
+!         rtrue;
+!     }
+!     "There's no one to talk to.";
+! ];
+
+[ TalkSub;
+    if (noun has animate) {
+        if (RunRoutines(noun, life)) rtrue; ! Call the NPC's life routine for Talk
+        print_ret "You try to talk to ", (the) noun, ", but get no response.";
+    }
+    "There's no one to talk to.";
+];
+
+
+Verb 'talk'
+    * noun -> Talk
+    * 'to' noun -> Talk;
+
 ! [Outside DCCCB] in the AGT source
 Object  Outside_DCCCB "Outside the Dallas County Criminal Courts Building"
  has    light
@@ -325,6 +347,7 @@ Object  Underpass3 "Triple Underpass"
         n_to Grassy_Knoll,
         ne_to Grassy_Field;
 
+! TODO: there's no actual way to get to this room. I will need to figure out what I meant to do here.
 Object  Backstage "Backstage"
  has    light
  with   description "This room is for the cast to stay in while they wait.",
@@ -576,15 +599,59 @@ Object  Jail4 "Jail Cell"
     }
 ];
 
+! CREATURES
+
 Class   Person
  has    animate
  with   name "creature";
 
-Person  William "William" Outside_SBD
- with   name "William",
-        description [;
-             "There is a man here, among others, standing particularly close to Elm Street.";
+! WM in the AGT code
+Person William_Newman "man"
+    Outside_SBD
+    with name 'william' 'newman' 'man' 'guy' 'sir' 'dude' 'asswipe',
+         describe "^There is a man here, standing particularly close to Elm Street.",
+         description "There is a man here, standing particularly close to Elm Street.",
+         life [;
+             Ask:
+                 if (noun == self) {
+                     switch (second) {
+                         'camera':
+                             print "Huh? Oh, no, I don't have a camera.^";
+                             return true;
+                         'record', 'player':
+                             print "What? Oh, no, my Record Player is not broken.^";
+                             return true;
+                         'name':
+                             print "Huh? Oh, my name is William Newman.^";
+                             return true;
+                     }
+                 }
+                 "He doesn't seem to understand your question.";
          ],
-        describe [;
-             "There is a man here, among others, standing particularly close to Elm Street.";
-         ];
+    has animate;
+
+
+Person Dana_Wilkins "woman"
+    Backstage
+    with name 'dana' 'wilkins' 'woman' 'ma^am',
+         description [;
+             print "The woman here keeps staring at you. What, is everybody in Dallas a great big freak? Oh, wait! It looks like Dana Wilkins!^";
+         ],
+         points_awarded false, ! Tracks if points were already awarded
+         life [;
+             Talk:
+                 print "~Oh my God, is it really you? I knew you'd come!~^";
+                 rtrue;
+             Ask:
+                 if (self.points_awarded == false) {
+                    score = score + 50; ! Award points
+                    self.points_awarded = true; ! Prevent multiple rewards
+                    print "~I can't believe you'd come all this way and ask me about that! Come here and give me a big hug!~^^";
+                    print "And with that hug, you know you've done good.^";
+                 } else {
+                     print "~I can't believe you'd ask me about that again!~ she laughs.^";
+                 }
+                 rtrue;
+         ],
+    has animate;
+
