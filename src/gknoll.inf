@@ -780,3 +780,38 @@ Person Joe_Smith "officer"
                  rtrue;
          ],
     has animate;
+
+! [Jackie] in the AGT Source
+Person Jackie_Kennedy "officer"
+    Backstage
+    with name 'jackie' 'kennedy' 'jaqueline' 'onassis' 'first' 'lady',
+         initial [;
+            "The first lady, covered in blood, is sitting here.^";
+         ],
+         description [;
+            "Jackie Kennedy, the First Lady of the United States, is sitting here,
+            splattered with blood and other such bodily matter, crying with her head
+            buried in her hands.^";
+         ],
+         life [;
+             Talk:
+                 print "She's too overcome with emotion to answer. Plus, you're not 
+                 supposed to behere, so you'd do good not to draw attention to yourself.";
+                 rtrue;
+             Ask:
+                 print "She's too overcome with emotion to answer. Plus, you're not 
+                 supposed to behere, so you'd do good not to draw attention to yourself.";
+                 rtrue;
+         ],
+    has animate;
+
+! [Bubba] in the AGT Source
+! In the AGT source this character has no starting room and nothing happens with him
+! I think maybe I didn't finish this one
+Person Bubba "man"
+    Jail4
+    with name 'big' 'bubba',
+         initial [;
+            "There is a large individual here named Bubba.^";
+         ],
+    has animate;

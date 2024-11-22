@@ -700,32 +700,6 @@ confusion and rush that followed, you were somehow able to grab the limousine,
 and the vehicle takes you to Parkland Hospital.
 END_MESSAGE
 
-CREATURE [Jackie]
-Jackie
-Kennedy
-The first lady, covered in blood, is sitting here.
-LOCATION [ERHall]
-POINTS 100
-WOMAN
-CREATURE_SYNONYMS JACKIE KENNEDY JAQUELINE ONASSIS O'NASSIS FIRST LADY
-END_CREATURE
-
-CREATURE_DESCR [Jackie]
-Jackie Kennedy, the First Lady of the United States, is sitting here,
-splattered with blood and other such bodily matter, crying with her head
-buried in her hands.
-END_CREATURE_DESCR
-
-TALK_DESCR [Jackie]
-She's too overcome with emotion to answer. Plus, you're not supposed to be
-here, so you'd do good not to draw attention to yourself.
-END_TALK_DESCR
-
-ASK_DESCR [Jackie]
-She's too overcome with emotion to answer. Plus, you're not supposed to be
-here, so you'd do good not to draw attention to yourself.
-END_ASK_DESCR
-
 NOUN [Gurney]
 Gurney
 Hospital
@@ -1035,16 +1009,6 @@ bloody knife, the Dallas Police Department has arrested you and placed you
 in jail. You have been charged with murder in the first degree.
 Don't fuck with Texas. We've got the Electric Chair.
 END_MESSAGE
-
-CREATURE [Bubba]
-Bubba
-Big
-There is a large individual here named Bubba that wants you to bend over.
-HOSTILE
-TIME_THRESH 5
-THRESHOLD 3
-MAN
-END_CREATURE
 
 NOUN [Hanky]
 Hankerchief
