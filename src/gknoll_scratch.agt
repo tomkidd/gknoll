@@ -104,43 +104,6 @@ TimeGT 1230
 SwapLocations [Zapruder]
 END_COMMAND
 
-CREATURE [JH+MM]
-Jean
-Women
-There are two women here, watching for the parade.
-LOCATION [Grassy Field]
-CREATURE_SYNONYMS JEAN HILL MARY MORMON WOMAN WOMEN BITCHES RED
-WOMAN
-END_CREATURE
-
-CREATURE [Joe Smith]
-Joe
-Officer
-There is an officer here, apparently just ran to get here.
-LOCATION [Backstage]
-CREATURE_SYNONYMS SMITH SIR PIG
-MAN
-END_CREATURE
-
-TALK_DESCR [Joe Smith]
-"What? You saw shots coming from where?"
-END_TALK_DESCR
-
-ASK_DESCR [Joe Smith]
-"I can't be bothered with such a question, especially at this time."
-END_ASK_DESCR
-
-COMMAND ASK NAME
-AtLocation [Grassy Knoll]
-InRoom [Joe Smith]
-PrintMessage [BITEME]
-DoneWithTurn
-END_COMMAND
-
-MESSAGE [BITEME]
-"My name is Officer Joe Smith. What did you see?"
-END_MESSAGE
-
 COMMAND ANY
 AtLocation [Grassy Knoll]
 TimeGT 1233

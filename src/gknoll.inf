@@ -753,3 +753,30 @@ Person Jean_Hill_Mary_Mormon "women"
                  rtrue;
          ],
     has animate;
+
+! [Joe Smith] in the AGT Source
+Person Joe_Smith "officer"
+    Backstage
+    with name 'smith' 'sir',
+         initial [;
+            "There is an officer here, apparently just ran to get here.^";
+         ],
+         description [;
+            "There is an officer here, apparently just ran to get here.^";
+         ],
+         life [;
+             Talk:
+                 print "~What? You saw shots coming from where?~^";
+                 rtrue;
+             Ask:
+                if (noun == self) {
+                     switch (second) {
+                         'name':
+                             print "~My name is Officer Joe Smith. What did you see?~^";
+                             return true;
+                     }
+                 }
+                 print "~I can't be bothered with such a question, especially at this time.~^^";
+                 rtrue;
+         ],
+    has animate;
