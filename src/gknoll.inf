@@ -112,6 +112,8 @@ Verb 'talk'
     * noun -> Talk
     * 'to' noun -> Talk;
 
+! LOCATIONS
+
 ! [Outside DCCCB] in the AGT source
 Object  Outside_DCCCB "Outside the Dallas County Criminal Courts Building"
  has    light
@@ -519,6 +521,8 @@ Object  Jail4 "Jail Cell"
  with   description "This is a Jail Cell. Your murder charge is being proccessed. You're gonna be
         here a long time.";
 
+! EVENTS
+
 [ CheckForEvents;
     ! LunchIt in the AGT code
     if (location == Lunchroom && fulltime > 1214 && fulltime < 1221) {
@@ -590,6 +594,18 @@ Object  Jail4 "Jail Cell"
         print "^^Some officers from the Dallas Police Department are marching three hoboes in
             handcuffs to a patrolcar.";
     }
+
+    ! UhOhOswald in the AGT code
+    ! In the AGT code it's a "Look" command but here it's just part of the room description now
+    if (location == Window6 && fulltime > 1230) {
+        print "^^There are some bullet casings, laying neatly here, and a paper bag.";
+    }
+
+    ! UhOhOswald2 in the AGT code
+    ! In the AGT code it's a "Look" command but here it's just part of the room description now
+    if (location == LOSpace && fulltime > 1230) {
+        print "^^There is a rifle here, laying in the boxes.";
+    }
 ];
 
 ! CREATURES
@@ -638,9 +654,16 @@ Person Dana_Wilkins "woman"
                  if (self.points_awarded == false) {
                     score = score + 50; ! Award points
                     self.points_awarded = true; ! Prevent multiple rewards
+                    if (noun == self) {
+                        switch (second) {
+                            'name':
+                                print "~Don't you recognize me? I'm Dana Wilkins!~^";
+                                return true;
+                        }
+                    }
                     print "~I can't believe you'd come all this way and ask me about that! Come here and give me a big hug!~^^";
                     print "And with that hug, you know you've done good.^";
-                 } else {
+                } else {
                      print "~I can't believe you'd ask me about that again!~ she laughs.^";
                  }
                  rtrue;

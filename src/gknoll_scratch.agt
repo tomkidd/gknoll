@@ -68,37 +68,6 @@ HELP [OSS]
 You're getting colder......
 END_HELP_DESCR
 
-COMMAND LOOK
-AtLocation [Window6]
-TimeGT 1230
-PrintMessage [UhOhOswald]
-END_COMMAND
-
-MESSAGE [UhOhOswald]
-There are some bullet casings, laying neatly here, and a paper bag.
-END_COMMAND
-
-COMMAND LOOK
-AtLocation [LOSpace]
-TimeGT 1230
-PrintMessage [UhOhOswald2]
-END_COMMAND
-
-MESSAGE [UhOhOswald2]
-There is a rifle here, laying in the boxes.
-END_COMMAND
-
-COMMAND ASK NAME
-AtLocation [Grassy Knoll]
-PrintMessage [DanaThis]
-PlusScore  50
-DoneWithTurn
-END_COMMAND
-
-MESSAGE [DanaThis]
-"Don't you recognize me? I'm Dana Wilkins!"
-END_MESSAGE
-
 COMMAND ANY
 TimeGT 1230
 SwapLocations [Zapruder]
