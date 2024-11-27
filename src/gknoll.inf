@@ -107,7 +107,6 @@ Include "grammar";
     "There's no one to talk to.";
 ];
 
-
 Verb 'talk'
     * noun -> Talk
     * 'to' noun -> Talk;
@@ -638,7 +637,7 @@ Person William_Newman "man"
          ],
     has animate;
 
-! [Dana Wilkins] in the AGT Source
+! [Dana Wilkins] in the AGT source
 Person Dana_Wilkins "woman"
     Backstage
     with name 'dana' 'wilkins' 'woman' 'ma^am',
@@ -670,7 +669,7 @@ Person Dana_Wilkins "woman"
          ],
     has animate;
 
-! [Zapruder] in the AGT Source
+! [Zapruder] in the AGT source
 Person Zapruder "man"
     Pergolas
     with name 'abraham' 'zapruder' 'man' 'old' 'dude',
@@ -697,7 +696,7 @@ Person Zapruder "man"
          ],
     has animate;
 
-! [Mr. Truly] in rhe AGT Source
+! [Mr. Truly] in rhe AGT source
 Person Mr_Truly "man"
     Truly
     with name 'man' 'truly' 'suit' 'mr' 'mr. fatso',
@@ -723,7 +722,7 @@ Person Mr_Truly "man"
          ],
     has animate;
 
-! [James Hague] in the AGT Source
+! [James Hague] in the AGT source
 Person James_Hague "man"
     Underpass3
     with name 'james' 'hague' 'man' 'guy' 'dude',
@@ -750,7 +749,7 @@ Person James_Hague "man"
          ],
     has animate;
 
-! [JH+MM] in the AGT Source
+! [JH+MM] in the AGT source
 Person Jean_Hill_Mary_Mormon "women"
     Grassy_Field
     with name 'jean' 'hill' 'mary' 'mormon' 'woman' 'women' 'red',
@@ -777,7 +776,7 @@ Person Jean_Hill_Mary_Mormon "women"
          ],
     has animate;
 
-! [Joe Smith] in the AGT Source
+! [Joe Smith] in the AGT source
 Person Joe_Smith "officer"
     Backstage
     with name 'smith' 'sir',
@@ -804,7 +803,7 @@ Person Joe_Smith "officer"
          ],
     has animate;
 
-! [Jackie] in the AGT Source
+! [Jackie] in the AGT source
 Person Jackie_Kennedy "officer"
     Backstage
     with name 'jackie' 'kennedy' 'jaqueline' 'onassis' 'first' 'lady',
@@ -828,7 +827,7 @@ Person Jackie_Kennedy "officer"
          ],
     has animate;
 
-! [Bubba] in the AGT Source
+! [Bubba] in the AGT source
 ! In the AGT source this character has no starting room and nothing happens with him
 ! I think maybe I didn't finish this one
 Person Bubba "man"
@@ -838,3 +837,36 @@ Person Bubba "man"
             "There is a large individual here named Bubba.^";
          ],
     has animate;
+
+! OBJECTS
+
+! [CokeMach] in the AGT source
+Object Coke_Machine "Coke machine"
+    Lunchroom
+    with name 'coke' 'machine' 'drink' 'shit',
+         description "There is a Coke machine here. Insert a quarter, and get a drink.",
+         size 10,  ! Custom property for size
+         is_accessible true,  ! Indicates the machine is accessible
+         before [;
+             Take:
+                 print "Are you crazy? It's too damn heavy!^";
+                 rtrue;
+         ],
+    has static;
+
+! [Quarter] in the AGT source
+Object Quarter "quarter"
+    DCCCB
+    with name 'quarter' 'rusted' 'coin',
+        describe "There is a quarter on the ground here.^",
+        ppints 5,
+        points_awarded false, ! Tracks if points were already awarded
+        before [;
+            Take:
+                 if (self hasnt moved) {  ! Only award points the first time it is taken
+                    score = score + 5; ! Award points
+                     print "You pick up the rusted quarter. It's not much, but it's something.^";
+                 }
+                 give self moved;  ! Mark the object as having been taken
+                 rfalse;  ! Allow default inventory behavior for Take                if (self.points_awarded == false) {
+        ];

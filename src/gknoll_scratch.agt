@@ -340,25 +340,6 @@ for questioning," says Officer Chris Whitaker of the Dallas Police Department.
 And with that, you are taken to jail.
 END_MESSAGE
 
-NOUN [CokeMach]
-Machine
-Coke
-There is a Coke Machine here. Insert a quarter, and get a drink.
-LOCATION [Lunchroom]
-SIZE 10
-OPEN
-PUSHABLE
-NOUN_SYNONYMS COKE MACHINE COKE DRINK SHIT
-END_NOUN
-
-NOUN [Quarter]
-Quarter
-Rusted
-There is a quarter on the ground here.
-LOCATION [DCCCB]
-POINTS 5
-END_NOUN
-
 COMMAND PUT QUARTER IN MACHINE
 IsCarrying [Quarter]
 InRoom [CokeMach]
@@ -380,12 +361,6 @@ MESSAGE [DrinkUp]
 You insert the quarter into the Coke machine, and it gives you a bottle of
 Coke. You then open the Coke.
 END_MESSAGE
-
-COMMAND GET MACHINE
-AtLocation [Lunchroom]
-InRoom [CokeMach]
-PrintMessage "Are you crazy? It's too damn heavy!"
-END_COMMAND
 
 COMMAND GET QUARTER
 AtLocation [Lunchroom]
@@ -438,12 +413,6 @@ MESSAGE [EatUp]
 You now have the Ham and Cheese sandwich. Good thing, too, since it's
 lunchtime and all.
 END_MESSAGE
-
-COMMAND GET DISPENSER
-AtLocation [Lunchroom]
-InRoom [CokeMach]
-PrintMessage "Are you crazy? It's too damn heavy!"
-END_COMMAND
 
 RESURRECTION_ROOM [P+RP]
 
