@@ -868,8 +868,8 @@ Object Coke_Machine "Coke machine"
             Push:
                 if (self.has_quarter) {  ! <-- Check the property instead
                     if (Coke_Bottle in self) {
-                        move Coke_Bottle to Lunchroom;
-                        print "You press the button, and a Coke bottle drops out with a satisfying thunk.";
+                        move Coke_Bottle to player;
+                        print "You insert the quarter into the Coke machine, and it gives you a bottle of Coke. You then open the Coke.";
                         self.has_quarter = false;
                         return true;
                     } else {
@@ -889,7 +889,7 @@ Object Coke_Machine "Coke machine"
 Object Coke_Bottle "Coke bottle"
     Coke_Machine
     with name 'coke' 'bottle',
-         description "A cold bottle of Coke.",
+         description "There are some bottles of Coke here.",
          before [;
             Drink: 
                 remove self;

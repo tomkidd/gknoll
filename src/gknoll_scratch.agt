@@ -340,27 +340,11 @@ for questioning," says Officer Chris Whitaker of the Dallas Police Department.
 And with that, you are taken to jail.
 END_MESSAGE
 
-COMMAND PUT QUARTER IN MACHINE
-IsCarrying [Quarter]
-InRoom [CokeMach]
+COMMAND GET MACHINE
 AtLocation [Lunchroom]
-PrintMessage [DrinkUp]
-SwapLocations [Coke] [Quarter]
-DoneWithTurn
+InRoom [CokeMach]
+PrintMessage "Are you crazy? It's too damn heavy!"
 END_COMMAND
-
-NOUN [Coke]
-Bottle
-Coke
-There are some bottles of Coke here.
-LOCATION  [CokeMach]
-DRINKABLE
-END_NOUN
-
-MESSAGE [DrinkUp]
-You insert the quarter into the Coke machine, and it gives you a bottle of
-Coke. You then open the Coke.
-END_MESSAGE
 
 COMMAND GET QUARTER
 AtLocation [Lunchroom]
