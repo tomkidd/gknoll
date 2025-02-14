@@ -844,18 +844,65 @@ Person Bubba "man"
 Object Coke_Machine "Coke machine"
     Lunchroom
     with name 'coke' 'machine' 'drink' 'shit',
-         description "There is a Coke machine here. Insert a quarter, and get a drink.",
-         size 10,  ! Custom property for size
-         is_accessible true,  ! Indicates the machine is accessible
+         initial "There is a Coke machine here. Insert a quarter, and get a drink.",
+         has_quarter false,  ! <-- Custom property to track whether a quarter has been inserted
          before [;
+            Examine:
+                 if (child(self) == 0) {
+                     print "The red light is on, indicating the Coke machine has no more Cokes in it.";
+                     return true;
+                 } else {
+                     print "The Coke machine appears to have at least one Coke in it.";
+                     return true;
+                 }
+            Receive:
+                 if (noun == quarter) {
+                    remove quarter;
+                    self.has_quarter = true;  ! <-- Set the state when a quarter is inserted
+                    print "You hear a satisfying clink as the machine accepts the quarter.^";
+                    return true;
+                 } else {
+                    print "The machine only accepts quarters.^";
+                    return false;
+                 }
+            Push:
+                if (self.has_quarter) {  ! <-- Check the property instead
+                    if (Coke_Bottle in self) {
+                        move Coke_Bottle to Lunchroom;
+                        print "You press the button, and a Coke bottle drops out with a satisfying thunk.";
+                        self.has_quarter = false;
+                        return true;
+                    } else {
+                        print "The machine is out of Cokes.";
+                        return true;
+                    }
+                } else {
+                    print "You need to insert a quarter first.";
+                    return true;
+                }
              Take:
                  print "Are you crazy? It's too damn heavy!^";
                  rtrue;
          ],
-    has static;
+    has static container scenery concealed;
+    
+Object Coke_Bottle "Coke bottle"
+    Coke_Machine
+    with name 'coke' 'bottle',
+         description "A cold bottle of Coke.",
+         before [;
+            Drink: 
+                remove self;
+                move empty_coke to player;
+                "You drink the coke. The pause that refreshes.";
+            ];
+
+Object empty_coke "Empty Coke bottle"
+    with name "coke" "bottle",
+         description "An empty bottle of Coke.";
 
 ! [Quarter] in the AGT source
-Object Quarter "quarter"
+Object quarter "quarter"
     DCCCB
     with name 'quarter' 'rusted' 'coin',
         describe "There is a quarter on the ground here.^",
@@ -868,5 +915,6 @@ Object Quarter "quarter"
                      print "You pick up the rusted quarter. It's not much, but it's something.^";
                  }
                  give self moved;  ! Mark the object as having been taken
-                 rfalse;  ! Allow default inventory behavior for Take                if (self.points_awarded == false) {
+                 return false;  ! Allow default inventory behavior for Take                if (self.points_awarded == false) {
         ];
+
