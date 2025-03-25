@@ -69,11 +69,6 @@ You're getting colder......
 END_HELP_DESCR
 
 COMMAND ANY
-TimeGT 1230
-SwapLocations [Zapruder]
-END_COMMAND
-
-COMMAND ANY
 AtLocation [Grassy Knoll]
 TimeGT 1233
 Chance 50
@@ -340,12 +335,6 @@ for questioning," says Officer Chris Whitaker of the Dallas Police Department.
 And with that, you are taken to jail.
 END_MESSAGE
 
-COMMAND GET MACHINE
-AtLocation [Lunchroom]
-InRoom [CokeMach]
-PrintMessage "Are you crazy? It's too damn heavy!"
-END_COMMAND
-
 COMMAND GET QUARTER
 AtLocation [Lunchroom]
 InRoom [CokeMach]
@@ -353,50 +342,6 @@ InRoom [Quarter]
 PrintMessage "Your arm's not long enough."
 DoneWithTurn
 END_COMMAND
-
-NOUN [FoodMach]
-Food
-Dispenser
-There is a Sandwich Dispenser here.
-LOCATION [Lunchroom]
-OPEN
-SIZE 10
-NOUN_SYNONYMS FOOD, DISPENSER
-END_NOUN
-
-NOUN_DESCR [FoodMach]
-This is a sandwich dispensing mechanism that gives you a nasty stale sandwich
-in excfhange for a quarter.
-END_NOUN_DESCR
-
-NOUN [Sandwich]
-Ham&Cheese
-Sandwich
-There are some Ham and Cheese Sandwiches here.
-LOCATION [FoodMach]
-NOUN_SYNONYMS SANDWICH HAM CHEESE POISON
-EDIBLE
-POISONOUS
-END_NOUN
-
-NOUN_DESCR [Sandwich]
-This is a typical Ham and Cheese sandwich, though this one appears to be
-unwrapped.
-END_NOUN_DESCR
-
-COMMAND PUT QUARTER IN DISPENSER
-IsCarrying [Quarter]
-InRoom [FoodMach]
-AtLocation [Lunchroom]
-PrintMessage [EatUp]
-SwapLocations [Sandwich] [Quarter]
-DoneWithTurn
-END_COMMAND
-
-MESSAGE [EatUp]
-You now have the Ham and Cheese sandwich. Good thing, too, since it's
-lunchtime and all.
-END_MESSAGE
 
 RESURRECTION_ROOM [P+RP]
 

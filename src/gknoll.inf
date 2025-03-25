@@ -49,7 +49,7 @@ Object Timer "game timer"
     time_left 60;
 
 [ Initialise;
-    location = Outside_DCCCB;
+    location = Lunchroom;
     print "^^^^^INTRODUCTION^^ (later)^";
 !         It's been six years since you last saw Dana Wilkins, your old High
 ! School Sweetheart. Since then, you've graduated from Texas A&M, and you're
@@ -79,9 +79,11 @@ Object Timer "game timer"
 ];
 
 [ TimePasses;
+  !print "TimePasses";
   if (parent(Timer) == nothing) {
     Timer.time_left = Timer.time_left - 1;
     IncrementTime();
+    !print fulltime;
     CheckForEvents();
   }
 ];
@@ -92,7 +94,7 @@ Object Timer "game timer"
     minutes = 0;
     hours = hours + 1;
   }
-  fulltime = (hours * 100) + minutes;
+  fulltime = (hours * 100) + minutes + 1; ! adding 1 because the increment happens after the turn
 ];
 
 Include "grammar";
@@ -288,11 +290,17 @@ Object  OSpace "Office Space"
         e_to Hallway,
         s_to ConRoom;
 
+! Note: to simulate how it works in the AGT source, I have to label the coke/food machines as "scenery" 
+! which means I have to simulate their descriptions here. If there's a more correct way to do this I'll 
+! update this in the future. 
 Object  Lunchroom "Lunchroom"
  has    light,
  with   description "This is a lunchroom, complete with boring tables, a Coke machine, and one of
             those things that sells you stale sandwiches. There is an exit to the east,
-            and one to the south.",
+            and one to the south.^^  There is a Coke machine here. Insert a quarter, and get a drink.^    There are some bottles of Coke here. (in the machine)^  There is a Sandwich Dispenser here.^    There are some Ham and Cheese Sandwiches here. (in the dispenser)",
+        before [;
+            ! print "fulltime: ", fulltime;
+        ],
         s_to Hallway2,
         e_to Foyer2;
 
@@ -341,7 +349,8 @@ Object  Underpass3 "Triple Underpass"
         n_to Grassy_Knoll,
         ne_to Grassy_Field;
 
-! TODO: there's no actual way to get to this room. I will need to figure out what I meant to do here.
+! In the AGT code this was where I "stored" characters before they were to be seen.
+! This room is not accessible from the game directly. 
 Object  Backstage "Backstage"
  has    light
  with   description "This room is for the cast to stay in while they wait.",
@@ -605,6 +614,10 @@ Object  Jail4 "Jail Cell"
     if (location == LOSpace && fulltime > 1230) {
         print "^^There is a rifle here, laying in the boxes.";
     }
+
+    if (fulltime > 1230) {
+        move Zapruder to Backstage;
+    }
 ];
 
 ! CREATURES
@@ -841,10 +854,10 @@ Person Bubba "man"
 ! OBJECTS
 
 ! [CokeMach] in the AGT source
+! TODO: implement "GET QUARTER" bit from AGT source
 Object Coke_Machine "Coke machine"
     Lunchroom
     with name 'coke' 'machine' 'drink' 'shit',
-         initial "There is a Coke machine here. Insert a quarter, and get a drink.",
          has_quarter false,  ! <-- Custom property to track whether a quarter has been inserted
          before [;
             Examine:
@@ -858,35 +871,35 @@ Object Coke_Machine "Coke machine"
             Receive:
                  if (noun == quarter) {
                     remove quarter;
+                    move Coke_Bottle to player;
                     self.has_quarter = true;  ! <-- Set the state when a quarter is inserted
-                    print "You hear a satisfying clink as the machine accepts the quarter.^";
+                    print "You insert the quarter into the Coke machine, and it gives you a bottle of Coke. You then open the Coke.^";
                     return true;
                  } else {
                     print "The machine only accepts quarters.^";
                     return false;
                  }
-            Push:
-                if (self.has_quarter) {  ! <-- Check the property instead
-                    if (Coke_Bottle in self) {
-                        move Coke_Bottle to player;
-                        print "You insert the quarter into the Coke machine, and it gives you a bottle of Coke. You then open the Coke.";
-                        self.has_quarter = false;
-                        return true;
-                    } else {
-                        print "The machine is out of Cokes.";
-                        return true;
-                    }
-                } else {
-                    print "You need to insert a quarter first.";
-                    return true;
-                }
+            ! Push:
+            !     if (self.has_quarter) {  ! <-- Check the property instead
+            !         if (Coke_Bottle in self) {
+            !             print "You insert the quarter into the Coke machine, and it gives you a bottle of Coke. You then open the Coke.";
+            !             self.has_quarter = false;
+            !             return true;
+            !         } else {
+            !             print "The machine is out of Cokes.";
+            !             return true;
+            !         }
+            !     } else {
+            !         print "You need to insert a quarter first.";
+            !         return true;
+            !     }
              Take:
                  print "Are you crazy? It's too damn heavy!^";
                  rtrue;
          ],
-    has static container scenery concealed;
+    has static container scenery;
     
-Object Coke_Bottle "Coke bottle"
+Object Coke_Bottle "Coke Bottle"
     Coke_Machine
     with name 'coke' 'bottle',
          description "There are some bottles of Coke here.",
@@ -894,7 +907,8 @@ Object Coke_Bottle "Coke bottle"
             Drink: 
                 remove self;
                 move empty_coke to player;
-                "You drink the coke. The pause that refreshes.";
+                ! NOTE: this is clearly a bug in the game but I'm leaving it in for now
+                "The bottle slides down your throat, and your stomach is quickly full.";
             ];
 
 Object empty_coke "Empty Coke bottle"
@@ -902,19 +916,61 @@ Object empty_coke "Empty Coke bottle"
          description "An empty bottle of Coke.";
 
 ! [Quarter] in the AGT source
-Object quarter "quarter"
-    DCCCB
+Object quarter "Quarter"
+    Lunchroom
     with name 'quarter' 'rusted' 'coin',
-        describe "There is a quarter on the ground here.^",
-        ppints 5,
+        describe "  There is a quarter on the ground here.^",
+        points 5,
         points_awarded false, ! Tracks if points were already awarded
         before [;
             Take:
-                 if (self hasnt moved) {  ! Only award points the first time it is taken
-                    score = score + 5; ! Award points
-                     print "You pick up the rusted quarter. It's not much, but it's something.^";
+                 if (self hasnt moved) {
+                    score = score + 5;
+                    move quarter to player;
+                    print "You are now carrying the rusted quarter.^";
+                    give self moved;
+                    return true;
+                 } else {
+                     return false;
                  }
-                 give self moved;  ! Mark the object as having been taken
-                 return false;  ! Allow default inventory behavior for Take                if (self.points_awarded == false) {
         ];
 
+! [FoodMach] in the AGT source
+Object Food_Dispenser "Food Dispenser"
+    Lunchroom
+    with name 'food' 'dispenser',
+         initial "There is a Sandwich Dispenser here.",
+         has_quarter false, 
+         before [;
+            Examine:
+                print "This is a sandwich dispensing mechanism that gives you a nasty stale sandwich in excfhange for a quarter.";
+                return true;
+            Receive:
+                 if (noun == quarter) {
+                    remove quarter;
+                    self.has_quarter = true;
+                    move Sandwich to player;
+                    print "You now have the Ham and Cheese sandwich. Good thing, too, since it's lunchtime and all.^";
+                    return true;
+                 } else {
+                    print "The machine only accepts quarters.^";
+                    return false;
+                 }
+             Take:
+                 print "Are you crazy? It's too damn heavy!^";
+                 rtrue;
+         ],
+    has static container scenery concealed;
+
+! [Sandwich] in the AGT source
+Object Sandwich "Ham and Cheese Sandwich"
+    Food_Dispenser
+    with name 'ham' 'bottle' 'ham and cheese' 'sandwich' 'poison',
+         initial "There are some Ham and Cheese Sandwiches here.",
+         description "This is a typical Ham and Cheese sandwich, though this one appears to be unwrapped.",
+         before [;
+            Eat: 
+                deadflag = true;
+                "The Ham & Cheese sandwich slides down your throat and your stomach is quickly full.^^After only a moment you begin to sense a bitter taste, and your vision blurs. In only seconds, you slip to your knees and your throat closes. You gasp unsucessdully for air.^^Oh dear, you seem to have gotten yourself killed.^^Would you like me to try and get you resurrected?^^TODO: Resurrection lol.";
+            ]
+    has edible;
