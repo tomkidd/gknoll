@@ -349,7 +349,7 @@ Object  Underpass3 "Triple Underpass"
         n_to Grassy_Knoll,
         ne_to Grassy_Field;
 
-! In the AGT code this was where I "stored" characters before they were to be seen.
+! in the AGT source this was where I "stored" characters before they were to be seen.
 ! This room is not accessible from the game directly. 
 Object  Backstage "Backstage"
  has    light
@@ -532,31 +532,31 @@ Object  Jail4 "Jail Cell"
 ! EVENTS
 
 [ CheckForEvents;
-    ! LunchIt in the AGT code
+    ! [LunchIt] in the AGT source
     if (location == Lunchroom && fulltime > 1214 && fulltime < 1221) {
         print "^^There is a man in the lunchroom, who has the name Oswald on his outfit, eating.";
     }
 
-    ! Seizure! in the AGT code
+    ! [Seizure!] in the AGT source
     if (location == Outside_SBD && fulltime > 1214 && fulltime < 1221) {
         print "^^There is a man in the street, who is having an epileptic seizure. There
             are people gathered all around.";
     }
 
-    ! Lunch1 in the AGT code
+    ! [Lunch1] in the AGT source
     if (location == Window6 && fulltime > 1214 && fulltime < 1221) {
         print "^^There is a man sitting at the window, his name tag says Bonnie Ray Williams,
             who is sitting here eating his chicken lunch.";
     }
 
-    ! Lunch2 in the AGT code
+    ! [Lunch2] in the AGT source
     if ((location == Lunchroom && fulltime > 1230 && fulltime < 1233) ||
         (location == OSpace && fulltime > 1231 && fulltime < 1234)) {
         print "^^There is a man, with the name Oswald on his outfit, who appears to be on his
             way out of the building.";
     }
 
-    ! ByeOswald1 in the AGT code
+    ! [ByeOswald1] in the AGT source
     if ((location == Outside_SBD ||
         location == SBD) && fulltime > 1232 && fulltime < 1235) {
         print "^^There is a man, with the name Oswald on his outfit, leaving the School Book
@@ -564,26 +564,26 @@ Object  Jail4 "Jail Cell"
             If you want, you can follow him to the northeast.";
     }
 
-    ! SS1 in the AGT code
+    ! [SS1] in the AGT source
     if ((location == Outside_SBD || 
         location == Pergolas) && fulltime > 1219 && fulltime < 1226) {
         print "^^You can see what appear to be Secret Service Men in the windows of the 6th
             floor of the School Book Depository";
     }
 
-    ! CopFence in the AGT code
+    ! [CopFence] in the AGT source
     if (location == Grassy_Knoll && fulltime > 1220 && fulltime < 1230) {
         print "^^There are some people standing behind the wooden picket fence. One of them
             appears to be a police officer, and he appears to have a rifle.";
     }
     
-    ! BlackUMB in the AGT code
+    ! [BlackUMB] in the AGT source
     if (location == Pergolas && fulltime > 1225 && fulltime < 1230) {
         print "^^There is a man, standing near Elm Street, dressed in black, who has just now
             opened a black umbrella.";
     }
     
-    ! Pand in the AGT code
+    ! [Pand] in the AGT source
     if ((location == Outside_DTB || 
         location == Outside_DCRB || 
         location == Outside_DCCCB || 
@@ -597,20 +597,20 @@ Object  Jail4 "Jail Cell"
             Service agents.";
     }    
     
-    ! Hoboes in the AGT code
+    ! [Hoboes] in the AGT source
     if (location == Pergolas && fulltime > 1245 && fulltime < 1250) {
         print "^^Some officers from the Dallas Police Department are marching three hoboes in
             handcuffs to a patrolcar.";
     }
 
-    ! UhOhOswald in the AGT code
-    ! In the AGT code it's a "Look" command but here it's just part of the room description now
+    ! [UhOhOswald] in the AGT source
+    ! in the AGT source it's a "Look" command but here it's just part of the room description now
     if (location == Window6 && fulltime > 1230) {
         print "^^There are some bullet casings, laying neatly here, and a paper bag.";
     }
 
-    ! UhOhOswald2 in the AGT code
-    ! In the AGT code it's a "Look" command but here it's just part of the room description now
+    ! [UhOhOswald2] in the AGT source
+    ! in the AGT source it's a "Look" command but here it's just part of the room description now
     if (location == LOSpace && fulltime > 1230) {
         print "^^There is a rifle here, laying in the boxes.";
     }
@@ -619,76 +619,65 @@ Object  Jail4 "Jail Cell"
         move Zapruder to Backstage;
     }
 
-    ! NoBrain in the AGT code
+    ! [NoBrain] in the AGT source
     if (location == TR1 && fulltime > 1239 && fulltime < 1246) {
         print "^^It appears obvious apoun viewing the head of the President that the right
             side of his brain is missing.";
     }
 
-    ! HolyThroat in the AGT code
+    ! [HolyThroat] in the AGT source
     if (location == TR1 && fulltime > 1240 && fulltime < 1247) {
         print "^^It is also becoming more obvious to you and the surgeons that there is a
             large hole in the President's throat.";
     }
 
-    ! NoLuck in the AGT code
+    ! [NoLuck] in the AGT source
     if (location == TR1 && fulltime > 1241 && fulltime < 1248) {
         print "^^The surgeons are trying, unsuccessfully, to revive the President.";
     }
 
-    ! Asshole in the AGT code
+    ! [Asshole] in the AGT source
     if (location == ERHall && fulltime > 1244 && fulltime < 1248) {
         print "^^There is a man here, a Secret Service Agent named Clint Hill (nevermind how
             you know that), who is waving a gun, and making threats.";
     }
 
-    ! DumbAsshole in the AGT code
+    ! [DumbAsshole] in the AGT source
     if (location == ERHall && fulltime > 1245 && fulltime < 1249) {
         print "^^Nurse Doris Nelson is trying (somewhat successfully) to talk down Clint Hill.";
     }
 
-    ! Nude in the AGT code
+    ! [Nude] in the AGT source
     if (location == TR1 && fulltime > 1244 && fulltime < 1248) {
         print "^^Dr. Charles A. Crenshaw is cutting off JFK's trouser legs, and taking off his
             back brace, in preparation for surgery. However, he leaves the President's
             boxer shorts on, in order to preserve a bit of dignity.";
     }
 
-    ! TM! in the AGT code
+    ! [TM!] in the AGT source
     if (location == TR1 && fulltime > 1246 && fulltime < 1249) {
         print "^^Dr. Jim Carrico perfors a trachiomoty, while Dr. Charles A. Crenshaw
             discovers that there is a pulse, though no blood pressure.";
     }
 
-    ! Ouch in the AGT code
+    ! [Ouch] in the AGT source
     if (location == TR1 && fulltime > 1248 && fulltime < 1251) {
         print "^^The doctors insert a cathader into the President's heart, while his breathing
             is now being performed by a machine.";
     }
 
-    ! DOA in the AGT code
+    ! [DOA] in the AGT source
     if (location == TR1 && fulltime > 1251 && fulltime < 1300) {
         print "^^President John F. Kennedy has been pronounced dead.";
     }
 
-    ! ByeParade in the AGT code
-    if (location == Outside_DCRB && fulltime > 1224 && fulltime < 1231) {
+    ! [ByeParade] in the AGT source
+    if ((location == Outside_DCRB ||
+        location == Outside_DCCCB) && fulltime > 1224 && fulltime < 1231) {
         print "^^The parade goes by. When it gets to Elm Street, though, something happens.";
     }
 
-    ! ByeParade in the AGT code
-    if ((location == Outside_DCCCB ||
-        location == SBD) && fulltime > 1224 && fulltime < 1231) {
-        print "^^The parade goes by. When it gets to Elm Street, though, something happens.";
-    }
-
-    ! ByeParade in the AGT code
-    if ((location == Outside_DTB ||
-        location == SBD) && fulltime > 1224 && fulltime < 1231) {
-        print "^^The parade goes by. When it gets to Elm Street, though, something happens.";
-    }
-
-    ! JFKShot1 in the AGT code
+    ! [JFKShot1] in the AGT source
     if ((location == Outside_DTB ||
         location == Outside_SBD ||
         location == Underpass3) && fulltime > 1224 && fulltime < 1234) {
@@ -709,7 +698,7 @@ Class   Person
  has    animate
  with   name "creature";
 
-! WM in the AGT code
+! WM in the AGT source
 Person William_Newman "man"
     Outside_SBD
     with name 'william' 'newman' 'man' 'guy' 'sir' 'dude' 'asswipe',
