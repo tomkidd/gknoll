@@ -355,7 +355,7 @@ END_COMMAND
 
 NOUN [Bus]
 Bus
-White
+White9iuh
 There is a White Bus Here
 LOCATION [E+M]
 UNMOVEABLE
@@ -599,112 +599,6 @@ There is a perfect pristine bullet here, and it looks as if it has been fired,
 though likely not into anything dense.
 END_NOUN_DESCR
 
-COMMAND ANY
-AtLocation [TR1]
-TimeGT 1239
-TimeLT 1246
-PrintMessage [NoBrain]
-END_COMMAND
-
-MESSAGE [NoBrain]
-It appears obvious apoun viewing the head of the President that the right
-side of his brain is missing.
-END_MESSAGE
-
-COMMAND ANY
-AtLocation [TR1]
-TimeGT 1240
-TimeLT 1247
-PrintMessage [HolyThroat]
-END_COMMAND
-
-MESSAGE [HolyThroat]
-It is also becoming more obvious to you and the surgeons that there is a
-large hole in the President's throat.
-END_MESSAGE
-
-COMMAND ANY
-AtLocation [TR1]
-TimeGT 1241
-TimeLT 1248
-PrintMessage [NoLuck]
-END_COMMAND
-
-MESSAGE [NoLuck]
-The surgeons are trying, unsuccessfully, to revive the President.
-END_MESSAGE
-
-COMMAND ANY
-AtLocation [ERHall]
-TimeGT 1244
-TimeLT 1248
-PrintMessage [Asshole]
-END_COMMAND
-
-MESSAGE [Asshole]
-There is a man here, a Secret Service Agent named Clint Hill (nevermind how
-you know that), who is waving a gun, and making threats.
-END_MESSAGE
-
-COMMAND ANY
-AtLocation [ERHall]
-TimeGT 1245
-TimeLT 1249
-PrintMessage [DumbAsshole]
-END_COMMAND
-
-MESSAGE [DumbAsshole]
-Nurse Doris Nelson is trying (somewhat successfully) to talk down Clint Hill.
-END_MESSAGE
-
-COMMAND ANY
-AtLocation [TR1]
-TimeGT 1244
-TimeLT 1248
-PrintMessage [Nude]
-END_COMMAND
-
-MESSAGE [Nude]
-Dr. Charles A. Crenshaw is cutting off JFK's trouser legs, and taking off his
-back brace, in preparation for surgery. However, he leaves the President's
-boxer shorts on, in order to preserve a bit of dignity.
-END_MESSAGE
-
-COMMAND ANY
-AtLocation [TR1]
-TimeGT 1246
-TimeLT 1249
-PrintMessage [TM!]
-END_COMMAND
-
-MESSAGE [TM!]
-Dr. Jim Carrico perfors a trachiomoty, while Dr. Charles A. Crenshaw
-discovers that there is a pulse, though no blood pressure.
-END_MESSAGE
-
-COMMAND ANY
-AtLocation [TR1]
-TimeGT 1248
-TimeLT 1251
-PrintMessage [Ouch]
-END_COMMAND
-
-MESSAGE [Ouch]
-The doctors insert a cathader into the President's heart, while his breathing
-is now being performed by a machine.
-END_MESSAGE
-
-COMMAND ANY
-AtLocation [TR1]
-TimeGT 1251
-TimeLT 1300
-PrintMessage [DOA]
-END_COMMAND
-
-MESSAGE [DOA]
-President John F. Kennedy has been pronounced dead.
-END_MESSAGE
-
 NOUN [Camera] 
 Camera
 Expensive
@@ -920,55 +814,6 @@ END_COMMAND
 MESSAGE [NoNoNo]
 For some strange, inexplicable reason, you feel as if you should get out of
 this room. Maybe it's those gunshots.
-END_MESSAGE
-
-COMMAND ANY
-AtLocation [Outside DCRB]
-TimeGT 1224
-TimeLT 1231
-PrintMessage [ByeParade]
-END_COMMAND
-
-MESSAGE [ByeParade]
-The parade goes by. When it gets to Elm Street, though, something happens.
-END_MESSAGE
-
-COMMAND ANY
-AtLocation [Outside DCCCB]
-TimeGT 1224
-TimeLT 1231
-PrintMessage [ByeParade]
-END_COMMAND
-
-COMMAND ANY
-AtLocation [Outside DTB]
-TimeGT 1224
-TimeLT 1234
-PrintMessage [JFKShot1]
-END_COMMAND
-
-COMMAND ANY
-AtLocation [Outside SBD]
-TimeGT 1224
-TimeLT 1234
-PrintMessage [JFKShot1]
-END_COMMAND
-
-COMMAND ANY
-AtLocation [Underpass3]
-TimeGT 1224
-TimeLT 1234
-PrintMessage [JFKShot1]
-END_COMMAND
-
-MESSAGE [JFKShot1]
-The parade is passing by.
-And here's the president.
-Wait.
-He's been shot.
-More shots are ringing out.
-He's been shot in the head.
-The limo drives on.
 END_MESSAGE
 
 COMMAND ANY

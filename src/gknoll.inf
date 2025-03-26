@@ -618,6 +618,89 @@ Object  Jail4 "Jail Cell"
     if (fulltime > 1230) {
         move Zapruder to Backstage;
     }
+
+    ! NoBrain in the AGT code
+    if (location == TR1 && fulltime > 1239 && fulltime < 1246) {
+        print "^^It appears obvious apoun viewing the head of the President that the right
+            side of his brain is missing.";
+    }
+
+    ! HolyThroat in the AGT code
+    if (location == TR1 && fulltime > 1240 && fulltime < 1247) {
+        print "^^It is also becoming more obvious to you and the surgeons that there is a
+            large hole in the President's throat.";
+    }
+
+    ! NoLuck in the AGT code
+    if (location == TR1 && fulltime > 1241 && fulltime < 1248) {
+        print "^^The surgeons are trying, unsuccessfully, to revive the President.";
+    }
+
+    ! Asshole in the AGT code
+    if (location == ERHall && fulltime > 1244 && fulltime < 1248) {
+        print "^^There is a man here, a Secret Service Agent named Clint Hill (nevermind how
+            you know that), who is waving a gun, and making threats.";
+    }
+
+    ! DumbAsshole in the AGT code
+    if (location == ERHall && fulltime > 1245 && fulltime < 1249) {
+        print "^^Nurse Doris Nelson is trying (somewhat successfully) to talk down Clint Hill.";
+    }
+
+    ! Nude in the AGT code
+    if (location == TR1 && fulltime > 1244 && fulltime < 1248) {
+        print "^^Dr. Charles A. Crenshaw is cutting off JFK's trouser legs, and taking off his
+            back brace, in preparation for surgery. However, he leaves the President's
+            boxer shorts on, in order to preserve a bit of dignity.";
+    }
+
+    ! TM! in the AGT code
+    if (location == TR1 && fulltime > 1246 && fulltime < 1249) {
+        print "^^Dr. Jim Carrico perfors a trachiomoty, while Dr. Charles A. Crenshaw
+            discovers that there is a pulse, though no blood pressure.";
+    }
+
+    ! Ouch in the AGT code
+    if (location == TR1 && fulltime > 1248 && fulltime < 1251) {
+        print "^^The doctors insert a cathader into the President's heart, while his breathing
+            is now being performed by a machine.";
+    }
+
+    ! DOA in the AGT code
+    if (location == TR1 && fulltime > 1251 && fulltime < 1300) {
+        print "^^President John F. Kennedy has been pronounced dead.";
+    }
+
+    ! ByeParade in the AGT code
+    if (location == Outside_DCRB && fulltime > 1224 && fulltime < 1231) {
+        print "^^The parade goes by. When it gets to Elm Street, though, something happens.";
+    }
+
+    ! ByeParade in the AGT code
+    if ((location == Outside_DCCCB ||
+        location == SBD) && fulltime > 1224 && fulltime < 1231) {
+        print "^^The parade goes by. When it gets to Elm Street, though, something happens.";
+    }
+
+    ! ByeParade in the AGT code
+    if ((location == Outside_DTB ||
+        location == SBD) && fulltime > 1224 && fulltime < 1231) {
+        print "^^The parade goes by. When it gets to Elm Street, though, something happens.";
+    }
+
+    ! JFKShot1 in the AGT code
+    if ((location == Outside_DTB ||
+        location == Outside_SBD ||
+        location == Underpass3) && fulltime > 1224 && fulltime < 1234) {
+        print "^^The parade is passing by.
+            ^And here's the president.
+            ^Wait.
+            ^He's been shot.
+            ^More shots are ringing out.
+            ^He's been shot in the head.
+            ^The limo drives on.";
+    }
+
 ];
 
 ! CREATURES
