@@ -6,68 +6,6 @@ DELTA_TIME 3
 
 STATUS_OPTION 1
 
-HELP [Outside DCCCB]
-Go inside if you want, but remember, your purpose here is not in there. Get
-to the School Book Depository now!
-END_HELP_DESCR
-
-HELP [DCCCB]
-As nice and comfortable as this is, you really ought to be getting back to
-your once (and maybe future) girlfriend!
-END_HELP_DESCR
-
-HELP [Outside DCRB]
-Go inside if you want, but remember, your purpose here is not in there. Get
-to the School Book Depository now!
-END_HELP_DESCR
-
-HELP [DCRB]
-As nice and comfortable as this is, you really ought to be getting back to
-your once (and maybe future) girlfriend!
-END_HELP_DESCR
-
-HELP [Outside DTB]
-Go inside if you want, but remember, your purpose here is not in there. Get
-to the School Book Depository now!
-END_HELP_DESCR
-
-HELP [DTB]
-As nice and comfortable as this is, you really ought to be getting back to
-your once (and maybe future) girlfriend!
-END_HELP_DESCR
-
-HELP [Outside SBD]
-Well, Dingleberry, seeing as how your whole purpose in driving up here for
-three hours is in this building to the north, you might as well go in there.
-END_HELP_DESCR
-
-HELP [Grassy Field]
-Well, it's cute and all, but remember your purpose here (whatever that may
-be).
-END_HELP_DESCR
-
-HELP [Pergolas]
-Well, it's cute and all, but remember your purpose here (whatever that may
-be).
-END_HELP_DESCR
-
-HELP [Grassy Knoll]
-You know, if someone really wanted to kill the president, this would be a
-great place to try and get a shot off....
-END_HELP_DESCR
-
-HELP [SBD]
-You've come this far, now do it!
-END_HELP_DESCR
-
-HELP [SBDStairs1]
-Hello, Mr. Tyler........going up?
-END_HELP_DESCR
-
-HELP [OSS]
-You're getting colder......
-END_HELP_DESCR
-
 COMMAND ANY
 AtLocation [Grassy Knoll]
 TimeGT 1233

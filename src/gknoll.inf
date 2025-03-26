@@ -49,7 +49,7 @@ Object Timer "game timer"
     time_left 60;
 
 [ Initialise;
-    location = Lunchroom;
+    location = Outside_DCCCB;
     print "^^^^^INTRODUCTION^^ (later)^";
 !         It's been six years since you last saw Dana Wilkins, your old High
 ! School Sweetheart. Since then, you've graduated from Texas A&M, and you're
@@ -109,6 +109,26 @@ Include "grammar";
     "There's no one to talk to.";
 ];
 
+! Define the "Help" action
+[ HelpSub;
+    if (location provides help_message) {
+        print (string) location.help_message, "^";
+    } else {
+        "Sorry, you're on your own here.";
+    }
+];
+
+! Extend the grammar to recognize "Help" as a command
+Verb 'help' * -> Help;
+
+! A generic room with a custom help message
+Class ObjectWithHelp
+  class Object
+  with help_message 0, ! Default to no help message
+       before [;
+           Help: return HelpSub();
+       ];
+
 Verb 'talk'
     * noun -> Talk
     * 'to' noun -> Talk;
@@ -116,7 +136,7 @@ Verb 'talk'
 ! LOCATIONS
 
 ! [Outside DCCCB] in the AGT source
-Object  Outside_DCCCB "Outside the Dallas County Criminal Courts Building"
+ObjectWithHelp  Outside_DCCCB "Outside the Dallas County Criminal Courts Building"
  has    light
  with   description [;
             "You are standing outside the Dallas County Criminal Courts Building, where
@@ -124,55 +144,67 @@ Object  Outside_DCCCB "Outside the Dallas County Criminal Courts Building"
             handle any more crime in this city. From here, a sidewalk leads north, while
             the building eneters to the east.";
         ],
+        help_message "Go inside if you want, but remember, your purpose here is not in there. Get
+            to the School Book Depository now!",
         e_to DCCCB,
         n_to Outside_DCRB;
 
-Object  DCCCB "The Dallas County Criminal Courts Building"
+ObjectWithHelp  DCCCB "The Dallas County Criminal Courts Building"
  has    light
  with   description "This is the Dallas County Criminal Courts Building. It is bustling with
             lawyers, judges, and tourists, most of which are seeking shelter from the
             Texas heat outside. There is an exit to the west.",
+        help_message "As nice and comfortable as this is, you really ought to be getting back to
+            your once (and maybe future) girlfriend!",
         w_to Outside_DCCCB;
 
 
 ! [Outside DCRB] in the AGT source
-Object  Outside_DCRB "Outside the Dallas County Records Building"
+ObjectWithHelp  Outside_DCRB "Outside the Dallas County Records Building"
  has    light
  with   description "You're standing outside the Dallas County Records building. Your uncle was
             born in Dallas, and if your guess is correct, his birth certificate is in
             there somewhere. You can follow the sidewalk to the north or south, or you
             can beat the heat by entering the building to the east.",
+        help_message "Go inside if you want, but remember, your purpose here is not in there. Get
+            to the School Book Depository now!",
         s_to Outside_DCCCB,
         n_to Outside_DTB,
         e_to DCRB;
 
-Object  DCRB "The Dallas County Records Building"
+ObjectWithHelp  DCRB "The Dallas County Records Building"
  has    light
  with   description "You're standing in the Dallas County Records Building. WIth the possible
             exception of the receptionist and the tourists beating the heat, the place is
             empty. Cold, but empty. There is an exit to the east.",
+        help_message "As nice and comfortable as this is, you really ought to be getting back to
+            your once (and maybe future) girlfriend!",
         w_to Outside_DCRB;
 
 ! [Outside DTB] in the AGT source
-Object  Outside_DTB "Outside the Dal-Tex Building"
+ObjectWithHelp  Outside_DTB "Outside the Dal-Tex Building"
  has    light
  with   description "You're standing outside the Dal-Tex Building. You don't have a clue what
             Dal-Tex makes (or even if it's a company), and the outside of this
             establisment doesn't help much. You can cross Houston Street to the west, or
             you can enter the building to the east.",
+        help_message "Go inside if you want, but remember, your purpose here is not in there. Get
+            to the School Book Depository now!",
         e_to DTB,
         w_to Outside_SBD,
         s_to Outside_DCRB;
 
-Object  DTB "The Dal-Tex Building"
+ObjectWithHelp  DTB "The Dal-Tex Building"
  has    light
  with   description "This is the Dal-Tex Building, and the insides don't give much help as to
             exactly what in the hell the Dal-Tex Building is. There are some people here,
             and the place is at least air conditioned. There is an exit to the west.",
+        help_message "As nice and comfortable as this is, you really ought to be getting back to
+            your once (and maybe future) girlfriend!",
         w_to Outside_DTB;
 
 ! [Outside SBD] in the AGT source
-Object  Outside_SBD "Outside the School Book Depository"
+ObjectWithHelp  Outside_SBD "Outside the School Book Depository"
  has    light
  with   description "Well, you've made it to the School Book Depository. There are people hanging
             around outside, some even sitting down on the grass outside, to watch the
@@ -181,59 +213,69 @@ Object  Outside_SBD "Outside the School Book Depository"
             the north. Across the street to the east is the Dal-Tex Building. Across Elm
             street to the south is a large grassy field. And to the southwest is
             Pergolas.",
+        help_message "Well, Dingleberry, seeing as how your whole purpose in driving up here for
+            three hours is in this building to the north, you might as well go in there.",
         n_to SBD,
         s_to Grassy_Field,
         e_to Outside_DTB,
         sw_to Pergolas;
 
 ! [Grassy Field] in the AGT source
-Object  Grassy_Field "A Grassy Field"
+ObjectWithHelp  Grassy_Field "A Grassy Field"
  has    light
  with   description "This grassy field looks like a great place for a picnic, and indeed there are
             some people picnicing here. You can also get a great view of the parade that's
             coming. Across Elm Street to the north is the School Book Depository, to the
             northwest, there are Pergolas, and to the west, there is a grassy knoll. To
             the southwest, there is a triple underpass.",
+        help_message "Well, it's cute and all, but remember your purpose here (whatever that may
+            be).",
         n_to Outside_SBD,
         nw_to Pergolas,
         w_to Grassy_Knoll,
         sw_to Underpass3;
 
-Object  Pergolas "Pergolas"
+ObjectWithHelp  Pergolas "Pergolas"
  has    light
  with   description "You're standing here outside some pergolas (structures consisting of parallel
             colonnades supporting an open roof of girders and cross rafters). Across Elm
             Street to the southeast is a large grassy field. To the northeast is the
             School Book Depository, and to the southwest, there is a grassy knoll.",
+        help_message "Well, it's cute and all, but remember your purpose here (whatever that may
+            be).",
         ne_to Outside_SBD,
         se_to Grassy_Field,
         sw_to Grassy_Knoll;
 
 ! [Grassy Knoll] in the AGT source
-Object  Grassy_Knoll "Grassy Knoll"
+ObjectWithHelp  Grassy_Knoll "Grassy Knoll"
  has    light
  with   description "This appears to be a grassy knoll. As with everything today, there are a lot
             of people here. There is a nice shade tree here, right up near a spiked
             wooden fence. To the northeast are some pergolas, and across the street to
             the east, there is a grassy field. To the south, there is a triple underpass",
+        help_message "You know, if someone really wanted to kill the president, this would be a
+            great place to try and get a shot off....",
         ne_to Pergolas,
         s_to Underpass3,
         e_to Grassy_Field;
 
-Object  SBD "The School Book Depository"
+ObjectWithHelp  SBD "The School Book Depository"
  has    light
  with   description "This is the School Book Depository's Main Entrance. The building appears to be
             being refurbished, and there are lots of workers moving about. There are
             people working here, and there is a foyer to the north. There is also some
             stairs to the southeast.",
+        help_message "You've come this far, now do it!",
         s_to Outside_SBD,
         se_to SBDStairs1,
         n_to Foyer1;
 
-Object  SBDStairs1 "Stairwell, first floor"
+ObjectWithHelp  SBDStairs1 "Stairwell, first floor"
  has    light
  with   description "This stairwell can take you up. There is also an exit to the northwest. There
             are some workers in outfits going up and down the stairs.",
+        help_message "Hello, Mr. Tyler........going up?",
         nw_to SBD,
         u_to SBDStairs2;
 
@@ -298,6 +340,7 @@ Object  Lunchroom "Lunchroom"
  with   description "This is a lunchroom, complete with boring tables, a Coke machine, and one of
             those things that sells you stale sandwiches. There is an exit to the east,
             and one to the south.^^  There is a Coke machine here. Insert a quarter, and get a drink.^    There are some bottles of Coke here. (in the machine)^  There is a Sandwich Dispenser here.^    There are some Ham and Cheese Sandwiches here. (in the dispenser)",
+        help_message "This room contains a puzzle. Try looking around carefully.",
         before [;
             ! print "fulltime: ", fulltime;
         ],
@@ -989,7 +1032,7 @@ Object empty_coke "Empty Coke bottle"
 
 ! [Quarter] in the AGT source
 Object quarter "Quarter"
-    Lunchroom
+    DCCCB
     with name 'quarter' 'rusted' 'coin',
         describe "  There is a quarter on the ground here.^",
         points 5,
