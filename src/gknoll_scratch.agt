@@ -36,31 +36,6 @@ time to sort things out. But you've got a date next weekend with Dana, so
 things could be worse.
 END_MESSAGE
 
-COMMAND SOUTH
-AtLocation [SBD]
-TimeGT 1240
-PrintMessage [LockedIn]
-DoneWithTurn
-END_COMMAND
-
-MESSAGE [LockedIn]
-It appears that you cannot exit the School Book Depository, as it has been
-sealed off by the Dallas Police Department. Seems some people heard shots
-coming from the building.
-END_MESSAGE
-
-COMMAND NORTH
-AtLocation [Outside SBD]
-TimeGT 1240
-PrintMessage [LockedOut]
-DoneWithTurn
-END_COMMAND
-
-MESSAGE [LockedOut]
-You can't go into the School Book Depository, since it's been sealed off by
-the Dallas Police Department.
-END_MESSAGE
-
 COMMAND GET QUARTER
 AtLocation [Lunchroom]
 InRoom [CokeMach]

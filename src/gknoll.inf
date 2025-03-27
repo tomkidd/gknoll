@@ -213,7 +213,15 @@ ObjectWithHelp  Outside_SBD "Outside the School Book Depository"
             Pergolas.",
         help_message "Well, Dingleberry, seeing as how your whole purpose in driving up here for
             three hours is in this building to the north, you might as well go in there.",
-        n_to SBD,
+        n_to [;
+            if (fulltime > 1240) {
+                ! [LockedOut] in the AGT source
+                print "You can't go into the School Book Depository, since it's been sealed off by
+                    the Dallas Police Department.";
+                return true;
+            }
+            return SBD;
+        ],
         s_to Grassy_Field,
         e_to Outside_DTB,
         sw_to Pergolas;
@@ -265,7 +273,16 @@ ObjectWithHelp  SBD "The School Book Depository"
             people working here, and there is a foyer to the north. There is also some
             stairs to the southeast.",
         help_message "You've come this far, now do it!",
-        s_to Outside_SBD,
+        s_to [;
+            if (fulltime > 1240) {
+                ! [LockedIn] in the AGT source
+                print "It appears that you cannot exit the School Book Depository, as it has been
+                    sealed off by the Dallas Police Department. Seems some people heard shots
+                    coming from the building.";
+                return true;
+            }
+            return Outside_SBD;
+        ],
         se_to SBDStairs1,
         n_to Foyer1;
 
