@@ -9,7 +9,7 @@ Global hours = 12;       ! Initial hours (24h time)
 Global printhours = 12;  ! Initial print hours (12h time)
 Global minutes = 00;     ! Initial minutes
 Global fulltime = 1200;  ! 24h time spelled out for event checking
-
+Global chance = 0;       ! Placeholder value for chance
 Replace DrawStatusLine;
 
 Include "parser";
@@ -79,11 +79,9 @@ Object Timer "game timer"
 ];
 
 [ TimePasses;
-  !print "TimePasses";
   if (parent(Timer) == nothing) {
     Timer.time_left = Timer.time_left - 1;
     IncrementTime();
-    !print fulltime;
     CheckForEvents();
   }
 ];
@@ -575,6 +573,9 @@ Object  Jail4 "Jail Cell"
 ! EVENTS
 
 [ CheckForEvents;
+
+    ! Time/location based events
+
     ! [LunchIt] in the AGT source
     if (location == Lunchroom && fulltime > 1214 && fulltime < 1221) {
         print "^^There is a man in the lunchroom, who has the name Oswald on his outfit, eating.";
@@ -731,6 +732,85 @@ Object  Jail4 "Jail Cell"
             ^More shots are ringing out.
             ^He's been shot in the head.
             ^The limo drives on.";
+    }
+
+    ! Time/location/chance based events
+
+    chance = random(100);
+
+    ! [Arrest1] in the AGT source, 50% chance
+    if ((location == Grassy_Knoll ||
+        location == Grassy_Field ||
+        location == Outside_DCRB ||
+        location == Outside_DCCCB ||
+        location == Pergolas )
+        && fulltime > 1233 && chance > 50) {
+            print "^^~Well, since you obviously saw the incident, we have to take you in for
+                questioning,` says Officer Joe Smith.^^
+                And with that, you are taken to jail.^^";
+            hours = 13;
+            minutes = 30;
+            PlayerTo(Jail);
+    }
+
+    ! [Arrest1] in the AGT source, 25% chance 
+    if (location == Outside_SBD && fulltime > 1233 && chance > 25) {
+        print "^^~Well, since you obviously saw the incident, we have to take you in for
+            questioning,` says Officer Joe Smith.^^
+            And with that, you are taken to jail.^^";
+        hours = 13;
+        minutes = 30;
+        PlayerTo(Jail);
+    }
+
+    ! [Arrest2] in the AGT source, 90% chance
+    if ((location == SBD ||
+        location == SBDStairs1 ||
+        location == SBDStairs2 ||
+        location == Foyer1 ||
+        location == Truly ||
+        location == OSS ||
+        location == Lunchroom ||
+        location == ConRoom ||
+        location == Window6) && fulltime > 1245 && chance > 90) {
+        print "^^~Well, since you were in the School Book Depository, we need to take you in
+            for questioning,` says Officer Chris Whitaker of the Dallas Police Department.^^
+            And with that, you are taken to jail.^^";
+        hours = 13;
+        minutes = 30;
+        PlayerTo(Jail2);
+    }
+
+    ! [Arrest2] in the AGT source, 75% chance
+    if (location == LOSpace && fulltime > 1245 && chance > 75) {
+        print "^^~Well, since you were in the School Book Depository, we need to take you in
+            for questioning,` says Officer Chris Whitaker of the Dallas Police Department.^^
+            And with that, you are taken to jail.^^";
+        hours = 13;
+        minutes = 30;
+        PlayerTo(Jail2);
+    }
+
+    ! [Arrest2] in the AGT source, 50% chance
+    if ((location == Foyer2 ||
+        location == Hallway ||
+        location == Hallway2) && fulltime > 1245 && chance > 50) {
+        print "^^~Well, since you were in the School Book Depository, we need to take you in
+            for questioning,` says Officer Chris Whitaker of the Dallas Police Department.^^
+            And with that, you are taken to jail.^^";
+        hours = 13;
+        minutes = 30;
+        PlayerTo(Jail2);
+    }
+
+    ! [Arrest2] in the AGT source, 25% chance
+    if (location == SBDStairs6 && fulltime > 1245 && random(100) > 25) {
+        print "^^~Well, since you were in the School Book Depository, we need to take you in
+            for questioning,` says Officer Chris Whitaker of the Dallas Police Department.^^
+            And with that, you are taken to jail.^^";
+        hours = 13;
+        minutes = 30;
+        PlayerTo(Jail2);
     }
 
 ];
