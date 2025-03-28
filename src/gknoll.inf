@@ -222,6 +222,12 @@ ObjectWithHelp  Outside_SBD "Outside the School Book Depository"
             }
             return SBD;
         ],
+        ne_to [;
+            if (fulltime > 1231 && fulltime < 1241) {
+                return EandM;
+            }
+            return true;
+        ],
         s_to Grassy_Field,
         e_to Outside_DTB,
         sw_to Pergolas;
@@ -526,7 +532,11 @@ Object  CandJ "Crawford St. and Jefferson Blvd."
  with   description "This is the intersection of Crawford St. and Jefferson Blvd. Oswald probably
             went southwest from here",
         ne_to TenthAndP,
-        sw_to TexasT;
+        sw_to [;
+            hours = 13;
+            minutes = 50;
+            return TexasT;
+        ];
 
 ! The AGT source gives 500 points to the score for getting here
 Object  TexasT "Texas Theater"
@@ -535,7 +545,11 @@ Object  TexasT "Texas Theater"
             However, it is currently being swarmed by cops. You can enter the theater to
             the north, or start heading back to the south.",
         n_to Jail3,
-        s_to Outside_DCCCB;
+        s_to [;
+            hours = 14;
+            minutes = 30;
+            return Outside_DCCCB;
+        ];
 
 Object  Jail3 "Jail Cell"
  has    light
@@ -543,7 +557,7 @@ Object  Jail3 "Jail Cell"
             is obvious that you will be here for a while.";
 
 ! [Outside PH] in the AGT source
-Object  OutsidePH "Outside Parkland Hospital ER"
+Object  Outside_PH "Outside Parkland Hospital ER"
  has    light
  with   description "You are here at Parkland Hospital, standing outside the Emergency Room. The 
             Hospital enters to the west, while a walk to Dealy Plaza is to the east.",
@@ -551,7 +565,10 @@ Object  OutsidePH "Outside Parkland Hospital ER"
             Secret Service agents and plenty of Doctors and Surgeons have just escorted 
             the wounded President inside. The Hospital enters ot the west, while a walk 
             to Dealy Plaza is to the east.",
-        e_to Underpass3,
+        e_to [;
+            minutes = minutes + 10; ! may cause an issue after x:50
+            return Underpass3;
+        ],
         w_to ERLobby;
 
 Object  ERLobby "Emergency Room Lobby"
@@ -563,7 +580,7 @@ Object  ERLobby "Emergency Room Lobby"
             commotion here, though it appears obvious that hte President is in the hallway 
             to the north.",
         n_to ERHall,
-        e_to OutsidePH;
+        e_to Outside_PH;
 
 Object  ERHall "Emergency Room Hallway"
  has    light
@@ -749,6 +766,33 @@ Object  Jail4 "Jail Cell"
             ^More shots are ringing out.
             ^He's been shot in the head.
             ^The limo drives on.";
+    }
+
+    ! [NoNoNo] in the AGT source
+    if ((location == Window6 || 
+        location == LOSpace)
+        && fulltime > 1229 && fulltime < 1236) {
+        print "^^For some strange, inexplicable reason, you feel as if you should get out of
+            this room. Maybe it's those gunshots.";
+        PlayerTo(SBDStairs6);
+    }
+
+    ! [JFKShot2] / [JFKShot3] in the AGT source
+    ! In the AGT game we show an image from the Zapruder film ([GK50])
+    ! but we can't do that in Inform so I'm just putting more line breaks in, 
+    if ((location == Grassy_Field || 
+        location == Grassy_Knoll ||
+        location == Pergolas)
+        && fulltime > 1226 && fulltime < 1230) {
+        print "^^The parade is passing by.
+            ^And here's the president.
+            ^Wait.
+            ^He's been shot..
+            ^^^^More shots are ringing out.
+            ^He's been shot in the head.
+            ^The limo drives on.";
+        minutes = minutes + 5;
+        PlayerTo(Underpass3);
     }
 
     ! Time/location/chance based events

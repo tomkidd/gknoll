@@ -46,14 +46,6 @@ END_COMMAND
 
 RESURRECTION_ROOM [P+RP]
 
-COMMAND NORTHEAST
-AtLocation [Outside SBD]
-TimeGT 1231
-TimeLT 1240
-GoToRoom [E+M]
-DoneWithTurn
-END_COMMAND
-
 NOUN [Bus]
 Bus
 White9iuh
@@ -164,11 +156,6 @@ In light of today's events, it's probably best not to touch or disturb
 anything you see, especially this, as it would be disturbing evidence.
 END_MESSAGE
 
-COMMAND SOUTHWEST
-AtLocation [C+J]
-SetTime 1350
-END_COMMAND
-
 MESSAGE [Arrest3]
 "Well, since you obviously saw the incident, we have to take you in for
 questioning," says Officer Bill Cook.
@@ -211,11 +198,6 @@ thought killed the President, you've completely missed Dana Wilkins, and love
 eludes you one more time. Damn.
 END_MESSAGE
 
-COMMAND SOUTH
-AtLocation [TexasT]
-SetTime 1430
-END_COMMAND
-
 NOUN [Oswald]
 Oswald
 Lee
@@ -255,11 +237,6 @@ PrintMessage [Hitch Ride]
 SetTime 1240
 GoToRoom [Outside PH]
 DoneWithTurn
-END_COMMAND
-
-COMMAND EAST
-AtLocation [Outside PH]
-AddToTime 10
 END_COMMAND
 
 MESSAGE [Hitch Ride]
@@ -494,74 +471,4 @@ END_COMMAND
 
 MESSAGE [ThankU]
 Jackie takes the hankerchief, and thanks you.
-END_MESSAGE
-
-COMMAND ANY
-AtLocation [Window6]
-TimeGT 1229
-TimeLT 1236
-PrintMessage [NoNoNo]
-SendToRoom [SBDStairs6]
-END_COMMAND
-
-COMMAND ANY
-AtLocation [LOSpace]
-TimeGT 1229
-TimeLT 1236
-PrintMessage [NoNoNo]
-SendToRoom [SBDStairs6]
-END_COMMAND
-
-MESSAGE [NoNoNo]
-For some strange, inexplicable reason, you feel as if you should get out of
-this room. Maybe it's those gunshots.
-END_MESSAGE
-
-COMMAND ANY
-AtLocation [Grassy Field]
-TimeGT 1226
-TimeLT 1230
-PrintMessage [JFKShot2]
-WaitForReturn
-ShowPicture [GK50]
-PrintMessage [JFKShot3]
-SendToRoom [Underpass3]
-AddToTime 5
-END_COMMAND
-
-COMMAND ANY
-AtLocation [Grassy Knoll]
-TimeGT 1226
-TimeLT 1230
-PrintMessage [JFKShot2]
-WaitForReturn
-ShowPicture [GK50]
-PrintMessage [JFKShot3]
-SendToRoom [Underpass3]
-AddToTime 5
-END_COMMAND
-
-COMMAND ANY
-AtLocation [Pergolas]
-TimeGT 1226
-TimeLT 1230
-PrintMessage [JFKShot2]
-WaitForReturn
-ShowPicture [GK50]
-PrintMessage [JFKShot3]
-SendToRoom [Underpass3]
-AddToTime 5
-END_COMMAND
-
-MESSAGE [JFKShot2]
-The parade is passing by.
-And here's the president.
-Wait.
-He's been shot.
-END_MESSAGE
-
-MESSAGE [JFKShot3]
-More shots are ringing out.
-He's been shot in the head.
-The limo drives on.
 END_MESSAGE
