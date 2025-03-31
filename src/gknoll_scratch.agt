@@ -6,36 +6,6 @@ DELTA_TIME 3
 
 STATUS_OPTION 1
 
-COMMAND ANY
-AtLocation [Jail]
-TimeGT 1400
-NOT InRoom [Dana Wilkins]
-PrintMessage [Oopsy]
-SendToRoom [ENDGAME!]
-DoneWithTurn
-END_COMMAND
-
-MESSAGE [Oopsy]
-Well, since this is a dark day in the history of America, it will take some
-time to sort things out. Even worse, you've completely missed Dana Wilkins,
-and love eludes you one more time. Damn.
-END_MESSAGE
-
-COMMAND ANY
-AtLocation [Jail]
-TimeGT 1400
-InRoom [Dana Wilkins]
-PrintMessage [GoodJob1]
-SendToRoom [ENDGAME!]
-DoneWithTurn
-END_COMMAND
-
-MESSAGE [GoodJob1]
-Well, since this is a dark day in the history of America, it will take some
-time to sort things out. But you've got a date next weekend with Dana, so
-things could be worse.
-END_MESSAGE
-
 COMMAND GET QUARTER
 AtLocation [Lunchroom]
 InRoom [CokeMach]
@@ -45,61 +15,6 @@ DoneWithTurn
 END_COMMAND
 
 RESURRECTION_ROOM [P+RP]
-
-NOUN [Bus]
-Bus
-White9iuh
-There is a White Bus Here
-LOCATION [E+M]
-UNMOVEABLE
-END_NOUN
-
-COMMAND GET ON BUS
-AtLocation [E+M]
-NOT IsCarrying [Quarter]
-TimeGT 1230
-TimeLT 1245
-PrintMessage [FO3]
-DoneWithTurn
-END_COMMAND
-
-COMMAND GET ON BUS
-AtLocation [E+M]
-IsCarrying [Quarter]
-TimeGT 1230
-TimeLT 1245
-PrintMessage [FO1]
-SwapLocations [Quarter]
-GoToRoom [P+L]
-SetTime  1244
-DoneWithTurn
-END_COMMAND
-
-COMMAND GET ON BUS
-AtLocation [E+M]
-TimeGT 1245
-PrintMessage [FO2]
-DoneWithTurn
-END_COMMAND
-
-MESSAGE [FO1]
-You get on the Bus, where the driver asks for a quarter. You give it to him,
-and then the bus goes to Paydras Street and Lamar Street. Then Oswald gets off
-the bus, as do you. Then Oswald goes to the southeast. You can also go to
-Dealy Plaza to the southwest.
-END_MESSAGE
-
-MESSAGE [FO2]
-Well, the bus has left, and you can't get on it (obviously). Since you don't
-want to get lost in Downtown Dallas, you might as well go southeast, back to
-Dealy Plaza.
-END_MESSAGE
-
-MESSAGE [FO3]
-You get on the Bus, but the Bus Driver demands a quarter to ride. Damn. And
-you forgot all your change. He kicks you off. Might as well go back to Dealy
-Plaza to the southeast.
-END_MESSAGE
 
 COMMAND FOLLOW
 AtLocation [C+L]
@@ -154,48 +69,6 @@ END_NOUN
 MESSAGE [DontTouch]
 In light of today's events, it's probably best not to touch or disturb
 anything you see, especially this, as it would be disturbing evidence.
-END_MESSAGE
-
-MESSAGE [Arrest3]
-"Well, since you obviously saw the incident, we have to take you in for
-questioning," says Officer Bill Cook.
-And with that, you are taken to jail.
-END_COMMAND
-
-COMMAND ANY
-AtLocation [Jail3]
-TimeGT 1430
-NOT InRoom [Dana Wilkins]
-SendToRoom [ENDGAME!]
-PrintMessage [Oopsy2]
-END_COMMAND
-
-COMMAND ANY
-AtLocation [Jail3]
-TimeGT 1400
-InRoom [Dana Wilkins]
-SendToRoom [ENDGAME!]
-PrintMessage [GoodJob2]
-END_COMMAND
-
-MESSAGE [GoodJob2]
-Well, since this is a dark day in the history of America, it will take some
-time to sort things out. In Addition, it will be a long time, if ever, to
-prove that the man that you followed killed Kennedy. But you've got a date
-next weekend with Dana, so things could be worse.
-END_MESSAGE
-
-COMMAND NORTH
-AtLocation [TexasT]
-SetTime 1430
-PrintMessage [Arrest3]
-END_COMMAND
-
-MESSAGE [Oopsy2]
-Well, since this is a dark day in the history of America, it will take some
-time to sort things out. Even worse, since you followed some nut that you
-thought killed the President, you've completely missed Dana Wilkins, and love
-eludes you one more time. Damn.
 END_MESSAGE
 
 NOUN [Oswald]
@@ -433,21 +306,6 @@ NOUN_DESCR [Dead Body]
 There is a dead body here, obviously killed by a pocket knife of some sort.
 Oh, and by the way, people are staring at you and that bloody knife of yours.
 END_NOUN_DESCR
-
-COMMAND ANY
-InRoom [Dead Body]
-Chance 95
-PrintMessage [Arrest4]
-GoToRoom [Jail4]
-DoneWithTurn
-END_COMMAND
-
-MESSAGE [Arrest4]
-Because of the fact that there's a deed body here, and because you've got a
-bloody knife, the Dallas Police Department has arrested you and placed you
-in jail. You have been charged with murder in the first degree.
-Don't fuck with Texas. We've got the Electric Chair.
-END_MESSAGE
 
 NOUN [Hanky]
 Hankerchief

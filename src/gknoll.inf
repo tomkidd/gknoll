@@ -539,12 +539,22 @@ Object  CandJ "Crawford St. and Jefferson Blvd."
         ];
 
 ! The AGT source gives 500 points to the score for getting here
+! [TexasT] in the AGT source
 Object  TexasT "Texas Theater"
  has    light
  with   description "This is the Texas Theater, where you think you just saw Oswald go into.
             However, it is currently being swarmed by cops. You can enter the theater to
             the north, or start heading back to the south.",
-        n_to Jail3,
+        before [;
+            score = score + 50;
+        ],
+        n_to [;
+            ! [Arrest3] in the AGT source
+            print "~Well, since you obviously saw the incident, we have to take you in for
+                questioning,~ says Officer Bill Cook.^^
+                And with that, you are taken to jail.";
+            return Jail3;
+        ],
         s_to [;
             hours = 14;
             minutes = 30;
@@ -795,6 +805,50 @@ Object  Jail4 "Jail Cell"
         PlayerTo(Underpass3);
     }
 
+    ! Time/location/condition based events
+
+    if (location == Jail3 && fulltime > 1430) {
+        if (parent(Dana_Wilkins) == Jail3) {
+            ! [GoodJob2] in the AGT source
+            print "Well, since this is a dark day in the history of America, it will take some
+                time to sort things out. In Addition, it will be a long time, if ever, to
+                prove that the man that you followed killed Kennedy. But you've got a date
+                next weekend with Dana, so things could be worse.";
+        } else {
+            ! [Oopsy2] in the AGT source
+            print "Well, since this is a dark day in the history of America, it will take some
+                time to sort things out. Even worse, since you followed some nut that you
+                thought killed the President, you've completely missed Dana Wilkins, and love
+                eludes you one more time. Damn.";
+        }
+        deadflag = 3;
+    }
+
+    if (location == Jail && fulltime > 1400) {
+        if (parent(Dana_Wilkins) == Jail) {
+            ! [GoodJob1] in the AGT source
+            print "Well, since this is a dark day in the history of America, it will take some
+                time to sort things out. But you've got a date next weekend with Dana, so
+                things could be worse.";
+        } else {
+            ! [Oopsy] in the AGT source
+            print "Well, since this is a dark day in the history of America, it will take some
+                time to sort things out. Even worse, you've completely missed Dana Wilkins,
+                and love eludes you one more time. Damn.";
+        }
+        deadflag = 3;
+    }
+
+    if (location == EandM && fulltime > 1245) {
+        if (parent(Bus) == EandM) {
+            move Bus to Backstage;
+        }
+        ! [FO2] in the AGT source
+        print "Well, the bus has left, and you can't get on it (obviously). Since you don't
+            want to get lost in Downtown Dallas, you might as well go southeast, back to
+            Dealy Plaza.";
+    }
+
     ! Time/location/chance based events
 
     chance = random(100);
@@ -805,9 +859,9 @@ Object  Jail4 "Jail Cell"
         location == Outside_DCRB ||
         location == Outside_DCCCB ||
         location == Pergolas )
-        && fulltime > 1233 && chance > 50) {
+        && fulltime > 1233 && chance < 50) {
             print "^^~Well, since you obviously saw the incident, we have to take you in for
-                questioning,` says Officer Joe Smith.^^
+                questioning,~ says Officer Joe Smith.^^
                 And with that, you are taken to jail.^^";
             hours = 13;
             minutes = 30;
@@ -815,9 +869,9 @@ Object  Jail4 "Jail Cell"
     }
 
     ! [Arrest1] in the AGT source, 25% chance 
-    if (location == Outside_SBD && fulltime > 1233 && chance > 25) {
+    if (location == Outside_SBD && fulltime > 1233 && chance < 25) {
         print "^^~Well, since you obviously saw the incident, we have to take you in for
-            questioning,` says Officer Joe Smith.^^
+            questioning,~ says Officer Joe Smith.^^
             And with that, you are taken to jail.^^";
         hours = 13;
         minutes = 30;
@@ -833,9 +887,9 @@ Object  Jail4 "Jail Cell"
         location == OSS ||
         location == Lunchroom ||
         location == ConRoom ||
-        location == Window6) && fulltime > 1245 && chance > 90) {
+        location == Window6) && fulltime > 1245 && chance < 90) {
         print "^^~Well, since you were in the School Book Depository, we need to take you in
-            for questioning,` says Officer Chris Whitaker of the Dallas Police Department.^^
+            for questioning,~ says Officer Chris Whitaker of the Dallas Police Department.^^
             And with that, you are taken to jail.^^";
         hours = 13;
         minutes = 30;
@@ -843,9 +897,9 @@ Object  Jail4 "Jail Cell"
     }
 
     ! [Arrest2] in the AGT source, 75% chance
-    if (location == LOSpace && fulltime > 1245 && chance > 75) {
+    if (location == LOSpace && fulltime > 1245 && chance < 75) {
         print "^^~Well, since you were in the School Book Depository, we need to take you in
-            for questioning,` says Officer Chris Whitaker of the Dallas Police Department.^^
+            for questioning,~ says Officer Chris Whitaker of the Dallas Police Department.^^
             And with that, you are taken to jail.^^";
         hours = 13;
         minutes = 30;
@@ -855,9 +909,9 @@ Object  Jail4 "Jail Cell"
     ! [Arrest2] in the AGT source, 50% chance
     if ((location == Foyer2 ||
         location == Hallway ||
-        location == Hallway2) && fulltime > 1245 && chance > 50) {
+        location == Hallway2) && fulltime > 1245 && chance < 50) {
         print "^^~Well, since you were in the School Book Depository, we need to take you in
-            for questioning,` says Officer Chris Whitaker of the Dallas Police Department.^^
+            for questioning,~ says Officer Chris Whitaker of the Dallas Police Department.^^
             And with that, you are taken to jail.^^";
         hours = 13;
         minutes = 30;
@@ -865,13 +919,22 @@ Object  Jail4 "Jail Cell"
     }
 
     ! [Arrest2] in the AGT source, 25% chance
-    if (location == SBDStairs6 && fulltime > 1245 && random(100) > 25) {
+    if (location == SBDStairs6 && fulltime > 1245 && chance < 25) {
         print "^^~Well, since you were in the School Book Depository, we need to take you in
-            for questioning,` says Officer Chris Whitaker of the Dallas Police Department.^^
+            for questioning,~ says Officer Chris Whitaker of the Dallas Police Department.^^
             And with that, you are taken to jail.^^";
         hours = 13;
         minutes = 30;
         PlayerTo(Jail2);
+    }
+
+    if ((parent(Dead_Body) == parent(player)) && chance < 95) {
+        ! [Arrest4] in the AGT source
+        print "^^Because of the fact that there's a deed body here, and because you've got a
+            bloody knife, the Dallas Police Department has arrested you and placed you
+            in jail. You have been charged with murder in the first degree.
+            Don't fuck with Texas. We've got the Electric Chair.^^";
+        PlayerTo(Jail4);
     }
 
 ];
@@ -1175,7 +1238,7 @@ Object empty_coke "Empty Coke bottle"
 Object quarter "Quarter"
     DCCCB
     with name 'quarter' 'rusted' 'coin',
-        describe "  There is a quarter on the ground here.^",
+        initial "  There is a quarter on the ground here.",
         points 5,
         points_awarded false, ! Tracks if points were already awarded
         before [;
@@ -1230,3 +1293,34 @@ Object Sandwich "Ham and Cheese Sandwich"
                 "The Ham & Cheese sandwich slides down your throat and your stomach is quickly full.^^After only a moment you begin to sense a bitter taste, and your vision blurs. In only seconds, you slip to your knees and your throat closes. You gasp unsucessdully for air.^^Oh dear, you seem to have gotten yourself killed.^^Would you like me to try and get you resurrected?^^TODO: Resurrection lol.";
             ]
     has edible;
+
+Object bus "Bus"
+    EandM
+    with name 'bus' 'white',
+         initial "  There is a White Bus Here.",
+       before [;
+           Enter:
+               if (parent(quarter) ~= player) {
+                    ! [FO3] in the AGT source
+                    print "You get on the Bus, but the Bus Driver demands a quarter to ride. Damn. And
+                        you forgot all your change. He kicks you off. Might as well go back to Dealy
+                        Plaza to the southeast.^";
+                    return true;
+               }
+                ![FO3] in the AGT source
+                print "You get on the Bus, where the driver asks for a quarter. You give it to him,
+                    and then the bus goes to Paydras Street and Lamar Street. Then Oswald gets off
+                    the bus, as do you. Then Oswald goes to the southeast. You can also go to
+                    Dealy Plaza to the southwest..^";
+                hours = 12;
+                minutes = 44;
+                PlayerTo(PandL);
+                return true;
+       ],
+    has static supporter;
+
+Object Dead_Body "Dead Body"
+    Backstage
+    with name 'dead' 'body',
+    description "There is a dead body here, obviously killed by a pocket knife of some sort.
+            Oh, and by the way, people are staring at you and that bloody knife of yours.";
