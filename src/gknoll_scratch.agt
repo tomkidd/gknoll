@@ -16,38 +16,6 @@ END_COMMAND
 
 RESURRECTION_ROOM [P+RP]
 
-NOUN [Gurney]
-Gurney
-Hospital
-There is a Hospital Gurney in the hallway here.
-LOCATION [ERLobby]
-OPEN
-UNMOVEABLE
-END_NOUN
-
-NOUN [Magic Bullet]
-Bullet
-Pristine
-There is a pristine bullet here.
-LOCATION [Gurney]
-END_NOUN
-
-COMMAND GET ANY
-AtLocation [ERLobby]
-PrintMessage [DontTouch]
-DoneWithTurn
-END_COMMAND
-
-NOUN_DESCR [Gurney]
-There is a Hospital Gurney here, and judging from the appearence, it was used
-to wheel the President here after the shooting.
-END_NOUN_DESCR
-
-NOUN_DESCR [Magic Bullet]
-There is a perfect pristine bullet here, and it looks as if it has been fired,
-though likely not into anything dense.
-END_NOUN_DESCR
-
 NOUN [Camera] 
 Camera
 Expensive

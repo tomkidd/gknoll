@@ -50,6 +50,7 @@ Object Timer "game timer"
 
 [ Initialise;
     location = Outside_DCCCB;
+    ! location = Outside_PH;
     print "^^^^^INTRODUCTION^^ (later)^";
 !         It's been six years since you last saw Dana Wilkins, your old High
 ! School Sweetheart. Since then, you've graduated from Texas A&M, and you're
@@ -76,6 +77,7 @@ Object Timer "game timer"
     ! to figure out how those work first. And maybe I use a timer in the future.
     ! so for now it stays.
     StartTimer(Timer, 60, TimePasses); 
+    move Magic_Bullet to Gurney;
 ];
 
 [ TimePasses;
@@ -1417,3 +1419,42 @@ Object Limo
             }
     ],
     has static supporter concealed;
+
+! [Gurney] in the AGT source
+Object Gurney "Gurney"
+    ERLobby
+    with name 'gurney' 'hospital',
+    initial "There is a Hospital Gurney in the hallway here.",
+    description [;
+        print "There is a Hospital Gurney here, and judging from the appearence, it was used
+        to wheel the President here after the shooting.";
+        if (Magic_Bullet in self) {
+            print " There's a bullet sitting on top of it.";
+            give Magic_Bullet ~concealed;
+        }
+    ],
+    before [;
+            Take:
+                ! [DontTouch] in the AGT source
+                print "In light of today's events, it's probably best not to touch or disturb
+                        anything you see, especially this, as it would be disturbing evidence.^";
+                rtrue;
+        ],
+    has supporter;
+
+! [Magic Bullet] in the AGT source
+Object Magic_Bullet "bullet"
+    with name 'bullet' 'pristine',
+    initial "There is a pristine bullet here.",
+    description [;
+        "There is a perfect pristine bullet here, and it looks as if it has been fired,
+        though likely not into anything dense.";
+    ],
+    before [;
+            Take:
+                ! [DontTouch] in the AGT source
+                print "In light of today's events, it's probably best not to touch or disturb
+                        anything you see, especially this, as it would be disturbing evidence.^";
+                rtrue;
+        ],
+    has concealed;
