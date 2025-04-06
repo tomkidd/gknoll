@@ -139,10 +139,6 @@ Verb 'follow'
 Extend 'follow' first
     * noun -> Follow;
 
-Attribute legible;
-[ ReadSub;  ];
-Extend 'read' first * legible -> Read;
-
 [ FollowSub;
     if (location == CandL && noun == Lee_Harvey_Oswald) {
         hours = 12;
@@ -150,6 +146,32 @@ Extend 'read' first * legible -> Read;
         PlayerTo(BandN);
     }
 ];
+
+Extend 'kill' first
+    * noun -> Kill;
+
+[ KillSub;
+    if (noun == William_Newman ||
+        noun == Dana_Wilkins ||
+        noun == Zapruder ||
+        noun == Mr_Truly ||
+        noun == James_Hague ||
+        noun == Jean_Hill_Mary_Mormon ||
+        noun == Joe_Smith) {
+        move Dead_Body to parent(noun);
+        move noun to Backstage;
+    }
+
+    if (parent(Dead_Body) == location) {
+        ! [BadBpy] in the AGT source
+        print "You attack and kill the innocent person. Now, your knife is covered in blood,
+            and everyone is staring at you. Maybe you shouldn't have done that.";
+    }
+];
+
+Attribute legible;
+[ ReadSub;  ];
+Extend 'read' first * legible -> Read;
 
 ! LOCATIONS
 
@@ -991,7 +1013,7 @@ Class   Person
  has    animate
  with   name "creature";
 
-! WM in the AGT source
+! [WN] in the AGT source
 Person William_Newman "man"
     Outside_SBD
     with name 'william' 'newman' 'man' 'guy' 'sir' 'dude' 'asswipe',
@@ -1530,4 +1552,11 @@ Object Cooler
                 return false;
             }
     ];
+
+Object Knife "Knife"
+    OSS
+    with name 'knife' 'pocket',
+    initial "There is a pocket knife here.",
+    description "This is the kind of pocket knife that would be ideal for a killer: a large
+        blade, very sharp, and folds down into a neat carrying case.";
 
