@@ -131,6 +131,20 @@ Verb 'talk'
     * noun -> Talk
     * 'to' noun -> Talk;
 
+Verb 'follow'
+    * noun -> Follow;
+
+Extend 'follow' first
+    * noun -> Follow;
+
+[ FollowSub;
+    if (location == CandL && noun == Lee_Harvey_Oswald) {
+        hours = 12;
+        minutes = 54;
+        PlayerTo(BandN);
+    }
+];
+
 ! LOCATIONS
 
 ! [Outside DCCCB] in the AGT source
@@ -481,15 +495,17 @@ Object  BandN "Beckley and Neely"
             the intersection of Berkley and Neely Streets. Oswald doesn't see you. Hey, it
             could happen! Oswald isn't here, but you could've swore he went north. Might
             as well go North and follow him.",
-        n_to NBAve;
+        n_to [;
+            hours = 13;
+            minutes = 03;
+            return NBAve;
+        ];
 
 ! [1026NB] in the AGT source
 Object  NBAve "1026 North Beckley Ave."
  has    light
- with   description "You grab the bottom of the cab, and get out from under it when it gets to
-            the intersection of Berkley and Neely Streets. Oswald doesn't see you. Hey, it
-            could happen! Oswald isn't here, but you could've swore he went north. Might
-            as well go North and follow him.",
+ with   description "Here, at 1026 North Beckley Ave., is a rooming house. Oswald leaves here and
+            goes south. Never even saw you.",
         sw_to BandN,
         s_to Davis;
 
@@ -506,7 +522,7 @@ Object  DavisAndC "Davis and Commerce Street"
  with   description "This is the intersection of Davis and Crawford Street. Oswald went southeast
             from here.",
         w_to Davis,
-        sw_to TenthAndC;
+        se_to TenthAndC;
 
 ! The "INITIAL" concept in AGT may work differently in AGT than Inform, may need to debug later
 ! [10+C] in the AGT source
@@ -516,7 +532,11 @@ Object  TenthAndC "10th and Commerce Street"
         initial "This is the intersection of 10th and Crawford Street. Oswald went northeast
             from here. From the northeast, you can hear gunshots. Great.",
         nw_to DavisAndC,
-        ne_to TenthAndP;
+        ne_to  [;
+            hours = 13;
+            minutes = 16;
+            return TenthAndP;
+        ];
 
 ! [10+P] in the AGT source
 Object  TenthAndP "10th St. and Patton Ave."
@@ -803,6 +823,20 @@ Object  Jail4 "Jail Cell"
             ^The limo drives on.";
         minutes = minutes + 5;
         PlayerTo(Underpass3);
+    }
+
+    ! In Inform we have to mvoe the limo to the place it needs to be to
+    ! mimic the GET IN LIMO functionality like in AGT
+    if (fulltime > 1233) {
+        if (location == Grassy_Knoll) {
+            move Limo to Grassy_Knoll;
+        }
+        if (location == Grassy_Field) {
+            move Limo to Grassy_Field;
+        }
+        if (location == Underpass3) {
+            move Limo to Underpass3;
+        }
     }
 
     ! Time/location/condition based events
@@ -1159,6 +1193,13 @@ Person Jackie_Kennedy "officer"
          ],
     has animate;
 
+! [Oswald] in the AGT source
+! In AGT this started out Backstage
+Person Lee_Harvey_Oswald "Oswald"
+    CandL
+    with name 'Lee' 'Harvey' 'Oswald',
+    has animate concealed;
+
 ! [Bubba] in the AGT source
 ! In the AGT source this character has no starting room and nothing happens with him
 ! I think maybe I didn't finish this one
@@ -1297,9 +1338,9 @@ Object Sandwich "Ham and Cheese Sandwich"
 Object bus "Bus"
     EandM
     with name 'bus' 'white',
-         initial "  There is a White Bus Here.",
-       before [;
-           Enter:
+        initial "  There is a White Bus Here.",
+        before [;
+            Enter:
                if (parent(quarter) ~= player) {
                     ! [FO3] in the AGT source
                     print "You get on the Bus, but the Bus Driver demands a quarter to ride. Damn. And
@@ -1319,8 +1360,60 @@ Object bus "Bus"
        ],
     has static supporter;
 
+! [Dead Body] in the AGT source
 Object Dead_Body "Dead Body"
     Backstage
     with name 'dead' 'body',
     description "There is a dead body here, obviously killed by a pocket knife of some sort.
             Oh, and by the way, people are staring at you and that bloody knife of yours.";
+
+! [Body] in the AGT source
+Object Body "Body"
+    TenthAndP
+    with name 'body' 'dead',
+    initial "There is a body here.",
+    description "The body appears to be that of an officer Tippet. You're no coroner, but you
+            can tell that he was recently killed by bullet wounds.",
+    before [;
+            Take:
+                ! [DontTouch] in the AGT source
+                print "In light of today's events, it's probably best not to touch or disturb
+                        anything you see, especially this, as it would be disturbing evidence.^";
+                rtrue;
+        ],
+    has static;
+
+! [Jacket] in the AGT source
+Object Jacket "Jacket"
+    CandJ
+    with name 'jacket' 'nondescript',
+    initial "There is a nondescript jacket lying on the ground here.",
+    before [;
+            Take:
+                ! [DontTouch] in the AGT source
+                print "In light of today's events, it's probably best not to touch or disturb
+                        anything you see, especially this, as it would be disturbing evidence.^";
+                rtrue;
+        ],
+    has static;
+
+! [Limo] in the AGT source
+Object Limo
+    Backstage
+    with name 'limo' 'black' 'car' 'limousine',
+    initial 'There is a black limousine here.',
+    before [;
+        Enter:
+            ! [Hitch Ride] in the AGT source
+            if ((location == Grassy_Knoll || location == Grassy_Field || location == Underpass3) && fulltime > 1233)
+            {
+                print "^^You run after the Limousine, carrying the now wounded President. In the
+                    confusion and rush that followed, you were somehow able to grab the limousine,
+                    and the vehicle takes you to Parkland Hospital.";
+                hours = 12;
+                minutes = 40;
+                PlayerTo(Outside_PH);
+                return true;
+            }
+    ],
+    has static supporter concealed;
