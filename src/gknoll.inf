@@ -49,8 +49,9 @@ Object Timer "game timer"
     time_left 60;
 
 [ Initialise;
-    location = Outside_DCCCB;
-    ! location = Outside_PH;
+    ! location = Outside_DCCCB;
+    location = Outside_PH;
+    move Hanky to player;
     print "^^^^^INTRODUCTION^^ (later)^";
 !         It's been six years since you last saw Dana Wilkins, your old High
 ! School Sweetheart. Since then, you've graduated from Texas A&M, and you're
@@ -1215,7 +1216,7 @@ Person Joe_Smith "officer"
 
 ! [Jackie] in the AGT source
 Person Jackie_Kennedy "officer"
-    Backstage
+    ERHall
     with name 'jackie' 'kennedy' 'jaqueline' 'onassis' 'first' 'lady',
          initial [;
             "The first lady, covered in blood, is sitting here.^";
@@ -1234,6 +1235,14 @@ Person Jackie_Kennedy "officer"
                  print "She's too overcome with emotion to answer. Plus, you're not 
                  supposed to behere, so you'd do good not to draw attention to yourself.";
                  rtrue;
+            Give:
+                ! [ThankU] in the AGT source
+                if (noun == Hanky) {
+                    score = score + 100;
+                    move Hanky to Backstage;
+                    print "Jackie takes the hankerchief, and thanks you.";
+                    return true;
+                }
          ],
     has animate;
 
@@ -1553,6 +1562,7 @@ Object Cooler
             }
     ];
 
+! [Knife] in the AGT source
 Object Knife "Knife"
     OSS
     with name 'knife' 'pocket',
@@ -1560,3 +1570,22 @@ Object Knife "Knife"
     description "This is the kind of pocket knife that would be ideal for a killer: a large
         blade, very sharp, and folds down into a neat carrying case.";
 
+! [Hanky] in the AGT source
+! I misspelled it in 1995 and I'm going with it
+Object Hanky "Hankerchief"
+    DCRB
+    with name 'Hanky' 'Hankerchief' 'white' 'hanky' 'napkin' 'coffee' 'filter',
+    initial "There is a white hankerchief here.",
+    description "This is an ordinary white hankerchief, perfect for crying into.",
+        before [;
+        Take:
+            if (self hasnt moved) {
+                score = score + 50;
+                move Hanky to player;
+                print "You are now carrying the hankerchief.^";
+                give self moved;
+                return true;
+            } else {
+                return false;
+            }
+        ];

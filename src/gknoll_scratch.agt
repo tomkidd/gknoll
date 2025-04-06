@@ -15,27 +15,3 @@ DoneWithTurn
 END_COMMAND
 
 RESURRECTION_ROOM [P+RP]
-
-NOUN [Hanky]
-Hankerchief
-White
-There is a white hankerchief here.
-LOCATION [DCRB]
-POINTS 50
-NOUN_SYNONYMS HANKERCHIEF WHITE HANKY NAPKIN KNAPKIN COFFEE FILTER
-END_NOUN
-
-NOUN_DESCR [Hanky]
-This is an ordinary white hankerchief, perfect for crying into.
-END_NOUN_DESCR
-
-COMMAND GIVE HANKERCHIEF TO JACKIE
-SwapLocations [Hanky]
-PrintMessage [ThankU]
-PlusScore  100
-DoneWithTurn
-END_COMMAND
-
-MESSAGE [ThankU]
-Jackie takes the hankerchief, and thanks you.
-END_MESSAGE
