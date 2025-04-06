@@ -16,47 +16,6 @@ END_COMMAND
 
 RESURRECTION_ROOM [P+RP]
 
-NOUN [Camera] 
-Camera
-Expensive
-There is a Camera here.
-LOCATION [DTB]
-READABLE
-PUSHABLE
-POINTS 5
-NOUN_SYNONYMS CAMERA PICTURE FILM
-END_NOUN
-
-NOUN_DESCR [Camera]
-This is an expensive camera, and the empty surroundings seem to imply that
-this is a lost camera. It's some sort of 35mm job, with one big button on top.
-It's also got some sort of initials on it.
-END_NOUN_DESCR
-
-TEXT [Camera]
-The camera is engraved with the initials "W.M.".
-END_TEXT
-
-PUSH_DESCR [Camera]
-The camera's flash goes off, and the unit itself makes some noise. Great. Now
-the owner will always remember you, assuming the damn thing has film.
-END_PUSH_DESCR
-
-COMMAND PUSH CAMERA
-AtLocation [Outside SBD]
-TimeLT 1240
-PrintMessage [OhShit]
-SwapLocations [Camera]
-PlusScore  50
-DoneWithTurn
-END_COMMAND
-
-MESSAGE [OhShit]
-As you push the button in this location, the man standing here says, "Hey! You
-found it! My Camera! Thanks a lot!"
-And you get a warm, fuzzy feeling inside.
-END_MESSAGE
-
 COMMAND ANY
 AtLocation [Truly]
 FirstVisitToRoom

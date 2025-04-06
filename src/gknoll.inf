@@ -104,7 +104,7 @@ Include "grammar";
 [ TalkSub;
     if (noun has animate) {
         if (RunLife(noun, ##Talk)) rtrue; ! Call the NPC's life routine for Talk
-        print_ret "You try to talk to ", (the) noun, ", but get no response.";
+        print "You try to talk to ", (the) noun, ", but get no response.";
     }
     "There's no one to talk to.";
 ];
@@ -138,6 +138,10 @@ Verb 'follow'
 
 Extend 'follow' first
     * noun -> Follow;
+
+Attribute legible;
+[ ReadSub;  ];
+Extend 'read' first * legible -> Read;
 
 [ FollowSub;
     if (location == CandL && noun == Lee_Harvey_Oswald) {
@@ -1282,8 +1286,6 @@ Object quarter "Quarter"
     DCCCB
     with name 'quarter' 'rusted' 'coin',
         initial "  There is a quarter on the ground here.",
-        points 5,
-        points_awarded false, ! Tracks if points were already awarded
         before [;
             Take:
                  if (self hasnt moved) {
@@ -1458,3 +1460,39 @@ Object Magic_Bullet "bullet"
                 rtrue;
         ],
     has concealed;
+
+Object Camera "Camera"
+    DTB
+    with name 'camera' 'expensive' 'picture' 'film',
+    initial "There is a camera here",
+    points 5,
+    description "This is an expensive camera, and the empty surroundings seem to imply 
+        that this is a lost camera. It's some sort of 35mm job, with one big button on 
+        top. It's also got some sort of initials on it.",
+    before [;
+            Take:
+                 if (self hasnt moved) {
+                    score = score + 5;
+                    move Camera to player;
+                    print "You are now carrying the camera.^";
+                    give self moved;
+                    return true;
+                 } else {
+                     return false;
+                 }
+            Read:
+                print "The camera is engraved with the initials ~W.M.~.^";
+            Push:
+                if (location == Outside_SBD && fulltime < 1240) {
+                    print "As you push the button in this location, the man standing here says, ~Hey! You
+                        found it! My Camera! Thanks a lot!~^^
+                        And you get a warm, fuzzy feeling inside.";
+                        score = score + 50;
+                        move Camera to Backstage;
+                } else {
+                    print "The camera's flash goes off, and the unit itself makes some noise. Great. Now
+                            the owner will always remember you, assuming the damn thing has film.";
+                            return true;
+                }
+    ],
+    has legible;
