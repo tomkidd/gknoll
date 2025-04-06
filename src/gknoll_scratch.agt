@@ -16,35 +16,6 @@ END_COMMAND
 
 RESURRECTION_ROOM [P+RP]
 
-COMMAND ANY
-AtLocation [Truly]
-FirstVisitToRoom
-SwapLocations [Cooler] [Dana Wilkins]
-END_COMMAND
-
-NOUN [Cooler]
-Cooler
-Igloo
-There is an Igloo Cooler here.
-LOCATION [Grassy Knoll]
-POINTS 5
-CLOSED
-END_NOUN
-
-COMMAND GIVE COOLER TO ANY
-AtLocation [Underpass3]
-InRoom [James Hague]
-PrintMessage [ThanksAShitload]
-SwapLocations [Cooler]
-PlusScore  50
-DoneWithTurn
-END_COMMAND
-
-MESSAGE [ThanksAShitload]
-"Wow! Thanks, man! Now I won't die of heat exhaustion."
-And you get a warm fuzzy inside.
-END_MESSAGE
-
 NOUN [Knife]
 Knife
 Pocket

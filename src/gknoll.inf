@@ -333,6 +333,12 @@ Object  OSS "Open Storage Space"
  has    light
  with   description "This is a big, open, storage space. What'd you expect from a Book Depository?
             There are some more workers in outfits here. You can go south to exit.",
+        before [;
+            ! In the AGT source I think the Cooler may have been because
+            ! AGT can switch locations but not move characters directly
+            move Cooler to Backstage;
+            move Dana_Wilkins to Grassy_Knoll;
+        ],
         s_to Foyer1;
 
 Object  Truly "Mr. Truly's Office"
@@ -1118,6 +1124,16 @@ Person James_Hague "man"
                  }
                  print "~What'd you say? It's too damn hot. I feel like I'm gonna die of heat exhaustion.~^";
                  rtrue;
+            Give:
+                ! [ThanksAShitload] in the AGT source
+                ! I was so edgy naming things as a teen
+                if (noun == Cooler) {
+                    score = score + 50;
+                    move Cooler to Backstage;
+                    print "~Wow! Thanks, man! Now I won't die of heat exhaustion.!^
+                    And you get a warm fuzzy inside.";
+                    return true;
+                }
          ],
     has animate;
 
@@ -1470,29 +1486,48 @@ Object Camera "Camera"
         that this is a lost camera. It's some sort of 35mm job, with one big button on 
         top. It's also got some sort of initials on it.",
     before [;
-            Take:
-                 if (self hasnt moved) {
-                    score = score + 5;
-                    move Camera to player;
-                    print "You are now carrying the camera.^";
-                    give self moved;
-                    return true;
-                 } else {
-                     return false;
-                 }
-            Read:
-                print "The camera is engraved with the initials ~W.M.~.^";
-            Push:
-                if (location == Outside_SBD && fulltime < 1240) {
-                    print "As you push the button in this location, the man standing here says, ~Hey! You
-                        found it! My Camera! Thanks a lot!~^^
-                        And you get a warm, fuzzy feeling inside.";
-                        score = score + 50;
-                        move Camera to Backstage;
+        Take:
+                if (self hasnt moved) {
+                score = score + 5;
+                move Camera to player;
+                print "You are now carrying the camera.^";
+                give self moved;
+                return true;
                 } else {
-                    print "The camera's flash goes off, and the unit itself makes some noise. Great. Now
-                            the owner will always remember you, assuming the damn thing has film.";
-                            return true;
+                    return false;
                 }
+        Read:
+            print "The camera is engraved with the initials ~W.M.~.^";
+        Push:
+            if (location == Outside_SBD && fulltime < 1240) {
+                print "As you push the button in this location, the man standing here says, ~Hey! You
+                    found it! My Camera! Thanks a lot!~^^
+                    And you get a warm, fuzzy feeling inside.";
+                    score = score + 50;
+                    move Camera to Backstage;
+            } else {
+                print "The camera's flash goes off, and the unit itself makes some noise. Great. Now
+                        the owner will always remember you, assuming the damn thing has film.";
+                        return true;
+            }
     ],
     has legible;
+
+! [Cooler] in the AGT source
+Object Cooler 
+    Grassy_Knoll
+    with name 'igloo' 'cooler',
+    initial "There is an Igloo Cooler here.",
+    before [;
+        Take:
+            if (self hasnt moved) {
+                score = score + 5;
+                move Cooler to player;
+                print "You are now carrying the cooler.^";
+                give self moved;
+                return true;
+            } else {
+                return false;
+            }
+    ];
+
