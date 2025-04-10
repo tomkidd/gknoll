@@ -52,25 +52,24 @@ Object Timer "game timer"
     location = Outside_DCCCB;
     ! location = Outside_PH;
     ! move Hanky to player;
-    print "^^^^^INTRODUCTION^^ (later)^";
-!         It's been six years since you last saw Dana Wilkins, your old High
-! School Sweetheart. Since then, you've graduated from Texas A&M, and you're
-! starting to make a name for yourself in your field. However, true love still
-! eludes you, and you hear that Dana is single. She called Wednesday. She wanted
-! to meet you. She said that it was urgent.^^
-!         Well, it's at least worth a shot. She lives in Grand Prarie, Texas,
-! and she works at the School Book Depository, which is somewhere on Elm Street
-! in Dallas.^^
-!         On the upside, Dana was a real looker back in Texas High School,
-! class of '57. On the downside, Dallas is a whole 3 hours away from Texarkana,
-! Texas.^^
-!         So, on November 22, 1963, you take off from work, and head for
-! Big ~D~. When you get near the Dealy Plaza, around 10:00, it takes about an
-! hour to find a parking space some three blocks away. Seems some parade is in
-! town. Oh, yes, the President's in it. Great. You can't get to Dealy until
-! 12:00. You've got to meet Dana for lunch at noon. No doubt she'll also want
-! to watch the parade as well. Great. She works on the second floor of the
-! School Book Depository. Perfect. This promises to be an interesting weekend...^^";
+    print "It's been six years since you last saw Dana Wilkins, your old High
+School Sweetheart. Since then, you've graduated from Texas A&M, and you're
+starting to make a name for yourself in your field. However, true love still
+eludes you, and you hear that Dana is single. She called Wednesday. She wanted
+to meet you. She said that it was urgent.^^
+        Well, it's at least worth a shot. She lives in Grand Prarie, Texas,
+and she works at the School Book Depository, which is somewhere on Elm Street
+in Dallas.^^
+        On the upside, Dana was a real looker back in Texas High School,
+class of '57. On the downside, Dallas is a whole 3 hours away from Texarkana,
+Texas.^^
+        So, on November 22, 1963, you take off from work, and head for
+Big ~D~. When you get near the Dealy Plaza, around 10:00, it takes about an
+hour to find a parking space some three blocks away. Seems some parade is in
+town. Oh, yes, the President's in it. Great. You can't get to Dealy until
+12:00. You've got to meet Dana for lunch at noon. No doubt she'll also want
+to watch the parade as well. Great. She works on the second floor of the
+School Book Depository. Perfect. This promises to be an interesting weekend...^^";
 
     ! NOTE: TODO: Right now I'm not actually using the timer. 
     ! The examples I found were using it but really it's just a handy way to get
