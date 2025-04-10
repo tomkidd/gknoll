@@ -1,7 +1,0 @@
-COMMAND GET QUARTER
-AtLocation [Lunchroom]
-InRoom [CokeMach]
-InRoom [Quarter]
-PrintMessage "Your arm's not long enough."
-DoneWithTurn
-END_COMMAND

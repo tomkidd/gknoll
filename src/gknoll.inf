@@ -1297,7 +1297,8 @@ Object Coke_Machine "Coke machine"
                  }
             Receive:
                  if (noun == quarter) {
-                    remove quarter;
+                    move Quarter to Backstage;
+                    move FakeQuarter to self;
                     move Coke_Bottle to player;
                     self.has_quarter = true;  ! <-- Set the state when a quarter is inserted
                     print "You insert the quarter into the Coke machine, and it gives you a bottle of Coke. You then open the Coke.^";
@@ -1306,25 +1307,11 @@ Object Coke_Machine "Coke machine"
                     print "The machine only accepts quarters.^";
                     return false;
                  }
-            ! Push:
-            !     if (self.has_quarter) {  ! <-- Check the property instead
-            !         if (Coke_Bottle in self) {
-            !             print "You insert the quarter into the Coke machine, and it gives you a bottle of Coke. You then open the Coke.";
-            !             self.has_quarter = false;
-            !             return true;
-            !         } else {
-            !             print "The machine is out of Cokes.";
-            !             return true;
-            !         }
-            !     } else {
-            !         print "You need to insert a quarter first.";
-            !         return true;
-            !     }
-             Take:
-                 print "Are you crazy? It's too damn heavy!^";
-                 rtrue;
+            Take:
+                print "Are you crazy? It's too damn heavy!^";
+                rtrue;
          ],
-    has static container scenery;
+    has static container scenery transparent;
     
 Object Coke_Bottle "Coke Bottle"
     Coke_Machine
@@ -1336,7 +1323,8 @@ Object Coke_Bottle "Coke Bottle"
                 move empty_coke to player;
                 ! NOTE: this is clearly a bug in the game but I'm leaving it in for now
                 "The bottle slides down your throat, and your stomach is quickly full.";
-            ];
+            ],
+    has concealed;
 
 Object empty_coke "Empty Coke bottle"
     with name "coke" "bottle",
@@ -1349,16 +1337,28 @@ Object quarter "Quarter"
         initial "  There is a quarter on the ground here.",
         before [;
             Take:
-                 if (self hasnt moved) {
+                if (parent(self) == Coke_Machine)
+                    "Your arm's not long enough.";
+                if (self hasnt moved) {
                     score = score + 5;
                     move quarter to player;
                     print "You are now carrying the rusted quarter.^";
                     give self moved;
                     return true;
-                 } else {
-                     return false;
-                 }
+                } else {
+                    return false;
+                }
         ];
+
+Object FakeQuarter "quarter"
+  with
+    name 'quarter' 'coin',
+    description "It's just out of reach inside the machine.",
+    before [;
+        Take:
+            "Your arm's not long enough.";
+    ],
+  has concealed;
 
 ! [FoodMach] in the AGT source
 Object Food_Dispenser "Food Dispenser"
