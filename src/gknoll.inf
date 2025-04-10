@@ -49,9 +49,9 @@ Object Timer "game timer"
     time_left 60;
 
 [ Initialise;
-    ! location = Outside_DCCCB;
-    location = Outside_PH;
-    move Hanky to player;
+    location = Outside_DCCCB;
+    ! location = Outside_PH;
+    ! move Hanky to player;
     print "^^^^^INTRODUCTION^^ (later)^";
 !         It's been six years since you last saw Dana Wilkins, your old High
 ! School Sweetheart. Since then, you've graduated from Texas A&M, and you're
@@ -97,6 +97,8 @@ Object Timer "game timer"
   }
   fulltime = (hours * 100) + minutes + 1; ! adding 1 because the increment happens after the turn
 ];
+
+Replace AfterLife;
 
 Include "grammar";
 
@@ -173,6 +175,18 @@ Extend 'kill' first
 Attribute legible;
 [ ReadSub;  ];
 Extend 'read' first * legible -> Read;
+
+[ AfterLife;
+    print "^^Would you like me to try and get you resurrected? (yes/no)^^";
+
+    if (YesOrNo()) {
+        deadflag = 0;
+        PlayerTo(PandRP);
+        return true;  ! Prevent game from ending
+    }
+
+    return false;  ! Proceed with normal death (game over)
+];
 
 ! LOCATIONS
 
@@ -1381,8 +1395,8 @@ Object Sandwich "Ham and Cheese Sandwich"
          description "This is a typical Ham and Cheese sandwich, though this one appears to be unwrapped.",
          before [;
             Eat: 
-                deadflag = true;
-                "The Ham & Cheese sandwich slides down your throat and your stomach is quickly full.^^After only a moment you begin to sense a bitter taste, and your vision blurs. In only seconds, you slip to your knees and your throat closes. You gasp unsucessdully for air.^^Oh dear, you seem to have gotten yourself killed.^^Would you like me to try and get you resurrected?^^TODO: Resurrection lol.";
+                deadflag = 3;
+                "The Ham & Cheese sandwich slides down your throat and your stomach is quickly full.^^After only a moment you begin to sense a bitter taste, and your vision blurs. In only seconds, you slip to your knees and your throat closes. You gasp unsucessdully for air.^^Oh dear, you seem to have gotten yourself killed.";
             ]
     has edible;
 

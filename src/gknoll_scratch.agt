@@ -1,11 +1,3 @@
-#DEFINE [noun weight] 13
-#DEFINE [NoWhere] 0
-
-STARTING_TIME 1200
-DELTA_TIME 3
-
-STATUS_OPTION 1
-
 COMMAND GET QUARTER
 AtLocation [Lunchroom]
 InRoom [CokeMach]
@@ -13,5 +5,3 @@ InRoom [Quarter]
 PrintMessage "Your arm's not long enough."
 DoneWithTurn
 END_COMMAND
-
-RESURRECTION_ROOM [P+RP]
