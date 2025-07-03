@@ -107,6 +107,7 @@ Include "grammar";
     if (noun has animate) {
         if (RunLife(noun, ##Talk)) rtrue; ! Call the NPC's life routine for Talk
         print "You try to talk to ", (the) noun, ", but get no response.";
+        return true;
     }
     "There's no one to talk to.";
 ];
@@ -180,6 +181,10 @@ Extend 'read' first * legible -> Read;
 
     if (YesOrNo()) {
         deadflag = 0;
+        print "I'll try... but don't blame me if something goes wr@@64#%&&^^
+                            ---- POOF ----^^
+        You are engulfed in a large cloud of thick orange smoke, and you emerge coughing
+        and gasping, and find that you must start all over...^^";
         PlayerTo(PandRP);
         return true;  ! Prevent game from ending
     }
@@ -196,7 +201,7 @@ ObjectWithHelp  Outside_DCCCB "Outside the Dallas County Criminal Courts Buildin
             "You are standing outside the Dallas County Criminal Courts Building, where
             all of the city's criminal trials are being held. These guys probably can't
             handle any more crime in this city. From here, a sidewalk leads north, while
-            the building eneters to the east.";
+            the building enters to the east.";
         ],
         help_message "Go inside if you want, but remember, your purpose here is not in there. Get
             to the School Book Depository now!",
@@ -263,7 +268,7 @@ ObjectWithHelp  Outside_SBD "Outside the School Book Depository"
  with   description "Well, you've made it to the School Book Depository. There are people hanging
             around outside, some even sitting down on the grass outside, to watch the
             parade. There are also some people sitting at open windows, hoping to catch
-            a glimpse of the parade. The enterance to the School Book Depository is to
+            a glimpse of the parade. The entrance to the School Book Depository is to
             the north. Across the street to the east is the Dal-Tex Building. Across Elm
             street to the south is a large grassy field. And to the southwest is
             Pergolas.",
@@ -875,7 +880,7 @@ Object  Jail4 "Jail Cell"
 
     ! In Inform we have to mvoe the limo to the place it needs to be to
     ! mimic the GET IN LIMO functionality like in AGT
-    if (fulltime > 1233) {
+    if (fulltime > 1226) {
         if (location == Grassy_Knoll) {
             move Limo to Grassy_Knoll;
         }
@@ -1012,10 +1017,13 @@ Object  Jail4 "Jail Cell"
 
     if ((parent(Dead_Body) == parent(player)) && chance < 95) {
         ! [Arrest4] in the AGT source
-        print "^^Because of the fact that there's a deed body here, and because you've got a
+        print "^^Because of the fact that there's a dead body here, and because you've got a
             bloody knife, the Dallas Police Department has arrested you and placed you
             in jail. You have been charged with murder in the first degree.
             Don't fuck with Texas. We've got the Electric Chair.^^";
+        if (parent(Knife) == player) {
+            move Knife to Backstage;
+        }
         PlayerTo(Jail4);
     }
 
@@ -1031,19 +1039,22 @@ Class   Person
 Person William_Newman "man"
     Outside_SBD
     with name 'william' 'newman' 'man' 'guy' 'sir' 'dude' 'asswipe',
-         describe "^There is a man here, standing particularly close to Elm Street.",
+         describe "^There is a man here, among others, standing particularly close to Elm Street.",
          life [;
+             Talk:
+                 print "~Huh? Oh, no, I don't have a camera.~^";
+                 rtrue;
              Ask:
                  if (noun == self) {
                      switch (second) {
                          'camera':
-                             print "Huh? Oh, no, I don't have a camera.^";
+                             print "~Huh? Oh, no, I don't have a camera.~^";
                              return true;
                          'record', 'player':
-                             print "What? Oh, no, my Record Player is not broken.^";
+                             print "~What? Oh, no, my Record Player is not broken.~^";
                              return true;
                          'name':
-                             print "Huh? Oh, my name is William Newman.^";
+                             print "~Huh? Oh, my name is William Newman.~^";
                              return true;
                      }
                  }
@@ -1228,7 +1239,7 @@ Person Joe_Smith "officer"
     has animate;
 
 ! [Jackie] in the AGT source
-Person Jackie_Kennedy "officer"
+Person Jackie_Kennedy "Jackie"
     ERHall
     with name 'jackie' 'kennedy' 'jaqueline' 'onassis' 'first' 'lady',
          initial [;
@@ -1395,6 +1406,7 @@ Object Sandwich "Ham and Cheese Sandwich"
          before [;
             Eat: 
                 deadflag = 3;
+                move Sandwich to Backstage;
                 "The Ham & Cheese sandwich slides down your throat and your stomach is quickly full.^^After only a moment you begin to sense a bitter taste, and your vision blurs. In only seconds, you slip to your knees and your throat closes. You gasp unsucessdully for air.^^Oh dear, you seem to have gotten yourself killed.";
             ]
     has edible;
