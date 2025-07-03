@@ -154,21 +154,23 @@ Extend 'kill' first
     * noun -> Kill;
 
 [ KillSub;
-    if (noun == William_Newman ||
+    if (parent(Knife)  == player && (noun == William_Newman ||
         noun == Dana_Wilkins ||
         noun == Zapruder ||
         noun == Mr_Truly ||
         noun == James_Hague ||
         noun == Jean_Hill_Mary_Mormon ||
-        noun == Joe_Smith) {
+        noun == Joe_Smith)) {
         move Dead_Body to parent(noun);
         move noun to Backstage;
     }
 
     if (parent(Dead_Body) == location) {
-        ! [BadBpy] in the AGT source
+        ! [BadBoy] in the AGT source
         print "You attack and kill the innocent person. Now, your knife is covered in blood,
             and everyone is staring at you. Maybe you shouldn't have done that.";
+    } else {
+        print "You're not strong enough to kill anyone with your bare hands.";
     }
 ];
 
@@ -662,7 +664,7 @@ Object  ERLobby "Emergency Room Lobby"
             to enter hte lobby because of the connotion outside. There is similar 
             commotion here, though it appears obvious that hte President is in the hallway 
             to the north.",
-        n_to ERHall,
+        n_to ERLobby,
         e_to Outside_PH;
 
 Object  ERHall "Emergency Room Hallway"
@@ -743,6 +745,13 @@ Object  Jail4 "Jail Cell"
         print "^^There is a man, standing near Elm Street, dressed in black, who has just now
             opened a black umbrella.";
     }
+    
+    ! [Pand] in the AGT source
+    if (( location == Grassy_Knoll || 
+        location == Grassy_Field || 
+        location == Underpass3) && fulltime > 1223 && fulltime < 1230) {
+        print "^^The limo is right in front of you and you feel this strange urge to try and get into it.";
+    }    
     
     ! [Pand] in the AGT source
     if ((location == Outside_DTB || 
@@ -846,7 +855,7 @@ Object  Jail4 "Jail Cell"
             ^And here's the president.
             ^Wait.
             ^He's been shot.
-            ^More shots are ringing out.
+            ^^^^More shots are ringing out.
             ^He's been shot in the head.
             ^The limo drives on.";
     }
@@ -880,7 +889,7 @@ Object  Jail4 "Jail Cell"
 
     ! In Inform we have to mvoe the limo to the place it needs to be to
     ! mimic the GET IN LIMO functionality like in AGT
-    if (fulltime > 1226) {
+    if (fulltime > 1223) {
         if (location == Grassy_Knoll) {
             move Limo to Grassy_Knoll;
         }
@@ -1278,8 +1287,8 @@ Person Lee_Harvey_Oswald "Oswald"
     has animate concealed;
 
 ! [Bubba] in the AGT source
-! In the AGT source this character has no starting room and nothing happens with him
-! I think maybe I didn't finish this one
+! In the AGT source he is listed as "HOSTILE" and attacks and kills you after five moves
+! In the futre I should implement this. 
 Person Bubba "man"
     Jail4
     with name 'big' 'bubba',
@@ -1478,6 +1487,9 @@ Object Limo
     Backstage
     with name 'limo' 'black' 'car' 'limousine',
     initial 'There is a black limousine here.',
+    description [;
+        print "There is a black limousine here.";
+    ],
     before [;
         Enter:
             ! [Hitch Ride] in the AGT source
@@ -1485,7 +1497,7 @@ Object Limo
             {
                 print "^^You run after the Limousine, carrying the now wounded President. In the
                     confusion and rush that followed, you were somehow able to grab the limousine,
-                    and the vehicle takes you to Parkland Hospital.";
+                    and the vehicle takes you to Parkland Hospital.^^";
                 hours = 12;
                 minutes = 40;
                 PlayerTo(Outside_PH);
